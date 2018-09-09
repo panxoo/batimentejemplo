@@ -1,0 +1,441 @@
+﻿<UserControl x:Class="Recepcion.Views.Tab.Conf.TabModelProp"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
+             xmlns:abt="http://schemas.abtsoftware.co.uk/presentation"
+             xmlns:xs="clr-namespace:Recepcion.Diccionario"
+             xmlns:local="clr-namespace:Recepcion.Views.Tab.Conf"
+             xmlns:msg="clr-namespace:Recepcion.Views.Emergente"
+              mc:Ignorable="d"
+             d:DesignHeight="334" d:DesignWidth="643" Background="White">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Recepcion;component/Diccionario/DicMain.xaml" />
+                <ResourceDictionary Source="/Recepcion;component/Diccionario/DictGrid.xaml"  />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
+                <ResourceDictionary Source="/Recepcion;component/Diccionario/FormTesture.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <xs:BoolToVisibleOrHidden x:Key="btvi" Reverse="True"/>
+            <xs:BoolToVisibleOrHidden x:Key="btvc" Collapse="True"/>
+            <xs:ConvertParameter x:Key="copr"/>
+            <xs:ConvertColorActive x:Key="colr"/>
+            <BooleanToVisibilityConverter x:Key="b2vc"/>
+            <xs:BluParamsWhenTrueConverter x:Key="bpc" From="0" To="30" Duration="200"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Background="{StaticResource test}"  >
+        <Grid Margin="20">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,15" Grid.Row="0">
+                <Image Source="/Recepcion;component/Imagen/model.png" Height="32"/>
+                <TextBlock Text="Mantenedor de Modelo de Propiedades." Style="{StaticResource H1}"  />
+            </StackPanel>
+
+
+            <Grid Grid.Row="1" Background="{StaticResource bkg}"  >
+                <GroupBox Margin="0">
+                    <TabControl Controls:TabControlHelper.IsUnderlined="True" TabStripPlacement="Left"
+                                 tz:Transitionz.Blur="{Binding camp.selgnrl, Converter={StaticResource bpc}}">
+
+                        <TabItem Header="Departamento" Name="Dep">
+
+                            <Grid Margin="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,10">
+                                    <Button Content="Agregar" Command="{Binding DelSelEdit}" CommandParameter="-1" Width="80"/>
+                                </StackPanel>
+
+                                <DataGrid  ItemsSource="{Binding camp.tabed}" AutoGenerateColumns="False" 
+                                              HorizontalAlignment="Left" CanUserAddRows="False" 
+                                              CanUserDeleteRows="False" VerticalScrollBarVisibility="Auto" Grid.Row="1"
+                                              HorizontalScrollBarVisibility="Auto"  >
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn Header="Activo">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Image Source="{Binding Path=vigente , Converter={StaticResource colr}}" Height="16" Width="16"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Header="Edificio"   Binding="{Binding Path=dep}"/>
+                                        <DataGridTextColumn Header="Modelo"   Binding="{Binding Path=name}"/>
+                                        <DataGridTextColumn Header="Tipo Modelo"   Binding="{Binding Path=tpdep}"/>
+                                        <DataGridTextColumn Header="Cant. Dormitorio"   Binding="{Binding Path=pieza}"/>
+                                        <DataGridTextColumn Header="Cant. Baños"   Binding="{Binding Path=bano}"/>
+                                        <DataGridTextColumn Header="Tamaño total (cm)"   Binding="{Binding Path=tamtot}"/>
+                                        <DataGridTextColumn Header="Tamaño Util (cm)"   Binding="{Binding Path=tamuti}"/>
+                                        <DataGridTemplateColumn Header="Comandos">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Button  Content="X" AutomationProperties.AutomationId="DepUpdtGrd"
+                                                         Command="{Binding Path=DataContext.DelActUpdtMod,
+                                                    RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
+                                                            <Button.CommandParameter>
+                                                                <MultiBinding Converter="{StaticResource copr}" Mode="OneWay">
+                                                                    <Binding Source='-1'/>
+                                                                    <Binding Path="id"/>
+                                                                </MultiBinding>
+                                                            </Button.CommandParameter>
+                                                        </Button>
+
+                                                        <Button  Content="Del" AutomationProperties.AutomationId="DepUpdtGrd"
+                                                         Command="{Binding Path=DataContext.DelDeletMod,
+                                                    RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
+                                                            <Button.CommandParameter>
+                                                                <MultiBinding Converter="{StaticResource copr}" Mode="OneWay">
+                                                                    <Binding Source='-1'/>
+                                                                    <Binding Path="id"/>
+                                                                    <Binding Path="vigente"/>
+                                                                </MultiBinding>
+                                                            </Button.CommandParameter>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+
+                                </DataGrid>
+
+                            </Grid>
+                        </TabItem>
+
+                        <TabItem Header="Bodegas"  Name="Bod" >
+                            <Grid Margin="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+                                    <Button Content="Agregar" Command="{Binding DelSelEdit}" CommandParameter="2" Width="80"/>
+                                </StackPanel>
+
+                                <DataGrid Grid.Row="1" ItemsSource="{Binding camp.tabbod}" AutoGenerateColumns="False" 
+                                      HorizontalAlignment="Left" CanUserAddRows="False" CanUserDeleteRows="False"
+                                      HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn Header="Activo">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Image Source="{Binding Path=vigente,Converter={StaticResource colr}}" Height="16" Width="16"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Header="Edificio"   Binding="{Binding Path=dep}"/>
+                                        <DataGridTextColumn Header="Condominio"   Binding="{Binding Path=cond}"/>
+                                        <DataGridTextColumn Header="Modelo"   Binding="{Binding Path=name}"/>
+                                        <DataGridTextColumn Header="Tamaño(cm)"   Binding="{Binding Path=tam}"/>
+                                        <DataGridTemplateColumn Header="Comandos">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Button  Content="X" AutomationProperties.AutomationId="DepUpdtGrd"
+                                                         Command="{Binding Path=DataContext.DelActUpdtMod,
+                                                    RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
+                                                            <Button.CommandParameter>
+                                                                <MultiBinding Converter="{StaticResource copr}" Mode="OneWay">
+                                                                    <Binding Source="2"/>
+                                                                    <Binding Path="id"/>
+                                                                </MultiBinding>
+                                                            </Button.CommandParameter>
+                                                        </Button>
+
+                                                        <Button  Content="Del" AutomationProperties.AutomationId="DepUpdtGrd"
+                                                         Command="{Binding Path=DataContext.DelDeletMod,
+                                                    RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
+                                                            <Button.CommandParameter>
+                                                                <MultiBinding Converter="{StaticResource copr}" Mode="OneWay">
+                                                                    <Binding Source='2'/>
+                                                                    <Binding Path="id"/>
+                                                                    <Binding Path="vigente"/>
+                                                                </MultiBinding>
+                                                            </Button.CommandParameter>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+
+                            </Grid>
+                        </TabItem>
+
+                        <TabItem Header="Estacionamientos"  Name="Est" >
+                            <Grid Margin="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+                                    <Button Content="Agregar" Command="{Binding DelSelEdit}" CommandParameter="1" Width="80" />
+                                </StackPanel>
+
+                                <DataGrid Grid.Row="1" ItemsSource="{Binding camp.tabest}" AutoGenerateColumns="False" 
+                                          HorizontalAlignment="Left" CanUserAddRows="False" CanUserDeleteRows="False"
+                                          HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn Header="Activo">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Image Source="{Binding Path=vigente, Converter={StaticResource colr}}" Height="16" Width="16"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Header="Edificio"   Binding="{Binding Path=dep}"/>
+                                        <DataGridTextColumn Header="Condominio"   Binding="{Binding Path=cond}"/>
+                                        <DataGridTextColumn Header="Modelo"   Binding="{Binding Path=name}"/>
+                                        <DataGridTextColumn Header="Tamaño(cm)"   Binding="{Binding Path=tam}"/>
+                                        <DataGridTextColumn Header="Activo"   Binding="{Binding Path=vigente}"/>
+                                        <DataGridTemplateColumn Header="Comandos">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Button  Content="X" AutomationProperties.AutomationId="DepUpdtGrd"
+                                                         Command="{Binding Path=DataContext.DelActUpdtMod,
+                                                    RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
+                                                            <Button.CommandParameter>
+                                                                <MultiBinding Converter="{StaticResource copr}" Mode="OneWay">
+                                                                    <Binding Source="1"/>
+                                                                    <Binding Path="id"/>
+                                                                </MultiBinding>
+                                                            </Button.CommandParameter>
+                                                        </Button>
+
+                                                        <Button  Content="Del" AutomationProperties.AutomationId="DepUpdtGrd"
+                                                         Command="{Binding Path=DataContext.DelDeletMod,
+                                                    RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
+                                                            <Button.CommandParameter>
+                                                                <MultiBinding Converter="{StaticResource copr}" Mode="OneWay">
+                                                                    <Binding Source='1'/>
+                                                                    <Binding Path="id"/>
+                                                                    <Binding Path="vigente"/>
+                                                                </MultiBinding>
+                                                            </Button.CommandParameter>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+
+                                </DataGrid>
+
+                            </Grid>
+                        </TabItem>
+
+                    </TabControl>
+
+                </GroupBox>
+                <GroupBox   Visibility="Collapsed" Margin="0"
+                               tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=200, TransitionOn=Visibility}"
+                               tz:Transitionz.Translate="{tz:TranslateParams From='200,0', To='0,0', Duration=200, TransitionOn=Visibility}"
+                               tz:Transitionz.Visibility="{Binding camp.seldep, Converter={StaticResource b2vc}}">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+                        <StackPanel Orientation="Vertical" Margin="10">
+
+                            <TextBlock Text="Registro de modelo depatamento." Margin="0,0,0,40" Style="{StaticResource H3}"/>
+
+                            <StackPanel Orientation="Horizontal"   Margin="0,0,0,30">
+                                <TextBlock Text="Edificio: "   Margin="3,3,3,3" Visibility="{Binding camp.MultiEd, Converter={StaticResource btvc}}"/>
+                                <ComboBox    
+                                      ItemsSource="{Binding Vargnrl.edific}" 
+                                      SelectedValuePath="Id" DisplayMemberPath="Name" 
+                                      SelectedValue="{Binding camp.diddep}" Visibility="{Binding camp.MultiEd, Converter={StaticResource btvc}}"/>
+
+
+                                <TextBlock Text="Tipo Departamento: "  />
+                                <ComboBox   
+                                      ItemsSource="{Binding Vargnrl.tpdep}" 
+                                      SelectedValuePath="Id" DisplayMemberPath="Name" 
+                                      SelectedValue="{Binding camp.didtpdep}"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal"  Margin="0,0,0,20">
+
+                                <TextBlock Text="Nombre de Modelo: " />
+                                <TextBox  Text="{Binding camp.dnom, UpdateSourceTrigger=PropertyChanged}" />
+
+                            </StackPanel>
+
+                            <WrapPanel  Margin="0,0,0,50">
+                                <StackPanel Orientation="Horizontal">
+
+                                    <TextBlock Text="Tamaño (cm): " />
+                                    <Controls:NumericUpDown HasDecimals="True"  HideUpDownButtons="True" Maximum="9999.99" Minimum="0"   Controls:TextBoxHelper.SelectAllOnFocus="True"
+                             Value="{Binding camp.dtamall, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+
+                                    <TextBlock Text="Tamaño Util (cm): " />
+                                    <Controls:NumericUpDown HasDecimals="True"  HideUpDownButtons="True" Maximum="9999.99" Minimum="0" SelectAllOnFocus="True"
+                             Value="{Binding camp.dtamut, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+
+                                    <TextBlock Text="Numero de pieza: "/>
+                                    <Controls:NumericUpDown HasDecimals="False" Maximum="10" Minimum="0" SelectAllOnFocus="True"
+                             Value="{Binding camp.ddor, UpdateSourceTrigger=PropertyChanged}" />
+
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+
+                                    <TextBlock Text="Numero de baño: " />
+                                    <Controls:NumericUpDown HasDecimals="False"  Maximum="10" Minimum="1" SelectAllOnFocus="False"
+                             Value="{Binding camp.dban, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                </StackPanel>
+
+                            </WrapPanel>
+                            <StackPanel Orientation="Horizontal"  >
+                                <Button Content="Guardar"  Command="{Binding DelSaveMod}"  CommandParameter="-1" />
+                                <Button Content="Cancel"  Command="{Binding DelSelEdit}" CommandParameter="0"/>
+                            </StackPanel>
+
+                        </StackPanel>
+                    </ScrollViewer>
+
+                </GroupBox>
+
+                <GroupBox Visibility="Collapsed"  Margin="0"
+                               tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=200, TransitionOn=Visibility}"
+                               tz:Transitionz.Translate="{tz:TranslateParams From='200,0', To='0,0', Duration=200, TransitionOn=Visibility}"
+                               tz:Transitionz.Visibility="{Binding camp.selbod, Converter={StaticResource b2vc}}">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+                        <StackPanel Orientation="Vertical" Margin="20">
+
+                            <TextBlock Text="Registro de modelo bodega." Margin="0,0,0,40" Style="{StaticResource H3}"/>
+
+
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,20" Visibility="{Binding camp.MultiEd, Converter={StaticResource btvc}}">
+                                <CheckBox Name="CondBod" Content="Condominio" HorizontalAlignment="Left" 
+                                      IsChecked="{Binding camp.bcondsel}" />
+                                <TextBlock Text="Nombre Edificio: "  
+                                       Visibility="{Binding ElementName=CondBod, Path=IsChecked, Converter={StaticResource btvi}}" />
+                                <ComboBox   
+                                      ItemsSource="{Binding Vargnrl.edific}" 
+                                      SelectedValuePath="Id" DisplayMemberPath="Name" 
+                                      SelectedValue="{Binding camp.biddep}"
+                                      Visibility="{Binding ElementName=CondBod, Path=IsChecked, Converter={StaticResource btvi}}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,50">
+                                <TextBlock Text="Nombre de modelo: " />
+                                <TextBox Grid.Column="2"  Text="{Binding camp.bnom, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                <TextBlock Text="Tamaño: "  />
+                                <Controls:NumericUpDown  HideUpDownButtons="True" HasDecimals="True" Maximum="9999.99" Minimum="0"
+                                                    Value="{Binding camp.btam,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"  >
+
+                                <Button Content="Guardar"  Command="{Binding DelSaveMod}" CommandParameter="2" />
+                                <Button Content="Cancel"  Command="{Binding DelSelEdit}" CommandParameter="0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </ScrollViewer>
+                </GroupBox>
+
+                <GroupBox  Visibility="Collapsed"  Margin="0"
+                               tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=200, TransitionOn=Visibility}"
+                               tz:Transitionz.Translate="{tz:TranslateParams From='200,0', To='0,0', Duration=200, TransitionOn=Visibility}"
+                               tz:Transitionz.Visibility="{Binding camp.selest, Converter={StaticResource b2vc}}">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+                        <StackPanel Orientation="Vertical" Margin="20 ">
+
+                            <TextBlock Text="Registro de modelo estacionamiento." Margin="0,0,0,40" Style="{StaticResource H3}"/>
+
+                            <StackPanel Orientation="Horizontal"  Margin="0,0,0,20" Visibility="{Binding camp.MultiEd, Converter={StaticResource btvc}}">
+
+                                <CheckBox Name="CondEst" Content="Condominio"  HorizontalAlignment="Left" 
+                                      IsChecked="{Binding camp.econdsel}"/>
+                                <TextBlock Text="Edificio: " 
+                                       Visibility="{Binding ElementName=CondEst, Path=IsChecked, Converter={StaticResource btvi}}" />
+                                <ComboBox Grid.Column="3"  
+                                      ItemsSource="{Binding Vargnrl.edific}" 
+                                      SelectedValuePath="Id" DisplayMemberPath="Name" 
+                                      SelectedValue="{Binding camp.eiddep}"
+                                      Visibility="{Binding ElementName=CondEst, Path=IsChecked, Converter={StaticResource btvi}}"/>
+
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"  Margin="0,0,0,50">
+
+                                <TextBlock Text="Nombre de modelo: " />
+                                <TextBox Text="{Binding camp.enom, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                <TextBlock Text="Tamaño: "  />
+                                <Controls:NumericUpDown  HideUpDownButtons="True" HasDecimals="True" Maximum="9999.99" Minimum="0"
+                                                    Value="{Binding camp.etam, UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal"  >
+
+                                <Button Content="Guardar" Command="{Binding DelSaveMod}" CommandParameter="1"/>
+                                <Button Content="Cancel" Command="{Binding DelSelEdit}" CommandParameter="0"/>
+
+                            </StackPanel>
+
+                        </StackPanel>
+                    </ScrollViewer>
+                </GroupBox>
+
+
+
+
+            </Grid>
+
+
+
+
+        </Grid>
+
+        <abt:PopupHost  Visibility="{Binding Vargnrl.selDeci, Converter={StaticResource b2vc}}" Style="{DynamicResource MetroPopupPresenter}"  Padding="0">
+            <abt:PopupHost.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="pack://application:,,,/SciChart.Wpf.UI;component/Themes/Controls.PopupHost.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </abt:PopupHost.Resources>
+            <msg:MensajeDesicion/>
+        </abt:PopupHost>
+
+
+        <abt:PopupHost  Visibility="{Binding Vargnrl.selMsg, Converter={StaticResource b2vc}}" Style="{DynamicResource MetroPopupPresenter}" Padding="0">
+            <abt:PopupHost.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="pack://application:,,,/SciChart.Wpf.UI;component/Themes/Controls.PopupHost.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </abt:PopupHost.Resources>
+            <msg:MensajeError  />
+        </abt:PopupHost>
+
+
+    </Grid>
+
+</UserControl>

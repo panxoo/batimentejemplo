@@ -1,0 +1,221 @@
+﻿<UserControl x:Class="SistemaAdminDep.Vista.Servicios.TipoServicios"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SistemaAdminDep.Vista.Servicios"
+             mc:Ignorable="d" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:ctrl="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:Dic="clr-namespace:SistemaAdminDep.Diccionario"
+             xmlns:Val="clr-namespace:SistemaAdminDep.Validacion"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"             
+             xmlns:materialDesignConverters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
+             Background="{DynamicResource MaterialDesignPaper}"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             FontFamily="{StaticResource MaterialDesignFont}"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto"
+             d:DesignHeight="450" d:DesignWidth="800">
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
+                <ResourceDictionary Source="/SistemaAdminDep;component/Diccionario/DicTexture.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            
+            <materialDesignConverters:BooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter"  FalseValue="Collapsed" TrueValue="Visible" />
+            <Dic:ConvertTrueToFalse x:Key="ConvertFT"/>
+            <Dic:ConvertColorActive x:Key="colr"/>
+            <Dic:ConvertSoloNumero x:Key="SolNum"/>
+            <Dic:ConvertParameter x:Key="ConvParm"/>
+            <Dic:ConvertIcoDel x:Key="IcoDel"/> 
+            
+            <Style BasedOn="{StaticResource MaterialDesignCheckBox}" TargetType="{x:Type CheckBox}">
+                <Setter Property="Margin" Value="0,0,10,10"/>
+            </Style>
+        
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid  Background="{StaticResource test}">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <DockPanel Margin="20">
+
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                    <Image Source="/SistemaAdminDep;component/Imagen/Menu/bbq5.png" Height="32" Margin="0,0,15,0"/>
+                    <TextBlock Text="Mantenedor Tipo Servicios" Style="{StaticResource MaterialDesignDisplay1TextBlock}"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" >
+
+
+                    <Button   Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"   ToolTip="Agregar"  materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                       Command="{Binding DelAddTpSrv}" HorizontalAlignment="Right" Margin="0,0,0,5" IsEnabled="{Binding Camp.ModAdd,Converter={StaticResource ConvertFT}}">
+                        <materialDesign:PackIcon Kind="Plus" Height="24" Width="24" />
+                    </Button>
+
+                    <DataGrid ItemsSource="{Binding Camp.DtTpSrv}" ScrollViewer.VerticalScrollBarVisibility="Auto" CanUserAddRows="False" 
+                                  AutoGenerateColumns="False" IsReadOnly="True" HorizontalScrollBarVisibility="Visible" 
+                                  MaxHeight="{Binding Camp.AltGrid}" IsEnabled="{Binding Camp.ModAdd, Converter={StaticResource ConvertFT}}" >
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+
+                                            <Button AutomationProperties.AutomationId="DelUpdTpSrv"
+                                                             Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
+                                                Command="{Binding Path=DataContext.DelUpdTpSrv,RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                CommandParameter="{Binding Path=Id}" IsEnabled="{Binding Path=Vigente}"
+                                                        Content="{materialDesign:PackIcon Kind=Pencil, Size=15}" Height="25" Width="25"/>
+
+                                            <Button AutomationProperties.AutomationId="DelRmvTpSrv" Margin="5,0,0,0"
+                                                         Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                                Command="{Binding Path=DataContext.DelRmvTpSrv,RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                        Height="25" Width="25">
+                                                <Button.CommandParameter>
+                                                    <MultiBinding Converter="{StaticResource ConvParm}" Mode="OneWay">
+                                                        <Binding Path="Vigente"/>
+                                                        <Binding Path="Id"/>
+                                                    </MultiBinding>
+                                                </Button.CommandParameter>
+                                                <materialDesign:PackIcon Kind="{Binding Path=Vigente, Converter={StaticResource IcoDel}}" Height="15" Width="15"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Activo">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Path=Vigente , Converter={StaticResource colr}}" Height="16" Width="16"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Servicio" Binding="{Binding Path=Name}"/>
+                            <DataGridTextColumn Header="Cobro" Binding="{Binding Path=Cob}"/>
+                            <DataGridCheckBoxColumn Header="Cobro en Gastos Comunes" Binding="{Binding Path=CobGC}"/>
+                            <DataGridCheckBoxColumn Header="Reserva" Binding="{Binding Path=RqrSvrSc}"/>
+                            <DataGridCheckBoxColumn Header="Requiere Reserva con Documento" Binding="{Binding Path=RqRsrv}"/>
+                            <DataGridCheckBoxColumn Header="Reserva por Checke" Binding="{Binding Path=ResDoc}"/>
+                            <DataGridCheckBoxColumn Header="Reserva por Efectivo" Binding="{Binding Path=ResEfc}"/>
+                            <DataGridCheckBoxColumn Header="Reserva por Transferencia" Binding="{Binding Path=ResTra}"/>
+                            <DataGridCheckBoxColumn Header="Reserva Pago Total" Binding="{Binding Path=ResCtt}"/>
+                            <DataGridTextColumn Header="Monto Reserva Parcial" Binding="{Binding Path=ResCMn}"/>
+                            <DataGridCheckBoxColumn Header="Requiere Garantia" Binding="{Binding Path=RqGaran}"/>
+                            <DataGridTextColumn Header="Monto Garantia" Binding="{Binding Path=GrMont}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <materialDesign:Transitioner Name="Transitioner" SelectedIndex="0" >
+                        <TextBlock/>
+                        <materialDesign:TransitionerSlide   >
+                            <materialDesign:TransitionerSlide.OpeningEffects>
+                                <materialDesign:TransitionEffect Kind="SlideInFromLeft" Duration="0:0:0.8" />
+                                <!--<materialDesign:TransitionEffect Kind="SlideInFromBottom" Duration="0:0:0.8" OffsetTime="0:0:0.15" />-->
+                            </materialDesign:TransitionerSlide.OpeningEffects>
+
+                            <GroupBox   Header="Registrar tipo de servicio" Style="{DynamicResource MaterialDesignCardGroupBox}" Margin="0,5,0,0"
+                                        Visibility="{Binding Camp.ModAdd, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" >
+                                <GroupBox.HeaderTemplate>
+                                    <DataTemplate>
+                                       
+                                        <StackPanel  Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="Pencil" Height="20" Width="20"  VerticalAlignment="Center" />
+                                            <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubheadingTextBlock}" 
+                                                       Text="{Binding}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GroupBox.HeaderTemplate>
+                                <StackPanel Orientation="Vertical" Margin="10">
+
+                                    <TextBlock Text="Registro de tipo servicio"  Margin="0,0,0,20" Style="{StaticResource MaterialDesignTitleTextBlock}"/>
+
+                                    <TextBox Text="{Binding Camp.NomTS,UpdateSourceTrigger=PropertyChanged}"  Width="160" 
+                                             materialDesign:HintAssist.Hint="Nombre del Servicio" HorizontalAlignment="Left" 
+                                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"  />
+
+                                   
+
+
+                                    <TextBox  Text="{Binding Camp.AltGrid}" 
+                                              materialDesign:HintAssist.Hint="Monto de servicio" 
+                                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"  >
+                                        <i:Interaction.Behaviors>
+                                            <Val:TextBoxDecimalRangeBehaviour MaxDecimals="2" 
+                             MaxInteger="20" 
+                             Minimum="0.0" 
+                             Maximum="20.0" />
+
+                                        </i:Interaction.Behaviors>
+
+                                    </TextBox>
+
+                                    <WrapPanel Margin="0,20,0,5">
+
+                                        <StackPanel Orientation="Vertical" Margin="0,0,5,0">
+                                            <CheckBox Content="Se requiere cobro de uso" IsChecked="{Binding Camp.SeCobra}" />
+
+                                            <TextBox  Text="{Binding Camp.Cobro}" materialDesign:HintAssist.Hint="Monto de servicio" 
+                                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                                      Visibility="{Binding Camp.SeCobra,Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+                                        </StackPanel>
+
+                                        <StackPanel Orientation="Vertical" Margin="0,0,5,0">
+
+                                            <CheckBox Content="Se  requiere garantia" IsChecked ="{Binding Camp.RqGarant}"  />
+
+                                            <TextBox  Text="{Binding Camp.GarValor}" materialDesign:HintAssist.Hint="Valor de garantia" 
+                                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                                      Visibility="{Binding Camp.RqGarant,Converter={StaticResource InvertedBooleanToVisibilityConverter}}"/>
+
+                                        </StackPanel>
+
+                                        <CheckBox Content="Cobro por Gastos Comunes" IsChecked ="{Binding Camp.GcCobro}" VerticalAlignment="Top" 
+                                                  Visibility="{Binding Camp.RqGarant,Converter={StaticResource InvertedBooleanToVisibilityConverter}}"/>
+
+                                        <CheckBox Content="Se requiere reserva" IsChecked ="{Binding Camp.RqReserv}" VerticalAlignment="Top" />
+
+                                    </WrapPanel>
+
+                                    <GroupBox Margin="0,15,0,0" Header="Tipo de reserva permitidos"
+                                              Visibility="{Binding Camp.RqReserv,Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
+                                        <StackPanel Orientation="Vertical" Margin="10">
+
+                                            <WrapPanel>
+                                                <CheckBox Content="Reserva por Checke" IsChecked="{Binding Camp.ResDocum}" VerticalAlignment="Top"/>
+                                                <CheckBox Content="Reserva por Efectivo" IsChecked="{Binding Camp.ResEfec}" VerticalAlignment="Top"/>
+                                                <CheckBox Content="Reserva por Transferencia" IsChecked="{Binding Camp.ResTrans}" VerticalAlignment="Top"/>
+
+                                                <StackPanel Orientation="Vertical">
+                                                    <CheckBox Content="Reserva por valor total" IsChecked="{Binding Camp.ResCobTot}"/>
+                                                    <TextBox  Text="{Binding Camp.ResCobMont}" materialDesign:HintAssist.Hint="Valor de la reserva:" 
+                                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                                      Visibility="{Binding Camp.ResCobTot,Converter={StaticResource InvertedBooleanToVisibilityConverter}}"/>
+
+                                                </StackPanel>
+                                            </WrapPanel>
+                                        </StackPanel>
+                                    </GroupBox>
+
+                                    <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+                                        <Button Content="Guardar" Command="{Binding DelSavTpSrv}" CommandParameter="0"/>
+                                        <Button Content="Guardar y Cerrar" Command="{Binding DelSavTpSrv}" CommandParameter="1" Margin="5,0,0,0"
+                                                Visibility="{Binding Camp.ActUpdt, Converter={StaticResource InvertedBooleanToVisibilityConverter}}"/>
+                                        <Button Content="Cancelar" Command="{Binding DelCanTpSrv}" Margin="5,0,0,0"/>
+                                    </StackPanel>
+
+                                </StackPanel>
+                            </GroupBox>
+                        </materialDesign:TransitionerSlide>
+                    </materialDesign:Transitioner>
+                </StackPanel>
+            </DockPanel>
+        </ScrollViewer>
+
+    </Grid>
+</UserControl>

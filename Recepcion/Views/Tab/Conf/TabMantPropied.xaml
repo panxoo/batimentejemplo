@@ -1,0 +1,200 @@
+﻿<UserControl x:Class="Recepcion.Views.Tab.Conf.TabMantPropied"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+              xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:xs="clr-namespace:Recepcion.Diccionario"
+             xmlns:msg="clr-namespace:Recepcion.Views.Emergente"
+              xmlns:abt="http://schemas.abtsoftware.co.uk/presentation"
+                xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
+                 xmlns:prism="http://prismlibrary.com/"     
+                 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" 
+             Background="White" >
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Recepcion;component/Diccionario/DicMain.xaml" />
+                <ResourceDictionary Source="/Recepcion;component/Diccionario/DictGrid.xaml"  />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
+                <ResourceDictionary Source="/Recepcion;component/Diccionario/FormTesture.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <xs:ConvertParameter x:Key="copr"/>
+            <BooleanToVisibilityConverter x:Key="b2vc"/>
+            <xs:BoolToVisibleOrHidden x:Key="bvhc" Collapse="True" Reverse="True"/>
+            <xs:BluParamsWhenTrueConverter x:Key="bpc" From="0" To="30" Duration="200"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Background="{StaticResource test}">
+        <Grid Margin="20">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+
+            <StackPanel Orientation="Vertical" Grid.Row="0">
+
+                <StackPanel   Orientation="Horizontal" Margin="0,0,0,15" >
+                    <Image Source="/Recepcion;component/Imagen/door2.png" Height="32" />
+                    <TextBlock  Text="Mantenedor de departamentos."   Style="{StaticResource H1}"  />
+                </StackPanel>
+               
+                <Grid Margin="0,0,0,5">
+                    
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <StackPanel Orientation="Horizontal" Grid.Column="0">
+                        <TextBlock Text="Seleccionar Edificio: " />
+                        <ComboBox ItemsSource="{Binding Vargnrl.edific}" DisplayMemberPath="Name" SelectedValuePath="Id"
+                              SelectedValue="{Binding camp.seledef}"                              >
+
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <prism:InvokeCommandAction Command="{Binding DelSelectionEdef}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                        </ComboBox>
+                    </StackPanel>
+                    
+                    <Button Content="Agregar" Width="80" Command="{Binding DelOpenMod}"  HorizontalAlignment="Right" HorizontalContentAlignment="Right"  Grid.Column="1">
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource copr}" Mode="OneWay">
+                                    <Binding Source='0'/>
+                                    <Binding Source='0'/>
+                                </MultiBinding>
+                            </Button.CommandParameter>
+                        </Button>
+                    
+                </Grid>
+                           </StackPanel>
+
+            <Grid Grid.Row="1">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Grid Background="white"   Grid.Column="0">
+                    <GroupBox Header="Pisos" Margin="0" >
+
+                        <ListBox ItemsSource="{Binding Vargnrl.piso}" DisplayMemberPath="Name"  
+                     SelectedValuePath="Id" SelectedValue="{Binding camp.selpiso}" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <prism:InvokeCommandAction Command="{Binding DelSelectionPiso}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ListBox>
+
+                    </GroupBox>
+                    </Grid>
+
+ 
+                    <Grid Background="White"  Grid.Column="1"  Margin="20,0,0,0">
+                        <GroupBox Header="Datos Departamento" Margin="0" tz:Transitionz.Blur="{Binding camp.selgnrl, Converter={StaticResource bpc}}">
+
+                        <DataGrid ItemsSource="{Binding camp.grddepart}" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" 
+                                          VerticalScrollBarVisibility="Auto">
+
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="Comandos">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button Content="editar"    Command="{Binding Path=DataContext.DelOpenMod,
+                                                    RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
+                                                    <Button.CommandParameter>
+                                                        <MultiBinding Converter="{StaticResource copr}" Mode="OneWay">
+                                                            <Binding Source='1'/>
+                                                            <Binding Path="id"/>
+                                                        </MultiBinding>
+                                                    </Button.CommandParameter>
+                                                </Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="Nombre" Binding="{Binding Path=name}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Numero Dep" Binding="{Binding Path=num}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Modelo" Binding="{Binding Path=model}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Orientacion" Binding="{Binding Path=orient}" IsReadOnly="True"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
+                 
+
+
+                    <GroupBox  Visibility="Collapsed" Margin="0"
+                               tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=200, TransitionOn=Visibility}"
+                               tz:Transitionz.Translate="{tz:TranslateParams From='200,0', To='0,0', Duration=200, TransitionOn=Visibility}"
+                               tz:Transitionz.Visibility="{Binding camp.selmod, Converter={StaticResource b2vc}}"  >
+
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <StackPanel Orientation="Vertical" Margin="15,11,0,15">
+                                <TextBlock Text="Almacenar Datos" Style="{StaticResource H3}"></TextBlock>
+
+                                <WrapPanel Orientation="Horizontal" Margin="0,15,0,0" Style="{StaticResource Fo1}">
+                                    <StackPanel Orientation="Horizontal"  Margin="0,0,50,0" >
+                                        <TextBlock Text="Nombre Dep: " />
+                                        <TextBox Text="{Binding camp.dname}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,50,0" >
+                                        <TextBlock Text="Numero Dep: " />
+                                        <Controls:NumericUpDown Value="{Binding camp.dnum}" Maximum="9999" HasDecimals="False"  />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,50,0" >
+                                        <TextBlock Text="Orientacion: " />
+                                        <ComboBox ItemsSource="{Binding Vargnrl.orient}" SelectedValuePath="Id" DisplayMemberPath="Name"
+                                      SelectedValue="{Binding camp.dselori}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" >
+                                        <TextBlock Text="Modelo Dep: " />
+                                        <ComboBox ItemsSource="{Binding Vargnrl.modeldepa}" SelectedValuePath="Id" DisplayMemberPath="Name"
+                                      SelectedValue="{Binding camp.dselmod}"/>
+                                    </StackPanel>
+                                </WrapPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,56,0,0">
+                                    <Button Content="Almacenar Cerrar"  Command="{Binding DelAlmDep}" CommandParameter="1"/>
+                                    <Button Content="Almacenar"  Command="{Binding DelAlmDep}" CommandParameter="2" Visibility="{Binding camp.selUpdt, Converter={StaticResource bvhc}}"/>
+                                    <Button Content="Cancelar"  Command="{Binding DelCloseMod}" />
+                                </StackPanel>
+
+                            </StackPanel>
+                        </ScrollViewer>
+                    </GroupBox>
+                    </Grid>
+                </Grid>
+
+            </Grid>
+        </Grid>
+
+        <abt:PopupHost  Visibility="{Binding Vargnrl.selMsg, Converter={StaticResource b2vc}}" Style="{DynamicResource MetroPopupPresenter}" Padding="0">
+            <abt:PopupHost.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="pack://application:,,,/SciChart.Wpf.UI;component/Themes/Controls.PopupHost.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </abt:PopupHost.Resources>
+
+            <msg:MensajeError/>
+
+        </abt:PopupHost>
+
+    </Grid>
+</UserControl>

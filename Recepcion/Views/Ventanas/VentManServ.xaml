@@ -1,0 +1,173 @@
+﻿<Window x:Class="Recepcion.Ventanas.VentManServ"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+              xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+          xmlns:prism="http://prismlibrary.com/"     
+                 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+   Title="VentManServ" Height="338" Width="532"  >
+
+    <!--<Window.Resources>
+        <ResourceDictionary Source="../../Diccionario/DictObjForm.xaml"/>
+    </Window.Resources>-->
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+        <!--<Grid.Background>
+            <ImageBrush Stretch="Uniform" Opacity="0.5">
+                <ImageBrush.ImageSource>
+                    <BitmapImage UriSource="/Recepcion;component/Imagen/1198399_45415067.png"/>
+                </ImageBrush.ImageSource>
+            </ImageBrush>
+        </Grid.Background>-->
+        <GroupBox Header="Departamento" Grid.Row="0">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition />
+                    <RowDefinition Height="5"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="2">
+                    <TextBlock Text="Seleccionar Edificio: " />
+                    <ComboBox ItemsSource="{Binding vargnrl.edific}" DisplayMemberPath="Name" SelectedValuePath="Id"
+                              SelectedValue="{Binding camp.seledef}"                              >
+
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <prism:InvokeCommandAction Command="{Binding DelSelectionEdef}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
+                    </ComboBox>
+                </StackPanel>
+
+
+
+
+                <GroupBox Header="Pisos" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2">
+
+                    <ListBox ItemsSource="{Binding vargnrl.piso}" DisplayMemberPath="Name" 
+                                 SelectedValuePath="Id" SelectedValue="{Binding camp.selpiso}" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <prism:InvokeCommandAction Command="{Binding DelSelectionPiso}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListBox>
+
+                </GroupBox>
+
+                <GroupBox Header="Datos Departamento" Grid.Row="1" Grid.Column="1">
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Nombre Dep: " Grid.Column="0" Grid.Row="0"/>
+                        <TextBox Text="{Binding camp.dname}" Grid.Column="1" Grid.Row="0"/>
+
+                        <TextBlock Text="Numero Dep: " Grid.Column="2" Grid.Row="0"/>
+                        <Controls:NumericUpDown Value="{Binding camp.dnum}" Grid.Column="3" Grid.Row="0"  />
+
+                        <TextBlock Text="Orientacion: " Grid.Column="4" Grid.Row="0"/>
+                        <ComboBox ItemsSource="{Binding vargnrl.orient}" SelectedValuePath="Id" DisplayMemberPath="Name" Grid.Column="5" Grid.Row="0"
+                                      SelectedValue="{Binding camp.dselori}"/>
+
+                        <TextBlock Text="Modelo Dep: " Grid.Column="6" Grid.Row="0"/>
+                        <ComboBox ItemsSource="{Binding vargnrl.modeldepa}" SelectedValuePath="Id" DisplayMemberPath="Name" Grid.Column="7" Grid.Row="0"
+                                      SelectedValue="{Binding camp.dselmod}"/>
+
+                        <Button Content="Almacenar" Grid.Row="1" Command="{Binding DelAlmDep}"/>
+                    </Grid>
+                </GroupBox>
+
+
+                <GroupBox Header="Datos Departamento" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2">
+
+                    <DataGrid ItemsSource="{Binding camp.grddepart}" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" 
+                                          VerticalScrollBarVisibility="Auto" SelectedCellsChanged="DataGrid_SelectedCellsChanged" x:Name="Dgrid" GotFocus="Dgrid_GotFocus" LostFocus="Dgrid_LostFocus" LostKeyboardFocus="Dgrid_LostKeyboardFocus">
+
+                        <DataGrid.Resources>
+                            <SolidColorBrush x:Key="SelectionColorKey" Color="DarkOrange"/>
+                            <Style TargetType="DataGridRow">
+                                <Style.Resources>
+                                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{Binding Source={StaticResource SelectionColorKey}, Path=Color}"/>
+                                </Style.Resources>
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+
+                            <DataGridTextColumn Header="Nombre" Binding="{Binding Path=name}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Numero Dep" Binding="{Binding Path=num}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Modelo" Binding="{Binding Path=model}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Orientacion" Binding="{Binding Path=orient}" IsReadOnly="True"/>
+
+                            <DataGridTemplateColumn Header="Comandos">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Content="editar"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                        <!--<DataGrid.CellStyle>-->
+                        <!--Override Highlighting so that its easy to see what is selected even when the control is not focused-->
+                        <!--<Style TargetType="{x:Type DataGridCell}">
+                                <Style.Triggers>
+                                    <Trigger  Property="IsSelected" Value="true">
+                                        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                                        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+                                        <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                                    </Trigger>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="True" />
+                                            <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=IsKeyboardFocusWithin}" Value="False" />
+                                        </MultiDataTrigger.Conditions>
+                                        <MultiDataTrigger.Setters>
+                                            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+                                            <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                                        </MultiDataTrigger.Setters>
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.CellStyle>-->
+
+                    </DataGrid>
+                </GroupBox>
+
+
+            </Grid>
+
+
+
+
+        </GroupBox>
+
+    </Grid>
+</Window>

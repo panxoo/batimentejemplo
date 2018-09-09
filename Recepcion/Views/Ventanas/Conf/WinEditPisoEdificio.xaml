@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="Recepcion.Views.Ventanas.Conf.WinEditPisoEdificio"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:dic="clr-namespace:Recepcion.Diccionario"
+        xmlns:local="clr-namespace:Recepcion.Views.Ventanas.Conf"
+        mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Recepcion;component/Diccionario/DicMain.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <dic:BoolToVisibleOrHidden x:Key="colp" Collapse="True"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+
+        
+        <StackPanel Orientation="Vertical">
+
+            <GroupBox Header="Configuración Pisos de condominio" Visibility="{Binding Notification.cond, Converter={StaticResource colp}}">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Pisos:"/>
+                        <TextBox Text="{Binding camp.ps}" IsReadOnly="{Binding camp.pedit }"/>
+                        <TextBlock Text="Sub Pisos:"/>
+                        <TextBox Text="{Binding camp.sps}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="Editar" Command="{Binding CEdit}"/>
+                        <Button Content="Actualizar" Command="{Binding CUpdate}"/>
+                        <Button Content="Cancelar" Command="{Binding CCancel}"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="Edición de Pisos">
+                <StackPanel Orientation="Vertical">
+                    <TabControl>
+                        <TabItem Header="Pisos">
+                            <StackPanel Orientation="Vertical">
+                            <DataGrid ItemsSource="{Binding camp.p}">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Nombre Piso" Binding="{Binding Path=d}"/>
+                                    <DataGridTextColumn Header="Orden" Binding="{Binding Path=d}" IsReadOnly="True"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                                <Button Content="Guardar" Command="{Binding PUpdt}"/>
+                            </StackPanel>
+                        </TabItem>
+                        <TabItem Header="Subterranio">
+                            <StackPanel Orientation="Vertical">
+                                <DataGrid ItemsSource="{Binding camp.s}">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Nombre Piso" Binding="{Binding Path=f}"/>
+                                        <DataGridTextColumn Header="Orden" Binding="{Binding Path=h}" IsReadOnly="True"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button Content="Guardar" Command="{Binding SUpdt}"/>
+                            </StackPanel>
+                        </TabItem>
+                    </TabControl>
+                </StackPanel>
+            </GroupBox>
+            <Button Content="Cerrar" Command="{Binding Close}"/>
+
+        </StackPanel>
+
+    </Grid>
+</UserControl>

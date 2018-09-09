@@ -1,0 +1,196 @@
+﻿<UserControl x:Class="Recepcion.Views.Tab.Servicios.TabTipoServicios"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ctrl="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:local="clr-namespace:Recepcion.Views.Tab.Conf"
+             xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
+              xmlns:abt="http://schemas.abtsoftware.co.uk/presentation"
+               xmlns:msg="clr-namespace:Recepcion.Views.Emergente"
+             xmlns:xs="clr-namespace:Recepcion.Diccionario"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" Background="White">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Recepcion;component/Diccionario/DicMain.xaml" />
+                <ResourceDictionary Source="/Recepcion;component/Diccionario/FormTesture.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <xs:ConvertColorActive x:Key="colr"/>
+            <xs:BoolToVisibleOrHidden x:Key="btvi" Reverse="False"/>
+            <xs:BoolToVisibleOrHidden x:Key="btvr" Reverse="True"/>
+            <xs:BoolToVisibleOrHidden x:Key="btvc" Collapse="True"/>
+            <xs:BoolToVisibleOrHidden x:Key="btvcr" Collapse="True" Reverse="True"/>
+
+            <xs:ConvertParameter x:Key="copr"/>
+            <xs:ConvertFalsTrue x:Key="cft"/>
+            <BooleanToVisibilityConverter x:Key="b2vc"/>
+            <xs:BluParamsWhenTrueConverter x:Key="bpc" From="0" To="30" Duration="200"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Background="{StaticResource test}">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <Grid Margin="20">
+
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                        <Image Source="/Recepcion;component/Imagen/bbq5.png" Height="32" />
+                        <TextBlock Text="Mantenedor Tipo Servicios" Style="{StaticResource H1}"/>
+                    </StackPanel>
+
+                    <Button Content="Agregar" Command="{Binding DelAddTpSrv}" Width="80" HorizontalAlignment="Right"
+                            Visibility ="{Binding Camp.ModAdd, Converter={StaticResource btvr}}" Margin="0,0,0,5"/>
+
+                    <Grid Background="{StaticResource bkg}" Margin="0,0,0,10">
+                        <GroupBox Margin="0">
+                            <DataGrid ItemsSource="{Binding Camp.DtTpSrv}" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True"
+                      HorizontalScrollBarVisibility="Visible" Width="auto" MaxHeight="180" IsEnabled="{Binding Camp.ModAdd, Converter={StaticResource cft}}">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Header="">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Button Content="Updt" AutomationProperties.AutomationId="DelUpdTpSrv"
+                                                Command="{Binding Path=DataContext.DelUpdTpSrv,RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                CommandParameter="{Binding Path=Id}" IsEnabled="{Binding Path=Vigente}"/>
+                                                    <Button Content="x" AutomationProperties.AutomationId="DelRmvTpSrv" Margin="5,0,0,0"
+                                                Command="{Binding Path=DataContext.DelRmvTpSrv,RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
+                                                        <Button.CommandParameter>
+                                                            <MultiBinding Converter="{StaticResource copr}" Mode="OneWay">
+                                                                <Binding Path="Vigente"/>
+                                                                <Binding Path="Id"/>
+                                                            </MultiBinding>
+                                                        </Button.CommandParameter>
+                                                    </Button>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Activo">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Image Source="{Binding Path=Vigente , Converter={StaticResource colr}}" Height="16" Width="16"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Header="Servicio" Binding="{Binding Path=Name}"/>
+                                    <DataGridTextColumn Header="Cobro" Binding="{Binding Path=Cob}"/>
+                                    <DataGridCheckBoxColumn Header="Cobro en Gastos Comunes" Binding="{Binding Path=CobGC}"/>
+                                    <DataGridCheckBoxColumn Header="Reserva" Binding="{Binding Path=RqrSvrSc}"/>
+                                    <DataGridCheckBoxColumn Header="Requiere Reserva con Documento" Binding="{Binding Path=RqRsrv}"/>
+                                    <DataGridCheckBoxColumn Header="Reserva por Checke" Binding="{Binding Path=ResDoc}"/>
+                                    <DataGridCheckBoxColumn Header="Reserva por Efectivo" Binding="{Binding Path=ResEfc}"/>
+                                    <DataGridCheckBoxColumn Header="Reserva por Transferencia" Binding="{Binding Path=ResTra}"/>
+                                    <DataGridCheckBoxColumn Header="Reserva Pago Total" Binding="{Binding Path=ResCtt}"/>
+                                    <DataGridTextColumn Header="Monto Reserva Parcial" Binding="{Binding Path=ResCMn}"/>
+                                    <DataGridCheckBoxColumn Header="Requiere Garantia" Binding="{Binding Path=RqGaran}"/>
+                                    <DataGridTextColumn Header="Monto Garantia" Binding="{Binding Path=GrMont}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </GroupBox>
+                    </Grid>
+
+                    <Grid Background="{StaticResource bkg}" >
+                        <GroupBox  Visibility="Collapsed" 
+                               tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=200, TransitionOn=Visibility}"
+                               tz:Transitionz.Translate="{tz:TranslateParams From='200,0', To='0,0', Duration=200, TransitionOn=Visibility}"
+                               tz:Transitionz.Visibility="{Binding Camp.ModAdd, Converter={StaticResource b2vc}}"
+                               Margin="0">
+                            <StackPanel Orientation="Vertical" Margin="10">
+
+                                <TextBlock Text="Registro de tipo servicio" Style="{StaticResource H3}" Margin="0,0,0,20"/>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Nombre del Servicio: "/>
+                                    <TextBox Text="{Binding Camp.NomTS}" />
+                                </StackPanel>
+
+                                <Grid HorizontalAlignment="Left">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+
+                                    <CheckBox Content="Se requiere cobro de uso" IsChecked="{Binding Camp.SeCobra}" Grid.Column="0" Grid.Row="0" Margin="0,0,15,0"/>
+
+                                    <TextBlock Text="Monto de servicio: " Grid.Column="1" Grid.Row="0" Visibility="{Binding Camp.SeCobra,Converter={StaticResource btvi}}"/>
+                                    <ctrl:NumericUpDown  HideUpDownButtons="True" HasDecimals="False" Value="{Binding Camp.Cobro}" Grid.Column="2" Grid.Row="0" Visibility="{Binding Camp.SeCobra,Converter={StaticResource btvi}}"/>
+
+                                    <CheckBox Content="Se requiere garantia" IsChecked ="{Binding Camp.RqGarant}" Grid.Column="0" Grid.Row="1"/>
+
+                                    <TextBlock Text="Valor de garantia: " HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1" Visibility="{Binding Camp.RqGarant,Converter={StaticResource btvi}}"/>
+                                    <ctrl:NumericUpDown HideUpDownButtons="True" HasDecimals="False" Value="{Binding Camp.GarValor}"  Grid.Column="2" Grid.Row="1" Visibility="{Binding Camp.RqGarant,Converter={StaticResource btvi}}"/>
+
+                                </Grid>
+
+
+
+                                <CheckBox Content="Cobro por Gastos Comunes" IsChecked ="{Binding Camp.GcCobro}" Visibility="{Binding Camp.SeCobra,Converter={StaticResource btvc}}"/>
+                                <CheckBox Content="Se requiere reserva" IsChecked ="{Binding Camp.RqReserv}" />
+
+                                <StackPanel Visibility="{Binding Camp.SeCobra,Converter={StaticResource btvc}}">
+                                    <GroupBox Visibility="{Binding Camp.RqReserv,Converter={StaticResource btvc}}" Margin="0,15,0,0">
+                                        <StackPanel Orientation="Vertical" Margin="10">
+
+                                            <WrapPanel>
+                                                <TextBlock Text="Tipo de reserva permitidos: "/>
+                                                <CheckBox Content="Reserva por Checke" IsChecked="{Binding Camp.ResDocum}"/>
+                                                <CheckBox Content="Reserva por Efectivo" IsChecked="{Binding Camp.ResEfec}"/>
+                                                <CheckBox Content="Reserva por Transferencia" IsChecked="{Binding Camp.ResTrans}"/>
+                                            </WrapPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                                <CheckBox Content="Reserva por valor total" IsChecked="{Binding Camp.ResCobTot}"/>
+                                                <TextBlock Text="Valor de la reserva: " Visibility="{Binding Camp.ResCobTot, Converter={StaticResource btvi}}"/>
+                                                <ctrl:NumericUpDown  HideUpDownButtons="True" HasDecimals="False" Value="{Binding Camp.ResCobMont}" 
+                                                                 Visibility="{Binding Camp.ResCobTot, Converter={StaticResource btvi}}"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </GroupBox>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+                                    <Button Content="Guardar" Command="{Binding DelSavTpSrv}" CommandParameter="0"/>
+                                    <Button Content="Guardar y Cerrar" Command="{Binding DelSavTpSrv}" CommandParameter="1"/>
+                                    <Button Content="Cancelar" Command="{Binding DelCanTpSrv}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+
+        <abt:PopupHost  Visibility="{Binding Vargnrl.selMsg, Converter={StaticResource b2vc}}" Style="{DynamicResource MetroPopupPresenter}" Padding="0">
+            <abt:PopupHost.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="pack://application:,,,/SciChart.Wpf.UI;component/Themes/Controls.PopupHost.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </abt:PopupHost.Resources>
+            <msg:MensajeError  />
+        </abt:PopupHost>
+
+        <abt:PopupHost  Visibility="{Binding Vargnrl.selDeci, Converter={StaticResource b2vc}}" Style="{DynamicResource MetroPopupPresenter}"  Padding="0">
+            <abt:PopupHost.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="pack://application:,,,/SciChart.Wpf.UI;component/Themes/Controls.PopupHost.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </abt:PopupHost.Resources>
+            <msg:MensajeDesicion/>
+        </abt:PopupHost>
+
+    </Grid>
+</UserControl>

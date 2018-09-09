@@ -1,0 +1,299 @@
+﻿<UserControl x:Class="Recepcion.Views.Tab.Conf.TabConfEdef"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:xs="clr-namespace:Recepcion.Diccionario"
+             xmlns:views="clr-namespace:Recepcion.Views.Ventanas.Conf"
+             xmlns:prism="http://prismlibrary.com/"  
+             xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
+             xmlns:abt="http://schemas.abtsoftware.co.uk/presentation"
+             xmlns:control="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:msg="clr-namespace:Recepcion.Views.Emergente"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"  Background="White">
+
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Recepcion;component/Diccionario/FormTesture.xaml"/>
+                <ResourceDictionary Source="/Recepcion;component/Diccionario/DicMain.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <xs:BoolToVisibleOrHidden x:Key="btvi" Reverse="False"/>
+            <xs:BoolToVisibleOrHidden x:Key="btvr" Reverse="True"/>
+            <xs:BoolToVisibleOrHidden x:Key="btvc" Collapse="True"/>
+            <xs:BoolToVisibleOrHidden x:Key="btvcr" Collapse="True" Reverse="True"/>
+
+            <xs:ConvertParameter x:Key="copr"/>
+            <xs:ConvertFalsTrue x:Key="cft"/>
+            <BooleanToVisibilityConverter x:Key="b2vc"/>
+            <xs:BluParamsWhenTrueConverter x:Key="bpc" From="0" To="30" Duration="200"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <i:Interaction.Triggers>
+
+        <prism:InteractionRequestTrigger SourceObject="{Binding IntPisoPopUp, Mode=OneWay}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True" >
+                <prism:PopupWindowAction.WindowContent>
+                    <views:WinEditPisoEdificio/>
+                </prism:PopupWindowAction.WindowContent>
+            </prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
+
+    </i:Interaction.Triggers>
+
+    <Grid Background="{StaticResource test}" >
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <Grid Margin="20">
+
+                <StackPanel Orientation="Vertical">
+
+                    <StackPanel   Orientation="Horizontal" Margin="0,0,0,15">
+                        <Image Source="/Recepcion;component/Imagen/edificio.png" Height="32" />
+                        <TextBlock  Text="Mantenedor de Condominio"  Style="{StaticResource H1}" />
+                    </StackPanel>
+
+
+                    <Grid Margin="0,0,0,10" Background="{StaticResource bkg}">
+
+                        <GroupBox Header="Condominio" IsEnabled="{Binding camp.Selgnrl, Converter={StaticResource cft}}" Margin="0" >
+
+                            <StackPanel Orientation="Vertical" Margin="10,10,10,10">
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <TextBlock Text="Nombre del condominio :"/>
+                                    <TextBox Text="{Binding camp.cnom}"  IsReadOnly="{Binding camp.cupdt}"/>
+
+                                    <CheckBox Content="Condominio con multiple edificio" HorizontalContentAlignment="Left" 
+                                      IsChecked="{Binding camp.cmultied}" IsEnabled="{Binding camp.cupdt,Converter={StaticResource cft}}"/>
+                                </StackPanel>
+
+                                <GroupBox Header="Dirección"  BorderBrush="White">
+                                    <WrapPanel Margin="5,5,5,5">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Pais :"  />
+                                            <ComboBox ItemsSource="{Binding Vargnrl.pais}" SelectedValuePath="Id" DisplayMemberPath="Name"  
+                                                      SelectedValue="{Binding camp.cIdPais}" 
+                                            Visibility="{Binding camp.cupdt, Converter={StaticResource btvcr}}">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="SelectionChanged">
+                                                        <prism:InvokeCommandAction Command="{Binding DelSelectionPais}"/>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </ComboBox>
+                                            <TextBox Text="{Binding camp.panam}" Visibility="{Binding camp.cupdt,Converter={StaticResource btvc}}"
+                                        />
+
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+
+
+                                            <TextBlock Text="Region :" />
+                                            <ComboBox ItemsSource="{Binding Vargnrl.region}"
+                                          SelectedValuePath="Id" DisplayMemberPath="Name"
+                                          SelectedValue="{Binding camp.cIdRegion}" 
+                                          Visibility="{Binding camp.cupdt, Converter={StaticResource btvcr}}"/>
+                                            <TextBox Text="{Binding camp.renam}" Visibility="{Binding camp.cupdt,Converter={StaticResource btvc}}"
+                                        />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Ciudad :" />
+                                            <TextBox Text="{Binding camp.ccity}" IsReadOnly="{Binding camp.cupdt}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Nombre de calle :" />
+                                            <TextBox Text="{Binding camp.ccalle}" IsReadOnly="{Binding camp.cupdt}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Numero :" />
+                                            <TextBox Text="{Binding camp.cNumDir}" IsReadOnly="{Binding camp.cupdt}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Codigo Postal :" />
+                                            <TextBox Text="{Binding camp.cpostal}"  IsReadOnly="{Binding camp.cupdt}"/>
+                                        </StackPanel>
+                                    </WrapPanel>
+
+                                </GroupBox>
+
+
+
+                                <GroupBox Header="Datos de contacto"  BorderBrush="White">
+                                    <WrapPanel Margin="5,5,5,5">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Telefono :"/>
+                                            <TextBox Text="{Binding camp.ctel}" Grid.Column="1" Grid.Row="2" IsReadOnly="{Binding camp.cupdt}" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Telefono 2 :"/>
+                                            <TextBox Text="{Binding camp.ctel2}" IsReadOnly="{Binding camp.cupdt}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Correo electronico :" />
+                                            <TextBox Text="{Binding camp.ccorreo}" IsReadOnly="{Binding camp.cupdt}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Correo electronico 2 :" />
+                                            <TextBox Text="{Binding camp.ccorreo2}" IsReadOnly="{Binding camp.cupdt}"/>
+                                        </StackPanel>
+                                    </WrapPanel>
+                                </GroupBox>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,50,0,0">
+                                    <Button Content="Editar" Visibility="{Binding camp.cupdt, Converter={StaticResource btvi}}" Command="{Binding DelActUpdtC}"/>
+                                    <Button Content="Guardar" Visibility="{Binding camp.cupdt, Converter={StaticResource btvr}}" Command="{Binding DelExeUpdtC}"/>
+                                    <Button Content="Cancelar" Visibility="{Binding camp.cupdt, Converter={StaticResource btvr}}" Command="{Binding DelCanUpdtC}"/>
+                                    <Button Content="Piso" Command="{Binding DelPisoPopUp}">
+                                        <Button.CommandParameter>
+                                            <MultiBinding Converter="{StaticResource copr}" Mode="OneWay" >
+                                                <Binding Source="true" />
+                                            </MultiBinding>
+                                        </Button.CommandParameter>
+                                    </Button>
+                                </StackPanel>
+
+                            </StackPanel>
+                        </GroupBox>
+                    </Grid>
+
+                    <Grid Background="{StaticResource bkg}">
+                        <GroupBox Header="Datos Departamentos" Visibility="{Binding camp.cmultied, Converter={StaticResource btvi}}"
+                                        tz:Transitionz.Blur="{Binding camp.Selgnrl, Converter={StaticResource bpc}}" Margin="0"
+                                  IsEnabled="{Binding camp.cupdt}">
+                            <StackPanel Orientation="Vertical">
+
+                                <DataGrid CanUserAddRows="False" IsReadOnly="True"
+                                    ItemsSource="{Binding camp.eedif}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Nombre Edificio" Binding="{Binding Path=nom_dep}" />
+                                        <DataGridTextColumn Header="Ident. edificio" Binding="{Binding Path=ident_ed}" />
+                                        <DataGridTextColumn Header="Num. Direccion" Binding="{Binding Path=num_dir}" />
+                                        <DataGridTextColumn Header="Telefono" Binding="{Binding Path=tel}" />
+                                        <DataGridTextColumn Header="Telefono 2" Binding="{Binding Path=tel2}" />
+                                        <DataGridTextColumn Header="Correo" Binding="{Binding Path=corre}" />
+                                        <DataGridTextColumn Header="Correo 2" Binding="{Binding Path=corre2}" />
+                                        <DataGridTextColumn Header="Pisos" Binding="{Binding Path=ps}" />
+                                        <DataGridTextColumn Header="Sub Pisos" Binding="{Binding Path=pss}" />
+
+                                        <DataGridTemplateColumn Header="View">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Button AutomationProperties.AutomationId="UpdtDep" Content="Update" Tag="Actualizar" 
+                                                                Command="{Binding DataContext.DelUpdDep,RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                                CommandParameter="{Binding Path=id_edf}"/>
+                                                        <Button AutomationProperties.AutomationId="PisoDep" Content="Piso"
+                                                                Command="{Binding DataContext.DelPisoPopUp,RelativeSource={RelativeSource AncestorType=DataGrid}}">
+                                                            <Button.CommandParameter>
+                                                                <MultiBinding Converter="{StaticResource copr}" Mode="OneWay" >
+                                                                    <Binding Source="False" />
+                                                                    <Binding Path="cond"/>
+                                                                    <Binding Path="id_edf"/>
+                                                                </MultiBinding>
+                                                            </Button.CommandParameter>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button Content="Agregar" Command="{Binding DelAddDep}" Visibility="{Binding camp.ecamact,Converter={StaticResource btvr}}"/>
+                            </StackPanel>
+
+                        </GroupBox>
+
+
+                        <GroupBox  Visibility="Collapsed" 
+                               tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=200, TransitionOn=Visibility}"
+                               tz:Transitionz.Translate="{tz:TranslateParams From='200,0', To='0,0', Duration=200, TransitionOn=Visibility}"
+                               tz:Transitionz.Visibility="{Binding camp.Moddep, Converter={StaticResource b2vc}}"
+                                   Margin="0">
+                            <StackPanel Orientation="Vertical" Margin="20,20,20,20">
+
+                                <TextBlock Text="Registro de edificio." Margin="0,0,0,40" Style="{StaticResource H3}"/>
+
+                                <WrapPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Nombre del Edificio :" />
+                                        <TextBox Text="{Binding camp.enom, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                                                     Width="300"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Ident. Edificio :"/>
+                                        <TextBox Text="{Binding camp.eidnom, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Numero Direccion :" />
+                                        <TextBox Text="{Binding camp.enumd, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                                     Width="100"/>
+                                    </StackPanel>
+
+                                </WrapPanel>
+                                <WrapPanel Margin="0,15,0,15">
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Telefono :" />
+                                        <TextBox Text="{Binding camp.etel, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Telefono 2 :"/>
+                                        <TextBox Text="{Binding camp.etel2, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Correo electronico :" />
+                                        <TextBox Text="{Binding camp.ecor, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Correo electronico 2 :"/>
+                                        <TextBox Text="{Binding camp.ecor2, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
+                                </WrapPanel>
+                                <WrapPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Cantidad de pisos :" />
+                                        <control:NumericUpDown HasDecimals="False" SelectAllOnFocus="True" Maximum="100" Minimum="0"
+                                                                  Value="{Binding camp.episo, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Cantidad de Sub Pisos :" />
+                                        <control:NumericUpDown HasDecimals="False" SelectAllOnFocus="True" Maximum="15" Minimum="0" 
+                                                               Value="{Binding camp.espiso,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
+                                </WrapPanel>
+
+                                <StackPanel  Grid.Row="10" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,30,0,0">
+                                    <Button Content="Cancel" Command="{Binding DelCanDepa}" Visibility="{Binding camp.ecamact,Converter={StaticResource btvi}}"/>
+                                    <Button Content="Guardar" Command="{Binding DelSvDepa}" Visibility="{Binding camp.eupdt,Converter={StaticResource btvr}}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
+
+                    </Grid>
+
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+        <abt:PopupHost  Visibility="{Binding Vargnrl.selMsg, Converter={StaticResource b2vc}}" Style="{DynamicResource MetroPopupPresenter}" Padding="0">
+            <abt:PopupHost.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="pack://application:,,,/SciChart.Wpf.UI;component/Themes/Controls.PopupHost.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </abt:PopupHost.Resources>
+            <msg:MensajeError  />
+        </abt:PopupHost>
+    </Grid>
+</UserControl>

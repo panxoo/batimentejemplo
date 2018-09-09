@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{24CBADB7-0356-4853-8DE9-6C9F58311784}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ClssVmMdl</RootNamespace>
+    <AssemblyName>ClssVmMdl</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.4\lib\net47\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MicrosoftExpressionInteractions.3.0.40218.0\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.10.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\MySQL\MySQL Connector Net 6.10.6\Assemblies\v4.5.2\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.5.9\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Prism, Version=7.0.0.396, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.7.0.0.396\lib\net45\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.6.3.0\lib\net45\Prism.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Calling\CallDatoSistem.cs" />
+    <Compile Include="Calling\CallDep.cs" />
+    <Compile Include="Calling\CallNota.cs" />
+    <Compile Include="Calling\CallParmtGen.cs" />
+    <Compile Include="Calling\CallServicios.cs" />
+    <Compile Include="Calling\CallVariables.cs" />
+    <Compile Include="Events\ApplicationService.cs" />
+    <Compile Include="Events\BarStatus\ExecEventBarSt.cs" />
+    <Compile Include="Events\BarStatus\FundAddStatusBarEvent.cs" />
+    <Compile Include="Events\BarStatus\FundParmStatBar.cs" />
+    <Compile Include="Models\Confirma\Conf\MDEditPisoEdificio.cs" />
+    <Compile Include="Models\Confirma\Conf\MDModParametros.cs" />
+    <Compile Include="Models\Conf\Edif\MDAddEd.cs" />
+    <Compile Include="Models\Conf\Edif\MDConfPiso.cs" />
+    <Compile Include="Models\Conf\Edif\MDMantPropied.cs" />
+    <Compile Include="Models\Conf\Edif\MDModelProp.cs" />
+    <Compile Include="Models\Conf\Edif\MDConfEdef.cs" />
+    <Compile Include="Models\Conf\Parametros\MDParametros.cs" />
+    <Compile Include="Models\Conf\Servicios\MDServicios.cs" />
+    <Compile Include="Models\Conf\Servicios\MDTipoServicios.cs" />
+    <Compile Include="Models\Dialogo\MDDialogDesicion.cs" />
+    <Compile Include="Models\Dialogo\MDDialogError.cs" />
+    <Compile Include="Models\Nota\MDNota.cs" />
+    <Compile Include="Models\Parametros\MDParGnrlPrin.cs" />
+    <Compile Include="Models\Parametros\MDVarGnrl.cs" />
+    <Compile Include="Models\Sist\MDPantPrincipal.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validacion\MsgEvents.cs" />
+    <Compile Include="Validacion\ValElemment.cs" />
+    <Compile Include="Validacion\ValTam.cs" />
+    <Compile Include="VarStatic\ParSistem.cs" />
+    <Compile Include="ViewModels\Confirma\Conf\VMEditPisoEdificio.cs" />
+    <Compile Include="ViewModels\Confirma\Conf\VMModParametros.cs" />
+    <Compile Include="ViewModels\Conf\Edif\VMConfPiso.cs" />
+    <Compile Include="ViewModels\Conf\Edif\VMMantPropied.cs" />
+    <Compile Include="ViewModels\Conf\Edif\VMModelProp.cs" />
+    <Compile Include="ViewModels\Conf\Edif\VMAddEd.cs" />
+    <Compile Include="ViewModels\Conf\Edif\VMConfEdef.cs" />
+    <Compile Include="ViewModels\Conf\Parametros\VMParametros.cs" />
+    <Compile Include="ViewModels\Conf\Servicios\VMServicios.cs" />
+    <Compile Include="ViewModels\Conf\Servicios\VMTipoServicios.cs" />
+    <Compile Include="ViewModels\Dialogo\VMDialogDesicion.cs" />
+    <Compile Include="ViewModels\Dialogo\VMDialogError.cs" />
+    <Compile Include="ViewModels\Nota\VMNota.cs" />
+    <Compile Include="ViewModels\Sist\VMPantPrincipal.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AccesoDatos\AccesoDatos.csproj">
+      <Project>{b00f60b3-e9ad-4867-a9c8-6cbf9f0b8017}</Project>
+      <Name>AccesoDatos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ClssTool\ClssTool.csproj">
+      <Project>{64d53aa2-a686-4945-8d2f-ea15bee28ab1}</Project>
+      <Name>ClssTool</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,314 @@
+﻿<UserControl x:Class="Recepcion.Views.Tab.Conf.TabParametros"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:xs="clr-namespace:Recepcion.Diccionario"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:prism="http://prismlibrary.com/"       
+      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+      xmlns:views="clr-namespace:Recepcion.Views.Ventanas.Conf"
+ 
+      mc:Ignorable="d" >
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Recepcion;component/Diccionario/DicMain.xaml" />
+                <ResourceDictionary Source="/Recepcion;component/Diccionario/DictGrid.xaml"  />
+            </ResourceDictionary.MergedDictionaries>
+            <xs:ConvertColorActive x:Key="colr"/>
+            <xs:ConvertParameter x:Key="copr"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+
+    <i:Interaction.Triggers>
+
+        <prism:InteractionRequestTrigger SourceObject="{Binding ConfirmPopUpDel, Mode=OneWay}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"/>
+        </prism:InteractionRequestTrigger>
+
+        <prism:InteractionRequestTrigger SourceObject="{Binding ConfirmPopUpUpdt, Mode=OneWay}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True" >
+                <prism:PopupWindowAction.WindowContent>
+                    <views:WinModParametros/>
+                </prism:PopupWindowAction.WindowContent>
+            </prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
+
+    </i:Interaction.Triggers>
+
+    <Grid Background="White">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+            <StackPanel Orientation="Vertical" Margin="10">
+
+                <Expander Header="Propiedades">
+
+                    <WrapPanel >
+                        <GroupBox BorderBrush="White" Header="Tipo Departamento">
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="130"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <DataGrid ItemsSource="{Binding varPar.LtTpDep}" Grid.Column="0" AutoGenerateColumns="False" 
+                                      SelectionUnit="FullRow"  CanUserResizeColumns="False" CanUserAddRows="False" 
+                                          ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn Header="Activo">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Image  Source="{Binding Path=vigente, Converter={StaticResource colr}}" Width="16" Height="16"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Header="Nombre Parametro" Binding="{Binding Path=name}" IsReadOnly="True"/>
+                                        <DataGridTemplateColumn Header="Comandos">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                        <Button AutomationProperties.AutomationId="ConfrnBtnUpd" 
+                                                                 Command="{Binding Path=DataContext.UpdCommand,RelativeSource={RelativeSource AncestorType=DataGrid}}" 
+                                                             Style="{StaticResource BtnUpdatParGrid}">
+                                                            <Button.CommandParameter>
+                                                                <MultiBinding Converter="{StaticResource copr}" Mode="OneWay" >
+                                                                    <Binding Path="name"/>
+                                                                    <Binding Source="1" />
+                                                                    <Binding Path="id"/>
+                                                                </MultiBinding>
+                                                            </Button.CommandParameter>
+                                                        </Button>
+                                                        <Button  AutomationProperties.AutomationId="ConfrnBtnDel" 
+                                                                 Command="{Binding Path=DataContext.delCommand,RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
+                                                             Style="{StaticResource BtnDeltParGrid}">
+                                                            <Button.CommandParameter>
+                                                                <MultiBinding Converter="{StaticResource copr}" Mode="OneWay" >
+                                                                    <Binding Path="vigente"/>
+                                                                    <Binding Source="1" />
+                                                                    <Binding Path="id"/>
+                                                                </MultiBinding>
+                                                            </Button.CommandParameter>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+
+                                </DataGrid>
+
+                                <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="top">
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="Nuevo Parametro : "/>
+                                        <TextBox Text="{Binding varPar.TpDep, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
+                                    <Button Style="{DynamicResource BtnUpdatPard}"  Width="32" Height="32"
+                                            Command="{Binding SvCommand}" CommandParameter="1">
+                                        <Image Source="/Recepcion;component/Imagen/Form/form_add.png" Width="32" Height="32" />
+                                    </Button>
+                                
+                                </StackPanel>
+                            </Grid>
+                        </GroupBox>
+
+                        <GroupBox BorderBrush="White" Header="Tipo Departamento otro">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="130"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+
+                                <DataGrid ItemsSource="{Binding varPar.LtTpDepOt}" Grid.Column="0" AutoGenerateColumns="False" 
+                                      SelectionUnit="FullRow"  CanUserResizeColumns="False" CanUserAddRows="False"
+                                          ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn Header="Activo">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Image  Source="{Binding Path=vigente, Converter={StaticResource colr}}" Width="16" Height="16"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Header="Nombre Parametro" Binding="{Binding Path=name}" IsReadOnly="True" />
+                                        <DataGridTemplateColumn Header="Comandos">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                        <Button Name="btna" Click="btna_Click"
+                                                            CommandParameter="{Binding Path=id}" Style="{StaticResource BtnUpdatParGrid}"/>
+                                                        <Button Command="{Binding Path=DataContext.delCommand,RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
+                                                             Style="{StaticResource BtnDeltParGrid}">
+                                                            <Button.CommandParameter>
+                                                                <MultiBinding Converter="{StaticResource copr}" Mode="OneWay" >
+                                                                    <Binding Path="vigente"/>
+                                                                    <Binding Source="2" />
+                                                                    <Binding Path="id"/>
+                                                                </MultiBinding>
+                                                            </Button.CommandParameter>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+
+                                </DataGrid>
+
+
+
+                                <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Top">
+                                    <TextBlock Text="Nuevo Parametro : "/>
+                                    <TextBox  Text="{Binding varPar.TpDepOt, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                    <Button Style="{DynamicResource BtnUpdatPard}"  Width="32" Height="32"
+                                            Command="{Binding SvCommand}" CommandParameter="2"/>
+
+
+                                </StackPanel>
+                            </Grid>
+                        </GroupBox>
+                    </WrapPanel>
+                </Expander>
+
+                <Expander Header="Notas" Margin="0,3,0,0">
+                    <WrapPanel>
+                        <GroupBox BorderBrush="White" Header="Tipo Nota">
+
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="130"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <DataGrid ItemsSource="{Binding varPar.LtTpNot}" Grid.Column="0" AutoGenerateColumns="False" 
+                                      SelectionUnit="FullRow"  CanUserResizeColumns="False" CanUserAddRows="False"
+                                          ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn Header="Activo">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Image  Source="{Binding Path=vigente, Converter={StaticResource colr}}" Width="16" Height="16"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Header="Nombre Parametro" Binding="{Binding Path=name}" IsReadOnly="True" />
+                                        <DataGridTemplateColumn Header="Comandos">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                        <Button Name="btna" Click="btna_Click"
+                                                            CommandParameter="{Binding Path=id}" Style="{StaticResource BtnUpdatParGrid}"/>
+                                                        <Button Command="{Binding Path=DataContext.delCommand,RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
+                                                             Style="{StaticResource BtnDeltParGrid}">
+                                                            <Button.CommandParameter>
+                                                                <MultiBinding Converter="{StaticResource copr}" Mode="OneWay" >
+                                                                    <Binding Path="vigente"/>
+                                                                    <Binding Source="3" />
+                                                                    <Binding Path="id"/>
+                                                                </MultiBinding>
+                                                            </Button.CommandParameter>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+
+                                </DataGrid>
+
+                                <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Top">
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="Nuevo Parametro : "/>
+                                        <TextBox Text="{Binding varPar.TpNot, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
+                                    <Button Style="{DynamicResource BtnUpdatPard}"  Width="32" Height="32"
+                                            Command="{Binding SvCommand}" CommandParameter="3">
+                                        <Image Source="/Recepcion;component/Imagen/Form/form_add.png" Width="32" Height="32" />
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </GroupBox>
+
+                        <GroupBox BorderBrush="White" Header="Nivel de Urgencia">
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="130"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <DataGrid ItemsSource="{Binding varPar.LtNvlNot}" Grid.Column="0" AutoGenerateColumns="False" 
+                                      SelectionUnit="FullRow"  CanUserResizeColumns="False" CanUserAddRows="False"
+                                          ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn Header="Activo">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Image  Source="{Binding Path=vigente, Converter={StaticResource colr}}" Width="16" Height="16"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Header="Nombre Parametro" Binding="{Binding Path=name}" IsReadOnly="True" />
+                                        <DataGridTemplateColumn Header="Comandos">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                        <Button Name="btna" Click="btna_Click"
+                                                            CommandParameter="{Binding Path=id}" Style="{StaticResource BtnUpdatParGrid}"/>
+                                                        <Button Command="{Binding Path=DataContext.delCommand,RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
+                                                             Style="{StaticResource BtnDeltParGrid}">
+                                                            <Button.CommandParameter>
+                                                                <MultiBinding Converter="{StaticResource copr}" Mode="OneWay" >
+                                                                    <Binding Path="vigente"/>
+                                                                    <Binding Source="4" />
+                                                                    <Binding Path="id"/>
+                                                                </MultiBinding>
+                                                            </Button.CommandParameter>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+
+                                </DataGrid>
+
+                                <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Top">
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="Nuevo Parametro : "/>
+                                        <TextBox Text="{Binding varPar.NvlNot, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </StackPanel>
+                                    <Button Style="{DynamicResource BtnUpdatPard}"  Width="32" Height="32"
+                                            Command="{Binding SvCommand}" CommandParameter="4">
+                                        <Image Source="/Recepcion;component/Imagen/Form/form_add.png" Width="32" Height="32" />
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </GroupBox>
+                    </WrapPanel>
+                </Expander>
+
+            </StackPanel>
+        </ScrollViewer>
+
+      
+    </Grid>
+</UserControl>

@@ -1,0 +1,87 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:SistemaAdminDep.Diccionario">
+
+    <SolidColorBrush x:Key="bkg" Color="White"/>
+
+    <ImageBrush x:Key="tes1" AlignmentY="Top" Stretch="Uniform" TileMode="FlipY" ViewportUnits="Absolute"
+                ImageSource="/SistemaAdminDep;component/Imagen/Testura/testure.png"                  
+                Viewport="0,0,100,100"/>
+
+    <ImageBrush x:Key="tes2" AlignmentY="Top" Stretch="Uniform" TileMode="FlipY" ViewportUnits="Absolute"
+                ImageSource="/SistemaAdminDep;component/Imagen/Testura/testure2.png"                  
+                Viewport="0,0,466,349"/>
+
+    <ImageBrush x:Key="tes3" AlignmentY="Top" Stretch="Uniform" TileMode="FlipY" ViewportUnits="Absolute"
+                ImageSource="/SistemaAdminDep;component/Imagen/Testura/testure3.png"                  
+                Viewport="0,0,4,4"/>
+
+    <ImageBrush x:Key="tes4" AlignmentY="Top" Stretch="Uniform" TileMode="FlipY" ViewportUnits="Absolute"
+                ImageSource="/SistemaAdminDep;component/Imagen/Testura/testure4.png"                  
+                Viewport="0,0,3,3"/>
+
+    <ImageBrush x:Key="tes5" AlignmentY="Top" Stretch="Uniform" TileMode="FlipY" ViewportUnits="Absolute"
+                ImageSource="/SistemaAdminDep;component/Imagen/Testura/testure5.png"                  
+                Viewport="0,0,54,58"/>
+
+    <ImageBrush x:Key="tes6" AlignmentY="Top" Stretch="Uniform" TileMode="FlipY" ViewportUnits="Absolute"
+                ImageSource="/SistemaAdminDep;component/Imagen/Testura/testure6.png"                  
+                Viewport="0,0,399,400"/>
+
+    <ImageBrush x:Key="tes7" AlignmentY="Top" Stretch="Uniform" TileMode="FlipY" ViewportUnits="Absolute"
+                ImageSource="/SistemaAdminDep;component/Imagen/Testura/testure7.png"                  
+                Viewport="0,0,49,28"/>
+
+    <ImageBrush x:Key="tes8" AlignmentY="Top" Stretch="Uniform" TileMode="FlipY" ViewportUnits="Absolute"
+                ImageSource="/SistemaAdminDep;component/Imagen/Testura/testure8.png"                  
+                Viewport="0,0,16,12"/>
+
+    <ImageBrush x:Key="tes9" AlignmentY="Top" Stretch="Uniform" TileMode="FlipY" ViewportUnits="Absolute"
+                ImageSource="/SistemaAdminDep;component/Imagen/Testura/testure9.png"                  
+                Viewport="0,0,70,70"/>
+
+    <ImageBrush x:Key="tes10" AlignmentY="Top" Stretch="Uniform" TileMode="FlipY" ViewportUnits="Absolute"
+                ImageSource="/SistemaAdminDep;component/Imagen/Testura/testure10.png"                  
+                Viewport="0,0,46,29"/>
+
+    <ImageBrush x:Key="tes11" AlignmentY="Top" Stretch="Uniform" TileMode="FlipY" ViewportUnits="Absolute"
+                ImageSource="/SistemaAdminDep;component/Imagen/Testura/testure11.png"                  
+                Viewport="0,0,46,29"/>
+
+    <ImageBrush x:Key="test" AlignmentY="Top" Stretch="Uniform" TileMode="FlipY" ViewportUnits="Absolute"
+                ImageSource="/SistemaAdminDep;component/Imagen/Testura/testure12.png"                  
+                Viewport="0,0,188,178"/>
+
+    <ImageBrush x:Key="tes13" AlignmentY="Top" Stretch="Uniform" TileMode="FlipY" ViewportUnits="Absolute"
+                ImageSource="/SistemaAdminDep;component/Imagen/Testura/testure13.png"                  
+                Viewport="0,0,150,173"/>
+
+    <ImageBrush x:Key="tes14" AlignmentY="Top" Stretch="Uniform" TileMode="FlipY" ViewportUnits="Absolute"
+                ImageSource="/SistemaAdminDep;component/Imagen/Testura/testure14.png"                  
+                Viewport="0,0,46,23"/>
+
+    <ImageBrush x:Key="tes15" AlignmentY="Top" Stretch="Uniform" TileMode="FlipY" ViewportUnits="Absolute"
+                ImageSource="/SistemaAdminDep;component/Imagen/Testura/testure15.png"                  
+                Viewport="0,0,4,4"/>
+
+    <ImageBrush x:Key="tes16" AlignmentY="Top" Stretch="Uniform" TileMode="FlipY" ViewportUnits="Absolute"
+                ImageSource="/SistemaAdminDep;component/Imagen/Testura/testure16.png"                  
+                Viewport="0,0,10,10"/>
+
+    <ImageBrush x:Key="tes17" AlignmentY="Top" Stretch="Uniform" TileMode="FlipY" ViewportUnits="Absolute"
+                ImageSource="/SistemaAdminDep;component/Imagen/Testura/testure17.png"                  
+                Viewport="0,0,14,14"/>
+
+    <ImageBrush x:Key="tes18" AlignmentY="Top" Stretch="Uniform" TileMode="FlipY" ViewportUnits="Absolute"
+                ImageSource="/SistemaAdminDep;component/Imagen/Testura/testure18.png"                  
+                Viewport="0,0,37,28"/>
+
+    <ImageBrush x:Key="tes19" AlignmentY="Top" Stretch="Uniform" TileMode="FlipY" ViewportUnits="Absolute"
+                ImageSource="/SistemaAdminDep;component/Imagen/Testura/testure19.png"                  
+                Viewport="0,0,4,4"/>
+
+    <ImageBrush x:Key="tes20" AlignmentY="Top" Stretch="Uniform" TileMode="FlipY" ViewportUnits="Absolute"
+                ImageSource="/SistemaAdminDep;component/Imagen/Testura/testure20.png"                  
+                Viewport="0,0,8,8"/>
+
+</ResourceDictionary>

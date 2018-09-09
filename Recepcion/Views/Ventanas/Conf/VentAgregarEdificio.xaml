@@ -1,0 +1,73 @@
+﻿<Window x:Class="Recepcion.Views.Ventanas.Conf.VentAgregarEdificio"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="VentAgregarEdificio" Height="313" Width="367" ShowInTaskbar="True" WindowStyle="None" SizeToContent="WidthAndHeight"> 
+
+    <Window.Resources>
+        <!--<ResourceDictionary Source="../../Diccionario/DictObjForm.xaml" />-->
+    </Window.Resources>
+
+    <Grid Name="_GridPrin" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="30" />
+
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+
+
+        <TextBlock Text="Agregar Edificio." Grid.Column="1" Grid.Row="0" FontSize="22"></TextBlock>
+
+        <TextBlock Text="Nombre de Edificio: " Grid.Column="1" Grid.Row="1"></TextBlock>
+        <TextBox Grid.Column="2" Grid.Row="1" Text="{Binding varb.nom, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding varb.nomCamDis}"/>
+
+        <TextBlock Text="Identificador Edificio: " Grid.Column="1" Grid.Row="2" />
+        <TextBox Grid.Column="2" Grid.Row="2" Text="{Binding varb.ident, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <TextBlock Text="Numero Dirección: " Grid.Column="1" Grid.Row="3" />
+        <TextBox Grid.Column="2" Grid.Row="3" Text="{Binding varb.numdir, UpdateSourceTrigger=PropertyChanged}"/>
+        
+        <TextBlock Text="Telefono: " Grid.Column="1" Grid.Row="4" />
+        <TextBox Grid.Column="2" Grid.Row="4" Text="{Binding varb.tel, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <TextBlock Text="Telefono 2: " Grid.Column="1" Grid.Row="5" />
+        <TextBox Grid.Column="2" Grid.Row="5" Text="{Binding varb.tel2, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <TextBlock Text="Correo: " Grid.Column="1" Grid.Row="6" />
+        <TextBox Grid.Column="2" Grid.Row="6" Text="{Binding varb.email, UpdateSourceTrigger=PropertyChanged}"/>
+
+
+        <TextBlock Text="Correo 2: " Grid.Column="1" Grid.Row="7" />
+        <TextBox Grid.Column="2" Grid.Row="7" Text="{Binding varb.email2, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <TextBlock Text="Cantidad de Pisos: " Grid.Column="1" Grid.Row="8" Visibility="{Binding varb.UpdCamVis}"/>
+        <TextBox Grid.Column="2" Grid.Row="8" Text="{Binding varb.ps, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding varb.UpdCamVis}"/>
+
+        <TextBlock Text="Pisos Subterranios: " Grid.Column="1" Grid.Row="9" Visibility="{Binding varb.UpdCamVis}" />
+        <TextBox Grid.Column="2" Grid.Row="9" Text="{Binding varb.sbps, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding varb.UpdCamVis}"/>
+
+        <Button Content="Guardar" Grid.Column="1" Grid.Row="10" Command="{Binding SaveCommand}"/>
+        <Button Content="Cerrar" Grid.Column="2" Grid.Row="10" Name="BtnCerrar" Click="BtnCerrar_Click"/>
+
+    </Grid>
+
+
+
+</Window>
+

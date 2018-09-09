@@ -1,0 +1,536 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D92D0B3F-D26F-498E-94AF-8EF932B2D952}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Recepcion</RootNamespace>
+    <AssemblyName>Recepcion</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net45\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.6.5\lib\net45\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks, Version=2.2.0.12, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.2.2.0\lib\net45\MahApps.Metro.IconPacks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MicrosoftExpressionInteractions.3.0.40218.0\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.5.6\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism, Version=7.0.0.396, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.7.0.0.396\lib\net45\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.6.3.0\lib\net45\Prism.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="SciChart.Wpf.UI, Version=1.0.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SciChart.Wpf.UI.1.0.9\lib\net45\SciChart.Wpf.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="SciChart.Wpf.UI.Bootstrap, Version=1.0.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SciChart.Wpf.UI.Bootstrap.1.0.9\lib\net45\SciChart.Wpf.UI.Bootstrap.dll</HintPath>
+    </Reference>
+    <Reference Include="SciChart.Wpf.UI.Reactive, Version=1.0.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SciChart.Wpf.UI.Reactive.1.0.9\lib\net45\SciChart.Wpf.UI.Reactive.dll</HintPath>
+    </Reference>
+    <Reference Include="SciChart.Wpf.UI.Transitionz, Version=1.0.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SciChart.Wpf.UI.Transitionz.1.0.9\lib\net45\SciChart.Wpf.UI.Transitionz.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Reactive.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-Interfaces.2.2.5\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-Linq.2.2.5\lib\net45\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-PlatformServices.2.2.5\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Windows.Threading, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-XAML.2.2.5\lib\net45\System.Reactive.Windows.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Controls.Ribbon" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Unity.Abstractions, Version=3.3.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net45\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Configuration, Version=5.2.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net45\Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.8.6.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net45\Unity.Container.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Interception, Version=5.5.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net45\Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Interception.Configuration, Version=5.1.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net45\Unity.Interception.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RegistrationByConvention, Version=2.1.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net45\Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ServiceLocation, Version=2.1.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net45\Unity.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Microsoft.Windows.Shell" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Diccionario\BluParamsWhenTrueConverter.cs" />
+    <Compile Include="Diccionario\BoolToVisibleOrHidden.cs" />
+    <Compile Include="Diccionario\ConvertCampoValor.cs" />
+    <Compile Include="Diccionario\ConvertColorActive.cs" />
+    <Compile Include="Diccionario\ConvertColorBarStatus.cs" />
+    <Compile Include="Diccionario\ConvertDecisionDelt.cs" />
+    <Compile Include="Diccionario\ConvertFalsTrue.cs" />
+    <Compile Include="Diccionario\ConvertMensajeError.cs" />
+    <Compile Include="Diccionario\ConvertParameter.cs" />
+    <Compile Include="Idioma\Esp.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Esp.resx</DependentUpon>
+    </Compile>
+    <Compile Include="PantPrincipal.xaml.cs">
+      <DependentUpon>PantPrincipal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Emergente\MensajeDesicion.xaml.cs">
+      <DependentUpon>MensajeDesicion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Emergente\MensajeError.xaml.cs">
+      <DependentUpon>MensajeError.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tab\Conf\TabConfEdef.xaml.cs">
+      <DependentUpon>TabConfEdef.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tab\Conf\TabConfPiso.xaml.cs">
+      <DependentUpon>TabConfPiso.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tab\Conf\TabMantPropied.xaml.cs">
+      <DependentUpon>TabMantPropied.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tab\Conf\TabParametros.xaml.cs">
+      <DependentUpon>TabParametros.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tab\Servicios\TabServicios.xaml.cs">
+      <DependentUpon>TabServicios.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tab\Servicios\TabTipoServicios.xaml.cs">
+      <DependentUpon>TabTipoServicios.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tab\TabAgVisita.xaml.cs">
+      <DependentUpon>TabAgVisita.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tab\TabConfReserva.xaml.cs">
+      <DependentUpon>TabConfReserva.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tab\Conf\TabModelProp.xaml.cs">
+      <DependentUpon>TabModelProp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tab\TabNewPropiet.xaml.cs">
+      <DependentUpon>TabNewPropiet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tab\TabNewServ.xaml.cs">
+      <DependentUpon>TabNewServ.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tab\TabNota.xaml.cs">
+      <DependentUpon>TabNota.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tab\TabReservServ.xaml.cs">
+      <DependentUpon>TabReservServ.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tab\TabUsuarioConect.xaml.cs">
+      <DependentUpon>TabUsuarioConect.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Ventanas\ComentNota.xaml.cs">
+      <DependentUpon>ComentNota.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Ventanas\Conf\WinEditPisoEdificio.xaml.cs">
+      <DependentUpon>WinEditPisoEdificio.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Ventanas\Conf\WinModParametros.xaml.cs">
+      <DependentUpon>WinModParametros.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Ventanas\Conf\VentAgregarEdificio.xaml.cs">
+      <DependentUpon>VentAgregarEdificio.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Ventanas\VentEjemPar.xaml.cs">
+      <DependentUpon>VentEjemPar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Ventanas\VentManServ.xaml.cs">
+      <DependentUpon>VentManServ.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Ventanas\VentParServ.xaml.cs">
+      <DependentUpon>VentParServ.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Diccionario\DicMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Diccionario\DicSist.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Diccionario\DictGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Diccionario\DictObjForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Diccionario\DictTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Diccionario\FormTesture.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PantPrincipal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Resources\Icons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\IconsNonShared.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Emergente\MensajeDesicion.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Emergente\MensajeError.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Tab\Conf\TabConfEdef.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tab\Conf\TabConfPiso.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tab\Conf\TabMantPropied.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tab\Conf\TabParametros.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tab\Servicios\TabServicios.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tab\Servicios\TabTipoServicios.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tab\TabAgVisita.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tab\TabConfReserva.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tab\Conf\TabModelProp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tab\TabNewPropiet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tab\TabNewServ.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tab\TabNota.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tab\TabReservServ.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tab\TabUsuarioConect.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Ventanas\ComentNota.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Ventanas\Conf\WinEditPisoEdificio.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Ventanas\Conf\WinModParametros.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Ventanas\Conf\VentAgregarEdificio.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Ventanas\VentEjemPar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Ventanas\VentManServ.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Ventanas\VentParServ.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Idioma\Esp.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Esp.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <Resource Include="Imagen\Grid\icon_add.png" />
+    <Resource Include="Imagen\Grid\icon_edit.png" />
+    <Resource Include="Imagen\Textur.png" />
+    <Resource Include="Imagen\bbq.png" />
+    <Resource Include="Imagen\bbq2.png" />
+    <Resource Include="Imagen\bbq3.png" />
+    <Resource Include="Imagen\bbq4.png" />
+    <Resource Include="Imagen\bbq5.png" />
+    <Resource Include="Imagen\door.png" />
+    <Resource Include="Imagen\door2.png" />
+    <Resource Include="Imagen\Testura\testure.png" />
+    <Resource Include="Imagen\Testura\testure2.png" />
+    <Resource Include="Imagen\Testura\testure3.png" />
+    <Resource Include="Imagen\Testura\testure4.png" />
+    <Resource Include="Imagen\Testura\testure10.png" />
+    <Resource Include="Imagen\Testura\testure11.png" />
+    <Resource Include="Imagen\Testura\testure12.png" />
+    <Resource Include="Imagen\Testura\testure13.png" />
+    <Resource Include="Imagen\Testura\testure14.png" />
+    <Resource Include="Imagen\Testura\testure15.png" />
+    <Resource Include="Imagen\Testura\testure16.png" />
+    <Resource Include="Imagen\Testura\testure17.png" />
+    <Resource Include="Imagen\Testura\testure18.png" />
+    <Resource Include="Imagen\Testura\testure19.png" />
+    <Resource Include="Imagen\Testura\testure20.png" />
+    <Resource Include="Imagen\Testura\testure5.png" />
+    <Resource Include="Imagen\Testura\testure6.png" />
+    <Resource Include="Imagen\Testura\testure7.png" />
+    <Resource Include="Imagen\Testura\testure8.png" />
+    <Resource Include="Imagen\Testura\testure9.png" />
+    <None Include="Gaspar.ini" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <Resource Include="Resources\Entypo.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\LargeIcon.png" />
+    <Resource Include="Images\SmallIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\business.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClssVmMdl\ClssVmMdl.csproj">
+      <Project>{24cbadb7-0356-4853-8de9-6c9f58311784}</Project>
+      <Name>ClssVmMdl</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\WindowsIcons-license.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Entypo-license.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\22-12-2016 9-36-11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\model.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\edificio.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\notepad.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\conf-par.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\Form\form_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\Form\form_del.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\Form\form_upd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\Grid\circle_green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\Grid\circle_red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\1198399_45415067.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\Sist\Flecha_Up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\Sist\Flecha_Down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\Messagebox\exclamation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagen\Messagebox\Error.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
