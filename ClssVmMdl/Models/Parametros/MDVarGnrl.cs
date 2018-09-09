@@ -18,11 +18,11 @@ namespace ClssVmMdl.Models.Parametros
             _selMsg = false;
         }
 
-        private List<ColIdName> _tpdep;
-        public List<ColIdName> tpdep
+        private List<ColIdName> tpdep;
+        public List<ColIdName> Tpdep
         {
-            get { return _tpdep; }
-            set { SetProperty(ref _tpdep, value); }
+            get { return tpdep; }
+            set { SetProperty(ref tpdep, value); }
         }
 
         private List<ColIdName> _pais;
@@ -39,11 +39,11 @@ namespace ClssVmMdl.Models.Parametros
             set { SetProperty(ref _region, value); }
         }
 
-        private List<ColIdName> _edific;
-        public List<ColIdName> edific
+        private List<ColIdName> edific;
+        public List<ColIdName> Edific
         {
-            get { return _edific; }
-            set { SetProperty(ref _edific, value); }
+            get { return edific; }
+            set { SetProperty(ref edific, value); }
         }
 
         private List<ColIdName> _modeldepa;

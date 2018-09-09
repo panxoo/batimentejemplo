@@ -265,33 +265,30 @@
                                     </StackPanel>
                                 </DataTemplate>
                             </GroupBox.HeaderTemplate>
-                            
+
                             <ScrollViewer VerticalScrollBarVisibility="Auto">
 
                                 <StackPanel Orientation="Vertical" Margin="10">
 
-                                   
+
 
                                     <StackPanel Orientation="Horizontal"   Margin="0,0,0,30">
-                            
-                                        
-                                        <ComboBox  materialDesign:HintAssist.Hint="Seleccionar Edificio"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"   
-                                      ItemsSource="{Binding Vargnrl.edific}" 
-                                      SelectedValuePath="Id" DisplayMemberPath="Name" 
-                                      SelectedValue="{Binding Camp.diddep}" Margin="0,0,20,0"/>
 
 
-                                   
-                                        <ComboBox  materialDesign:HintAssist.Hint="Seleccionar Tipo Edificio"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                                      ItemsSource="{Binding Vargnrl.tpdep}" 
-                                      SelectedValuePath="Id" DisplayMemberPath="Name" 
-                                      SelectedValue="{Binding Camp.didtpdep}"/>
+                                        <ComboBox materialDesign:HintAssist.Hint="Seleccionar Edificio"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"   
+                                                  ItemsSource="{Binding Vargnrl.Edific}" SelectedValuePath="Id" DisplayMemberPath="Name" Margin="0,0,20,0"
+                                                  SelectedValue="{Binding Camp.Idedf}" />
+
+                                        <ComboBox materialDesign:HintAssist.Hint="Seleccionar Tipo Edificio"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                                  ItemsSource="{Binding Vargnrl.Tpdep}" SelectedValuePath="Id" DisplayMemberPath="Name" 
+                                                  SelectedValue="{Binding Camp.Idtpedf}"/>
+
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal"  Margin="0,0,0,20">
 
                                         <TextBlock Text="Nombre de Modelo: " />
-                                        <TextBox  Text="{Binding Camp.dnom, UpdateSourceTrigger=PropertyChanged}" Width="250" />
+                                        <TextBox  Text="{Binding Camp.Nomb, UpdateSourceTrigger=PropertyChanged}" Width="250" />
 
                                     </StackPanel>
 
@@ -299,7 +296,7 @@
                                         <StackPanel Orientation="Horizontal" Margin="0,0,20,0">
 
                                             <TextBlock Text="Tamaño (cm): "  VerticalAlignment="Bottom"/>
-                                            <TextBox  Text="{Binding Camp.dtamall, UpdateSourceTrigger=LostFocus}" Width="80" >
+                                            <TextBox  Text="{Binding Camp.Tamall, UpdateSourceTrigger=LostFocus}" Width="80" >
                                                 <i:Interaction.Behaviors>
                                                     <Val:TextBoxDecimalRangeBehaviour MaxDecimals="2" MaxInteger="20" Minimum="0.0" Maximum="20.0" />
                                                 </i:Interaction.Behaviors>
@@ -312,7 +309,7 @@
                                         <StackPanel Orientation="Horizontal" Margin="0,0,20,0" >
 
                                             <TextBlock Text="Tamaño Util (cm): " VerticalAlignment="Bottom"/>
-                                            <TextBox  Text="{Binding Camp.dtamut}" Width="80" >
+                                            <TextBox  Text="{Binding Camp.Tamut}" Width="80" >
                                                 <i:Interaction.Behaviors>
                                                     <Val:TextBoxDecimalRangeBehaviour MaxDecimals="2" MaxInteger="20" Minimum="0.0" Maximum="20.0" />
                                                 </i:Interaction.Behaviors>
@@ -324,7 +321,7 @@
                                         <StackPanel Orientation="Horizontal" Margin="0,0,20,0">
 
                                             <TextBlock Text="Numero de pieza: " VerticalAlignment="Bottom"/>
-                                            <TextBox  Text="{Binding Camp.ddor}" Width="80" >
+                                            <TextBox  Text="{Binding Camp.Cantdor}" Width="80" >
                                                 <i:Interaction.Behaviors>
                                                     <Val:TextBoxDecimalRangeBehaviour MaxDecimals="0" MaxInteger="20" Minimum="0.0" Maximum="20.0" />
                                                 </i:Interaction.Behaviors>
@@ -336,7 +333,7 @@
                                         <StackPanel Orientation="Horizontal" >
 
                                             <TextBlock Text="Numero de baño: " VerticalAlignment="Bottom"/>
-                                            <TextBox  Text="{Binding Camp.dban}" Width="80" >
+                                            <TextBox  Text="{Binding Camp.Cantban}" Width="80" >
                                                 <i:Interaction.Behaviors>
                                                     <Val:TextBoxDecimalRangeBehaviour MaxDecimals="0" MaxInteger="20" Minimum="0.0" Maximum="20.0" />
                                                 </i:Interaction.Behaviors>
@@ -377,7 +374,7 @@
                                     </StackPanel>
                                 </DataTemplate>
                             </GroupBox.HeaderTemplate>
-                            
+
                             <ScrollViewer VerticalScrollBarVisibility="Auto">
 
                                 <StackPanel Orientation="Vertical" Margin="20">
@@ -433,7 +430,7 @@
                                     </StackPanel>
                                 </DataTemplate>
                             </GroupBox.HeaderTemplate>
-                            
+
                             <ScrollViewer VerticalScrollBarVisibility="Auto">
 
                                 <StackPanel Orientation="Vertical" Margin="20 ">

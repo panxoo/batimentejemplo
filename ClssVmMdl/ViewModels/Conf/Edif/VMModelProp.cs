@@ -26,10 +26,10 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
 
             camp.MultEdf = ParSistem.MultiEdef;
 
-            DelSaveMod = new DelegateCommand<object>(ExcSaveMod);
-            DelActUpdtMod = new DelegateCommand<object[]>(ExcActUpdtMod);
-            DelDeletMod = new DelegateCommand<object[]>(ExcDeltMod);
             DelSelEdit = new DelegateCommand<object>(ExcDelSelEdit);
+            DelActUpdtMod = new DelegateCommand<object[]>(ExcActUpdtMod);
+            DelSaveMod = new DelegateCommand<object>(ExcSaveMod);
+            DelDeletMod = new DelegateCommand<object[]>(ExcDeltMod);
             DelDeletAct = new DelegateCommand<object>(ExcDeltAct);
             DelCloseMsgError = new DelegateCommand(ExcCloseMsgError);
 
@@ -57,15 +57,15 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
         private MDVarGnrl vargnrl;
         public MDVarGnrl Vargnrl
         {
-            get { return vargnrl; }
-            set { SetProperty(ref vargnrl, value); }
+            get => vargnrl;
+            set => SetProperty(ref vargnrl, value);
         }
 
         private MDModelProp camp;
         public MDModelProp Camp
         {
-            get { return camp; }
-            set { SetProperty(ref camp, value); }
+            get => camp;
+            set => SetProperty(ref camp, value);
         }
 
         #endregion
@@ -73,17 +73,21 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
 
         #region Command Execute
 
+        private void ExcDelSelEdit(object parm)
+        {
+            CargParametro(Convert.ToInt16(parm));
+            SelPantalla(Convert.ToInt16(parm));
+        }
+
         private void ExcActUpdtMod(object[] parm)
         {
-                   CargParametro(Convert.ToInt16(parm[0]));
+            CargParametro(Convert.ToInt16(parm[0]));
             CargaUpdt(Convert.ToInt16(parm[0]), Convert.ToInt16(parm[1]));
         }
 
 
         private void ExcSaveMod(object parm)
         {
-            MsgEvents MsgEv = new MsgEvents();
-            //  MsgEv.MsgAlmacenar("", "0");
             AlmacModi(Convert.ToInt16(parm));
         }
 
@@ -107,11 +111,6 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
             vargnrl.selDeci = false;
         }
 
-        private void ExcDelSelEdit(object parm)
-        {
-            CargParametro(Convert.ToInt16(parm));
-            SelPantalla(Convert.ToInt16(parm));
-        }
 
         private void ExcCloseMsgError()
         {
@@ -135,26 +134,14 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
         {
             if (tp == 1)
             {
-                vargnrl.tpdep = callvr.PRGN_tpdep(ParSistem.IdCond);
+                Vargnrl.Tpdep = callvr.PRGN_tpdep(ParSistem.IdCond);
                 //if (vargnrl.tpdep.Count > 0)
-                    camp.didtpdep = -1;
             }
+
             if (ParSistem.MultiEdef == true)
             {
-                vargnrl.edific = callvr.PRGN_Edif(ParSistem.IdCond);
-                if (vargnrl.edific.Count > 0)
-                    switch (tp)
-                    {
-                        case 1:
-                            camp.diddep = -1;
-                            break;
-                        case 2:
-                            camp.eiddep = -1;
-                            break;
-                        case 3:
-                            camp.biddep = -1;
-                            break;
-                    }
+                Vargnrl.Edific = callvr.PRGN_Edif(ParSistem.IdCond);
+                Camp.Idedf = -1;
             }
         }
 
@@ -163,86 +150,86 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
             switch (tp)
             {
                 case 2:
-                    camp.tabbod = calldp.MDPP_SelModelGrd(tp, ParSistem.IdCond);
+                    camp.Tabbod = calldp.MDPP_SelModelGrd(tp, ParSistem.IdCond);
+                    break;
+                case 3:
+                    camp.Tabest = calldp.MDPP_SelModelGrd(tp, ParSistem.IdCond);
                     break;
                 case 1:
-                    camp.tabest = calldp.MDPP_SelModelGrd(tp, ParSistem.IdCond);
-                    break;
-                case -1:
-                    camp.tabed = calldp.MDPP_SelModelGrd(tp, ParSistem.IdCond);
+                    camp.Tabed = calldp.MDPP_SelModelGrd(tp, ParSistem.IdCond);
                     break;
             }
         }
 
         private void CargaUpdt(int tp, int id)
         {
-            camp.idMod = id;
-            camp.UpdtAct = true;
+            Camp.IdModSel = id;
+            Camp.UpdtAct = true;
 
             switch (tp)
             {
-                case -1:
+                case 1:
 
-                    foreach (var c in camp.tabed.Select("id = " + id))
+                    foreach (var c in camp.Tabed.Select("id = " + id))
                     {
-                        if (vargnrl.tpdep.Any(p => p.Id == (int)c["id_tp"]))
-                            camp.didtpdep = Convert.ToInt32(c["id_tp"]);
+                        if (vargnrl.Tpdep.Any(p => p.Id == (int)c["id_tp"]))
+                            Camp.Idtpedf = Convert.ToInt32(c["id_tp"]);
                         else
-                            camp.didtpdep = vargnrl.tpdep[0].Id;
+                            Camp.Idtpedf = vargnrl.Tpdep[0].Id;
 
-                        if (ParSistem.MultiEdef == true)
-                            if (vargnrl.edific.Any(p => p.Id == Convert.ToInt16(c["id_ed"])))
-                                camp.diddep = Convert.ToInt32(c["id_ed"]);
+                        if (Camp.MultEdf == true)
+                            if (vargnrl.Edific.Any(p => p.Id == Convert.ToInt16(c["id_ed"])))
+                                Camp.Idedf = Convert.ToInt32(c["id_ed"]);
                             else
-                                camp.diddep = vargnrl.edific[0].Id;
+                                Camp.Idedf = vargnrl.Edific[0].Id;
 
-                        camp.dnom = c["name"].ToString();
-                        camp.dban = Convert.ToInt32(c["bano"]);
-                        camp.ddor = Convert.ToInt32(c["pieza"]);
-                        camp.dtamall = Convert.ToDouble(c["tamtot"]);
-                        camp.dtamut = Convert.ToDouble(c["tamuti"]);
+                        Camp.Nomb = c["name"].ToString();
+                        Camp.Cantban = Convert.ToInt32(c["bano"]);
+                        Camp.Cantdor = Convert.ToInt32(c["pieza"]);
+                        Camp.Tamall = Convert.ToDouble(c["tamtot"]);
+                        Camp.Tamut = Convert.ToDouble(c["tamuti"]);
                     }
                     break;
 
-                case 1:
+                case 3:
 
-                    foreach (var c in camp.tabest.Select("id = " + id + " and tp = 1"))
+                    foreach (var c in camp.Tabest.Select("id = " + id + " and tp = 1"))
                     {
-                        if (ParSistem.MultiEdef == true)
+                        if (Camp.MultEdf == true)
                         {
-                            camp.econdsel = Convert.ToInt16(c["cond"]);
+                            Camp.Condsel = Convert.ToBoolean(c["cond"]);
 
-                            if (vargnrl.edific.Any(p => p.Id == Convert.ToInt16(c["id_ed"])) && camp.econdsel == 0)
-                                camp.eiddep = Convert.ToInt16(c["id_ed"]);
+                            if (vargnrl.Edific.Any(p => p.Id == Convert.ToInt16(c["id_ed"])) && camp.Condsel == false)
+                                camp.Idedf = Convert.ToInt16(c["id_ed"]);
                             else
-                                camp.eiddep = vargnrl.edific[0].Id;
+                                camp.Idedf = vargnrl.Edific[0].Id;
                         }
                         else
-                            camp.econdsel = 1;
+                            camp.Condsel = true;
 
-                        camp.enom = c["name"].ToString();
-                        camp.etam = Convert.ToDouble(c["tam"]);
+                        camp.Nomb = c["name"].ToString();
+                        camp.Tamall = Convert.ToDouble(c["tam"]);
                     }
                     break;
 
                 default:
 
-                    foreach (var c in camp.tabbod.Select("id = " + id + " and tp = 2"))
+                    foreach (var c in camp.Tabbod.Select("id = " + id + " and tp = 2"))
                     {
-                        if (ParSistem.MultiEdef == true)
+                        if (Camp.MultEdf == true)
                         {
-                            camp.bcondsel = Convert.ToInt16(c["cond"]);
+                            camp.Condsel = Convert.ToBoolean(c["cond"]);
 
-                            if (vargnrl.edific.Any(p => p.Id == Convert.ToInt16(c["id_ed"])) && camp.bcondsel == 0)
-                                camp.biddep = Convert.ToInt32(c["id_ed"]);
+                            if (vargnrl.Edific.Any(p => p.Id == Convert.ToInt16(c["id_ed"])) && camp.Condsel == false)
+                                camp.Idedf = Convert.ToInt32(c["id_ed"]);
                             else
-                                camp.biddep = vargnrl.edific[0].Id;
+                                camp.Idedf = vargnrl.Edific[0].Id;
                         }
                         else
-                            camp.bcondsel = 1;
+                            camp.Condsel = true;
 
-                        camp.bnom = c["name"].ToString();
-                        camp.btam = Convert.ToDouble(c["tam"]);
+                        camp.Nomb = c["name"].ToString();
+                        camp.Tamall = Convert.ToDouble(c["tam"]);
                     }
                     break;
             }
@@ -251,8 +238,7 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
 
         private void AlmacModi(int Tp)
         {
-            string rsp = "";
-            int aux_idDep;
+            string a = "";
 
             switch (Tp)
             {
@@ -265,12 +251,12 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
                         if (camp.bcondsel == 1) aux_idDep = 0;
                         else aux_idDep = camp.biddep;
                         if (camp.UpdtAct == false)
-                            rsp = calldp.MDPP_SvtModOtro(Tp, camp.bnom.ToString().Trim(), camp.btam, aux_idDep, camp.bcondsel, ParSistem.IdCond);
+                            a = calldp.MDPP_SvtModOtro(Tp, camp.bnom.ToString().Trim(), camp.btam, aux_idDep, camp.bcondsel, ParSistem.IdCond);
                         else
-                            rsp = calldp.MDPP_SvtModOtro(camp.bnom.ToString().Trim(), camp.btam, aux_idDep, camp.bcondsel, camp.idMod, ParSistem.IdCond, Tp);
+                            a = calldp.MDPP_SvtModOtro(camp.bnom.ToString().Trim(), camp.btam, aux_idDep, camp.bcondsel, camp.idMod, ParSistem.IdCond, Tp);
                     }
                     else
-                        rsp = "2";
+                        a = "2";
 
                     break;
 
