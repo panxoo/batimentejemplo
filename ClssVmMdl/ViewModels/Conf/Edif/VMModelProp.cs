@@ -24,7 +24,7 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
             val = new ValElemment();
             MsgEv = new MsgEvents();
 
-            camp.MultiEd = ParSistem.MultiEdef;
+            camp.MultEdf = ParSistem.MultiEdef;
 
             DelSaveMod = new DelegateCommand<object>(ExcSaveMod);
             DelActUpdtMod = new DelegateCommand<object[]>(ExcActUpdtMod);
