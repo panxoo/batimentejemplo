@@ -278,10 +278,9 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
                 }
                                
             }
-            else
-            {
+          
                 Mensaje(a, Tp);
-            }
+            
 
            
         }
@@ -339,19 +338,7 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
     }
     Lst.Clear();
 
-    if (a == "1")
-    {
-        CargaTabGrd(tp);
-        ExcDelSelEdit(0);
-        MsgEv.MsgAlmacenar("mdpp", a);
-    }
-    else
-    {
-        ExcDelSelEdit(0);
-        MsgEv.MsgAlmacenar("mdpp", a);
-        vargnrl.MsgError = mod + ";" + a;
-        vargnrl.selMsg = true;
-    }
+   Mensaje(a,tp);
 }
 
         private void Mensaje(string a, int Tp)
