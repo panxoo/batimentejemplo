@@ -66,7 +66,7 @@ namespace ClssVmMdl.Validacion
             return true;
         }
 
-        public bool NumCeroMay(List<float> val)
+        public bool NumCeroMay(List<double> val)
         {
             foreach (int it in val)
             {
