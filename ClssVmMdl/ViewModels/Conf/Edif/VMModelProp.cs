@@ -248,8 +248,8 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
             else
             {
                 if (camp.Condsel == false && camp.Idedf == -1)
-                   a = "2";
-           }
+                    a = "2";
+            }
 
 
             if (a == "")
@@ -276,70 +276,70 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
                     else
                         a = calldp.MDPP_SvtModOtro(Tp, camp.Nomb.ToString().Trim(), camp.Tamall, aux_idEdf, camp.Condsel, ParSistem.IdCond);
                 }
-                               
-            }
-          
-                Mensaje(a, Tp);
-            
 
-           
+            }
+
+            Mensaje(a, Tp);
+
+
+
         }
 
 
 
         private void DeltModel(int id, int tp)
-{
+        {
 
-    List<object> Lst = new List<object>();
-    string a;
+            List<object> Lst = new List<object>();
+            string a;
 
-    switch (tp)
-    {
-        case -1:
-
-            foreach (var c in camp.Tabed.Select("id = " + id))
+            switch (tp)
             {
-                Lst.Add(c["id_ed"]);
-                Lst.Add(c["idCond"]);
-                Lst.Add(c["name"]);
+                case -1:
+
+                    foreach (var c in camp.Tabed.Select("id = " + id))
+                    {
+                        Lst.Add(c["id_ed"]);
+                        Lst.Add(c["idCond"]);
+                        Lst.Add(c["name"]);
+                    }
+
+                    a = calldp.SvtModDep(id, Convert.ToInt16(Lst[0]), Convert.ToInt16(Lst[1]), Lst[2].ToString());
+                    break;
+
+                case 1:
+
+                    foreach (var c in camp.Tabest.Select("id = " + id + " and tp = " + tp))
+                    {
+                        Lst.Add(c["id_ed"]);
+                        Lst.Add(c["idCond"]);
+                        Lst.Add(c["name"]);
+                        Lst.Add(c["cond"]);
+                    }
+
+                    a = calldp.MDPP_SvtModOtro(id, Convert.ToInt16(Lst[0]), Convert.ToInt16(Lst[1]), Lst[2].ToString(), tp, Convert.ToInt16(Lst[3]));
+                    break;
+
+
+                default:
+
+
+                    foreach (var c in camp.Tabbod.Select("id = " + id + " and tp = " + tp))
+                    {
+                        Lst.Add(c["id_ed"]);
+                        Lst.Add(c["idCond"]);
+                        Lst.Add(c["name"]);
+                        Lst.Add(c["cond"]);
+                    }
+
+                    a = calldp.MDPP_SvtModOtro(id, Convert.ToInt16(Lst[0]), Convert.ToInt16(Lst[1]), Lst[2].ToString(), tp, Convert.ToInt16(Lst[3]));
+                    break;
+
             }
+            Lst.Clear();
 
-            a = calldp.SvtModDep(id, Convert.ToInt16(Lst[0]), Convert.ToInt16(Lst[1]), Lst[2].ToString());
-            break;
-
-        case 1:
-
-            foreach (var c in camp.Tabest.Select("id = " + id + " and tp = " + tp))
-            {
-                Lst.Add(c["id_ed"]);
-                Lst.Add(c["idCond"]);
-                Lst.Add(c["name"]);
-                Lst.Add(c["cond"]);
-            }
-
-            a = calldp.MDPP_SvtModOtro(id, Convert.ToInt16(Lst[0]), Convert.ToInt16(Lst[1]), Lst[2].ToString(), tp, Convert.ToInt16(Lst[3]));
-            break;
-
-
-        default:
-
-
-            foreach (var c in camp.Tabbod.Select("id = " + id + " and tp = " + tp))
-            {
-                Lst.Add(c["id_ed"]);
-                Lst.Add(c["idCond"]);
-                Lst.Add(c["name"]);
-                Lst.Add(c["cond"]);
-            }
-
-            a = calldp.MDPP_SvtModOtro(id, Convert.ToInt16(Lst[0]), Convert.ToInt16(Lst[1]), Lst[2].ToString(), tp, Convert.ToInt16(Lst[3]));
-            break;
-
-    }
-    Lst.Clear();
-
-   Mensaje(a,tp);
-}
+            Mensaje(a, tp);
+        }
 
         private void Mensaje(string a, int Tp)
         {
