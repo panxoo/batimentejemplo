@@ -84,6 +84,7 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
         {
             CargParametro(Convert.ToInt16(parm[0]));
             CargaUpdt(Convert.ToInt16(parm[0]), Convert.ToInt16(parm[1]));
+            SelPantalla(Convert.ToInt16(parm[0]));
         }
 
 
@@ -95,20 +96,20 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
         private void ExcDeltMod(object[] parm)
         {
             vargnrl.selDeci = true;
-            camp.TpDel = Convert.ToInt16(parm[0]);
-            camp.IdDel = (int)parm[1];
+            //camp.TpDel = Convert.ToInt16(parm[0]);
+            //camp.IdDel = (int)parm[1];
             vargnrl.MsgDesicion = mod + ";" + parm[2].ToString();
             //camp.EstDelAct = Convert.ToInt16(parm[2]);
         }
 
         private void ExcDeltAct(object parm)
         {
-            if (Convert.ToBoolean(parm) == true)
-            {
-                DeltModel(camp.IdDel, camp.TpDel);
-            }
-            camp.TpDel = new int();
-            camp.IdDel = new int();
+            //if (Convert.ToBoolean(parm) == true)
+            //{
+            //    DeltModel(camp.IdDel, camp.TpDel);
+            //}
+            //camp.TpDel = new int();
+            //camp.IdDel = new int();
             vargnrl.selDeci = false;
         }
 
@@ -126,9 +127,9 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
 
         private void inicio()
         {
-            CargaTabGrd(-1);
             CargaTabGrd(1);
             CargaTabGrd(2);
+            CargaTabGrd(3);
         }
 
         private void CargParametro(int tp)
@@ -136,6 +137,7 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
             if (tp == 1)
             {
                 Vargnrl.Tpdep = callvr.PRGN_tpdep(ParSistem.IdCond);
+                Camp.Idtpedf = -1;
                 //if (vargnrl.tpdep.Count > 0)
             }
 
@@ -151,13 +153,13 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
             switch (tp)
             {
                 case 2:
-                    camp.Tabbod = calldp.MDPP_SelModelGrd(tp, ParSistem.IdCond);
+                    camp.Tabbod = calldp.MDPP_SelModelGrd(2, ParSistem.IdCond);
                     break;
                 case 3:
-                    camp.Tabest = calldp.MDPP_SelModelGrd(tp, ParSistem.IdCond);
+                    camp.Tabest = calldp.MDPP_SelModelGrd(1, ParSistem.IdCond);
                     break;
                 case 1:
-                    camp.Tabed = calldp.MDPP_SelModelGrd(tp, ParSistem.IdCond);
+                    camp.Tabed = calldp.MDPP_SelModelGrd(-1, ParSistem.IdCond);
                     break;
             }
         }
@@ -176,13 +178,13 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
                         if (vargnrl.Tpdep.Any(p => p.Id == (int)c["id_tp"]))
                             Camp.Idtpedf = Convert.ToInt32(c["id_tp"]);
                         else
-                            Camp.Idtpedf = vargnrl.Tpdep[0].Id;
+                            Camp.Idtpedf = -1;
 
                         if (Camp.MultEdf == true)
                             if (vargnrl.Edific.Any(p => p.Id == Convert.ToInt16(c["id_ed"])))
                                 Camp.Idedf = Convert.ToInt32(c["id_ed"]);
                             else
-                                Camp.Idedf = vargnrl.Edific[0].Id;
+                                Camp.Idedf = -1;
 
                         Camp.Nomb = c["name"].ToString();
                         Camp.Cantban = Convert.ToInt32(c["bano"]);
@@ -244,6 +246,14 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
                 if (val.NumCeroMay(new List<int>(new int[] { camp.Cantban, camp.Cantdor })) == false
                     || val.NumCeroMay(new List<double>(new double[] { camp.Tamut })) == false || camp.Idtpedf == -1 || camp.Idedf == -1)
                     a = "2";
+
+                if (camp.Tamall < Camp.Tamut)
+                {
+                    if (a == "")
+                        a = "3";
+                    else
+                        a = a + ";3";
+                }
             }
             else
             {

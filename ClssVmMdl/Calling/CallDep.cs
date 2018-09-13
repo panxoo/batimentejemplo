@@ -127,7 +127,7 @@ namespace ClssVmMdl.Calling
             return Resp;
         }
 
-        public string MDPP_SvtModOtro(int TipOtro, string nom, double tam, int dep, int cond, int id_cond)
+        public string MDPP_SvtModOtro(int TipOtro, string nom, double tam, int dep, bool cond, int id_cond)
         {
             List<MySqlParameter> ParUnit = new List<MySqlParameter>();
             ParUnit.Add(new MySqlParameter("@tam", tam));
@@ -137,7 +137,7 @@ namespace ClssVmMdl.Calling
             return Resp;
         }
 
-        public string MDPP_SvtModOtro(string nom, double tam, int dep, int cond, int id, int id_cond, int tp_otro)
+        public string MDPP_SvtModOtro(string nom, double tam, int dep, bool cond, int id, int id_cond, int tp_otro)
         {
             List<MySqlParameter> ParUnit = new List<MySqlParameter>();
             ParUnit.Add(new MySqlParameter("@tam", tam));

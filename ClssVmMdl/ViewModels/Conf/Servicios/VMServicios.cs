@@ -148,16 +148,16 @@ namespace ClssVmMdl.ViewModels.Conf.Servicios
 
             if (ParSistem.MultiEdef == true)
             {
-                vargnrl.edific = callvar.PRGN_Edif(ParSistem.IdCond);
+                vargnrl.Edific = callvar.PRGN_Edif(ParSistem.IdCond);
             }
             else
             {
-                vargnrl.edific = new List<AccesoDatos.TypeVar.ColIdName>();
+                vargnrl.Edific = new List<AccesoDatos.TypeVar.ColIdName>();
             }
 
-            if (vargnrl.edific.Count() > 0)
+            if (vargnrl.Edific.Count() > 0)
             {
-                camp.IdMinEd = vargnrl.edific.Min(p => p.Id);
+                camp.IdMinEd = vargnrl.Edific.Min(p => p.Id);
             }
 
             camp.DtServ = callsrv.SRVI_Servicios(ParSistem.IdCond);

@@ -125,11 +125,11 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
 
         private void inicio()
         {
-            _vargnrl.edific = callvar.PRGN_Edif(ParSistem.IdCond);
+            _vargnrl.Edific = callvar.PRGN_Edif(ParSistem.IdCond);
             _vargnrl.orient = callvar.PRGN_Orient();
             _camp.dselori = _vargnrl.orient[0].Id;
-            _camp.seledef = _vargnrl.edific[0].Id;
-            CargaPiso(_vargnrl.edific[0].Id);
+            _camp.seledef = _vargnrl.Edific[0].Id;
+            CargaPiso(_vargnrl.Edific[0].Id);
         }
 
 

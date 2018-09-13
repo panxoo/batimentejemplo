@@ -128,7 +128,7 @@ namespace ClssVmMdl.ViewModels.Nota
 
             if (ParSistem.MultiEdef == true)
             {
-                vargnrl.edific = callvar.PRGN_Edif(ParSistem.IdCond);
+                vargnrl.Edific = callvar.PRGN_Edif(ParSistem.IdCond);
                 vargnrl.MultEdf = ParSistem.MultiEdef;
             }
         }

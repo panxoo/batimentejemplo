@@ -64,7 +64,7 @@
                                         <materialDesign:PackIcon Kind="Plus" Height="24" Width="24" />
                                     </Button>
 
-                                    <DataGrid  ItemsSource="{Binding Camp.tabed}" AutoGenerateColumns="False" HorizontalAlignment="Left" CanUserAddRows="False" IsReadOnly="True"
+                                    <DataGrid  ItemsSource="{Binding Camp.Tabed}" AutoGenerateColumns="False" HorizontalAlignment="Left" CanUserAddRows="False" IsReadOnly="True"
                                                CanUserDeleteRows="False" VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Auto" DockPanel.Dock="Bottom">
                                         <DataGrid.Columns>
                                             <DataGridTemplateColumn>
@@ -128,7 +128,7 @@
                                         <materialDesign:PackIcon Kind="Plus" Height="24" Width="24" />
                                     </Button>
 
-                                    <DataGrid Grid.Row="1" ItemsSource="{Binding Camp.tabbod}" AutoGenerateColumns="False" HorizontalAlignment="Left" IsReadOnly="True"
+                                    <DataGrid Grid.Row="1" ItemsSource="{Binding Camp.Tabbod}" AutoGenerateColumns="False" HorizontalAlignment="Left" IsReadOnly="True"
                                               CanUserAddRows="False" CanUserDeleteRows="False" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                                         <DataGrid.Columns>
                                             <DataGridTemplateColumn Header="Comandos">
@@ -189,7 +189,7 @@
                                         <materialDesign:PackIcon Kind="Plus" Height="24" Width="24" />
                                     </Button>
 
-                                    <DataGrid ItemsSource="{Binding Camp.tabest}" AutoGenerateColumns="False" HorizontalAlignment="Left" CanUserAddRows="False" 
+                                    <DataGrid ItemsSource="{Binding Camp.Tabest}" AutoGenerateColumns="False" HorizontalAlignment="Left" CanUserAddRows="False" 
                                               CanUserDeleteRows="False" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" IsReadOnly="True">
                                         <DataGrid.Columns>
 
