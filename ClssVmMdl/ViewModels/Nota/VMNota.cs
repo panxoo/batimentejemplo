@@ -216,8 +216,8 @@ namespace ClssVmMdl.ViewModels.Nota
             else
             {
                 msgev.MsgAlmacenar(mod, a);
-                vargnrl.MsgError = mod + ";" + a;
-                vargnrl.selMsg = true;
+                //vargnrl.MsgError = mod + ";" + a;
+                //vargnrl.selMsg = true;
             }
 
         }

@@ -11,8 +11,7 @@ namespace ClssVmMdl.Models.Conf.Edif
         public MDModelProp()
         {
             val = new ValTam();
-            UpdtAct = false;
-               LimpVar();
+            LimpVar();
         }
 
         private ValTam val;
@@ -120,13 +119,6 @@ namespace ClssVmMdl.Models.Conf.Edif
 
         #region General
 
-        private bool multEdf;
-        public bool MultEdf
-        {
-            get => multEdf;
-            set => SetProperty(ref multEdf, value);
-        }
-
         private bool updtAct;
         public bool UpdtAct
         {
@@ -134,13 +126,12 @@ namespace ClssVmMdl.Models.Conf.Edif
             set => SetProperty(ref updtAct, value);
         }
 
-        private int idModSel;
-        public int IdModSel
+        private bool selMod;
+        public bool SelMod
         {
-            get => idModSel;
-            set => SetProperty(ref idModSel, value);
+            get => selMod;
+            set => SetProperty(ref selMod, value);
         }
-
 
         private int idTpModSel;
         public int IdTpModSel
@@ -149,6 +140,19 @@ namespace ClssVmMdl.Models.Conf.Edif
             set => SetProperty(ref idTpModSel, value);
         }
 
+        private int tpModSel;
+        public int TpModSel
+        {
+            get => tpModSel;
+            set => SetProperty(ref tpModSel, value);
+        }
+
+        private bool vigenteIdSel;
+        public bool VigenteIdSel
+        {
+            get => vigenteIdSel;
+            set => SetProperty(ref vigenteIdSel, value);
+        }
 
         #endregion
 
@@ -160,6 +164,10 @@ namespace ClssVmMdl.Models.Conf.Edif
             Cantdor = 0;
             Tamall = 0;
             Tamut = 0;
+
+            UpdtAct = false;
+            SelMod = false;
+            idTpModSel = -1;
 
             Condsel = true;
 

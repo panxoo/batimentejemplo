@@ -107,9 +107,9 @@ namespace ClssVmMdl.ViewModels.Conf.Servicios
 
         private void ExcDeleteMsg(object[] parm)
         {
-            vargnrl.selDeci = true;
+            //vargnrl.selDeci = true;
             camp.IdDelt = (int)parm[0];
-            vargnrl.MsgDesicion = mod + ";" + parm[1].ToString();
+            //vargnrl.MsgDesicion = mod + ";" + parm[1].ToString();
         }
 
         private void ExcDeltAct(object parm)
@@ -119,14 +119,14 @@ namespace ClssVmMdl.ViewModels.Conf.Servicios
                 Eliminar();
             }
 
-            vargnrl.MsgDesicion = "";
-            vargnrl.selDeci = false;
+            //vargnrl.MsgDesicion = "";
+            //vargnrl.selDeci = false;
         }
 
         private void ExcCloseMsgError()
         {
-            vargnrl.MsgError = "";
-            vargnrl.selMsg = false;
+            //vargnrl.MsgError = "";
+            //vargnrl.selMsg = false;
         }
 
 
@@ -281,8 +281,8 @@ namespace ClssVmMdl.ViewModels.Conf.Servicios
             {
 
                 msgev.MsgAlmacenar(mod, a);
-                vargnrl.MsgError = mod + ";" + a;
-                vargnrl.selMsg = true;
+                //vargnrl.MsgError = mod + ";" + a;
+                //vargnrl.selMsg = true;
             }
 
         }

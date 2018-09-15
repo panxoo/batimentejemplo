@@ -149,7 +149,7 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
 
         private void ExCloseMsgError()
         {
-            vargnrl.selMsg = false;
+            //vargnrl.selMsg = false;
         }
 
         #endregion
@@ -341,8 +341,8 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
             else
             {
                 msgev.MsgAlmacenar("cfed", a);
-                vargnrl.MsgError = mod + ";" + a;
-                vargnrl.selMsg = true;
+                //vargnrl.MsgError = mod + ";" + a;
+                //vargnrl.selMsg = true;
             }
         }
 

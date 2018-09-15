@@ -93,7 +93,7 @@ namespace ClssVmMdl.ViewModels.Conf.Servicios
 
         private void ExcRmvTpSrv(object[] Tp)
         {
-            vargnrl.MsgDesicion = mod + ";" + Tp[0].ToString();
+            //vargnrl.MsgDesicion = mod + ";" + Tp[0].ToString();
             camp.IdTS = Convert.ToInt32(Tp[1]);
             ActDesicion();
         }
@@ -105,8 +105,8 @@ namespace ClssVmMdl.ViewModels.Conf.Servicios
 
         private void ExcCloseMsgError()
         {
-            vargnrl.selMsg = false;
-            vargnrl.MsgError = "";
+            //vargnrl.selMsg = false;
+            //vargnrl.MsgError = "";
         }
 
         public void ExcDelectAct(bool tp)
@@ -114,7 +114,7 @@ namespace ClssVmMdl.ViewModels.Conf.Servicios
             if (tp)
                 RmvAlmacenar();
 
-            vargnrl.MsgDesicion = "";
+            //vargnrl.MsgDesicion = "";
             camp.IdTS = new int();
         }
         #endregion
@@ -276,7 +276,7 @@ namespace ClssVmMdl.ViewModels.Conf.Servicios
             }
             else
             {
-                vargnrl.MsgError = mod + ";" + a;
+                //vargnrl.MsgError = mod + ";" + a;
                 ActError();
             }
         }

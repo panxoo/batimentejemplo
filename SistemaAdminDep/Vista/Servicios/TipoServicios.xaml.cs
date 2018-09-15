@@ -49,7 +49,7 @@ namespace SistemaAdminDep.Vista.Servicios
         {
             DialogDesicion view = new DialogDesicion
             {
-                MnsjDesicion = vm.Vargnrl.MsgDesicion,
+                //MnsjDesicion = vm.Vargnrl.MsgDesicion,
                 MnsjTitulo = "tpsv"
             };
 
@@ -62,7 +62,7 @@ namespace SistemaAdminDep.Vista.Servicios
         {
             DialogError view = new DialogError
             {
-                MnsjError = vm.Vargnrl.MsgError,
+                //MnsjError = vm.Vargnrl.MsgError,
                 TitlError = "tpsv"
             };
 

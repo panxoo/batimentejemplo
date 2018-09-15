@@ -53,6 +53,9 @@ namespace SistemaAdminDep.Diccionario
                                 case 3:
                                     msg = msg + "- El nombre del modelo ya esta en uso&#xA;";
                                     break;
+                                case 4:
+                                    msg = msg + "- El tamaño total no puede ser menor al tamaño util&#xA;";
+                                    break;
                                 case 5:
                                     msg = msg + "- Se encuentra nombre de modelo ya activo en otro modelo&#xA;";
                                     break;

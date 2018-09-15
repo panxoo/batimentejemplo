@@ -110,7 +110,7 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
 
         private void ExcCloseMsgError()
         {
-            _vargnrl.selMsg = false;
+            //_vargnrl.selMsg = false;
         }
 
         private void ExcCloseMod()
@@ -191,8 +191,8 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
             else
             {
                 MsgEv.MsgAlmacenar(mod, msg);
-                _vargnrl.MsgError = mod + ";" + msg;
-                _vargnrl.selMsg = true;
+                //_vargnrl.MsgError = mod + ";" + msg;
+                //_vargnrl.selMsg = true;
             }
 
             return;

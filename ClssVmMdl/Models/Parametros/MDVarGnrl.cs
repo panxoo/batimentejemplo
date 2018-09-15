@@ -14,8 +14,8 @@ namespace ClssVmMdl.Models.Parametros
     {
         public MDVarGnrl()
         {
-            _selDeci = false;
-            _selMsg = false;
+            //_selDeci = false;
+            //_selMsg = false;
         }
 
         private List<ColIdName> tpdep;
@@ -75,33 +75,26 @@ namespace ClssVmMdl.Models.Parametros
         }
 
 
-        private bool _selMsg;
-        public bool selMsg
+        private bool selError;
+        public bool SelError
         {
-            get { return _selMsg; }
-            set { SetProperty(ref _selMsg, value); }
+            get { return selError; }
+            set { SetProperty(ref selError, value); }
         }
 
-        private string _MsgError;
-        public string MsgError
-        {
-            get { return _MsgError; }
-            set { SetProperty(ref _MsgError, value); }
-        }
+        //private string _MsgError;
+        //public string MsgError
+        //{
+        //    get { return _MsgError; }
+        //    set { SetProperty(ref _MsgError, value); }
+        //}
 
-        private bool _selDeci;
-        public bool selDeci
-        {
-            get { return _selDeci; }
-            set { SetProperty(ref _selDeci, value); }
-        }
-
-        private string _MsgDesicion;
-        public string MsgDesicion
-        {
-            get { return _MsgDesicion; }
-            set { SetProperty(ref _MsgDesicion, value); }
-        }
+        //private bool selDeci;
+        //public bool SelDeci
+        //{
+        //    get { return selDeci; }
+        //    set { SetProperty(ref selDeci, value); }
+        //}      
 
         private bool multEdf;
         public bool MultEdf

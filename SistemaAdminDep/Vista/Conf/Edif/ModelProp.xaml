@@ -60,7 +60,7 @@
                                 <DockPanel Margin="10">
 
                                     <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" ToolTip="Agregar" HorizontalAlignment="Right" Margin="0,0,0,5" 
-                                            materialDesign:ShadowAssist.ShadowDepth="Depth3" Command="{Binding DelSelEdit}" CommandParameter="1" DockPanel.Dock="Top">
+                                            materialDesign:ShadowAssist.ShadowDepth="Depth3" Command="{Binding DelSelEdit}" CommandParameter="-1" DockPanel.Dock="Top">
                                         <materialDesign:PackIcon Kind="Plus" Height="24" Width="24" />
                                     </Button>
 
@@ -76,7 +76,7 @@
                                                                     Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}" Height="25" Width="25">
                                                                 <Button.CommandParameter>
                                                                     <MultiBinding Converter="{StaticResource ConvParm}" Mode="OneWay">
-                                                                        <Binding Source='1'/>
+                                                                        <Binding Source='-1'/>
                                                                         <Binding Path="id"/>
                                                                     </MultiBinding>
                                                                 </Button.CommandParameter>
@@ -87,7 +87,7 @@
                                                                     Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" >
                                                                 <Button.CommandParameter>
                                                                     <MultiBinding Converter="{StaticResource ConvParm}" Mode="OneWay">
-                                                                        <Binding Source='1'/>
+                                                                        <Binding Source='-1'/>
                                                                         <Binding Path="id"/>
                                                                         <Binding Path="vigente"/>
                                                                     </MultiBinding>
@@ -185,7 +185,7 @@
                                 <DockPanel Margin="10">
 
                                     <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" ToolTip="Agregar" HorizontalAlignment="Right" Margin="0,0,0,5" 
-                                            materialDesign:ShadowAssist.ShadowDepth="Depth3" Command="{Binding DelSelEdit}" CommandParameter="3" DockPanel.Dock="Top">
+                                            materialDesign:ShadowAssist.ShadowDepth="Depth3" Command="{Binding DelSelEdit}" CommandParameter="1" DockPanel.Dock="Top">
                                         <materialDesign:PackIcon Kind="Plus" Height="24" Width="24" />
                                     </Button>
 
@@ -202,7 +202,7 @@
                                                                     Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}" Height="25" Width="25">
                                                                 <Button.CommandParameter>
                                                                     <MultiBinding Converter="{StaticResource ConvParm}" Mode="OneWay">
-                                                                        <Binding Source='3'/>
+                                                                        <Binding Source='1'/>
                                                                         <Binding Path="id"/>
                                                                     </MultiBinding>
                                                                 </Button.CommandParameter>
@@ -213,7 +213,7 @@
                                                                     Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" >
                                                                 <Button.CommandParameter>
                                                                     <MultiBinding Converter="{StaticResource ConvParm}" Mode="OneWay">
-                                                                        <Binding Source='3'/>
+                                                                        <Binding Source='1'/>
                                                                         <Binding Path="id"/>
                                                                         <Binding Path="vigente"/>
                                                                     </MultiBinding>
@@ -298,12 +298,9 @@
                                             <TextBlock Text="Tamaño (cm): "  VerticalAlignment="Bottom"/>
                                             <TextBox  Text="{Binding Camp.Tamall, UpdateSourceTrigger=LostFocus}" Width="80" >
                                                 <i:Interaction.Behaviors>
-                                                    <Val:TextBoxDecimalRangeBehaviour MaxDecimals="2" MaxInteger="20" Minimum="0.0" Maximum="20.0" />
+                                                    <Val:TextBoxDecimalRangeBehaviour MaxDecimals="2" MaxInteger="4" Minimum="1" Maximum="9999.99" />
                                                 </i:Interaction.Behaviors>
                                             </TextBox>
-
-                                            <!--<Controls:NumericUpDown HasDecimals="True"  HideUpDownButtons="True" Maximum="9999.99" Minimum="0"   Controls:TextBoxHelper.SelectAllOnFocus="True"-->
-                                            <!--Value="{Binding Camp.dtamall, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
 
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,0,20,0" >
@@ -311,11 +308,9 @@
                                             <TextBlock Text="Tamaño Util (cm): " VerticalAlignment="Bottom"/>
                                             <TextBox  Text="{Binding Camp.Tamut}" Width="80" >
                                                 <i:Interaction.Behaviors>
-                                                    <Val:TextBoxDecimalRangeBehaviour MaxDecimals="2" MaxInteger="20" Minimum="0.0" Maximum="20.0" />
+                                                    <Val:TextBoxDecimalRangeBehaviour MaxDecimals="2" MaxInteger="4" Minimum="1.0" Maximum="9999.99" />
                                                 </i:Interaction.Behaviors>
                                             </TextBox>
-                                            <!--<Controls:NumericUpDown HasDecimals="True"  HideUpDownButtons="True" Maximum="9999.99" Minimum="0" SelectAllOnFocus="True"
-                             Value="{Binding Camp.dtamut, UpdateSourceTrigger=PropertyChanged}"/>-->
 
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,0,20,0">
@@ -323,11 +318,9 @@
                                             <TextBlock Text="Numero de pieza: " VerticalAlignment="Bottom"/>
                                             <TextBox  Text="{Binding Camp.Cantdor}" Width="80" >
                                                 <i:Interaction.Behaviors>
-                                                    <Val:TextBoxDecimalRangeBehaviour MaxDecimals="0" MaxInteger="20" Minimum="0.0" Maximum="20.0" />
+                                                    <Val:TextBoxDecimalRangeBehaviour MaxDecimals="0" MaxInteger="2" Minimum="1.0" Maximum="10.0" />
                                                 </i:Interaction.Behaviors>
                                             </TextBox>
-                                            <!--<Controls:NumericUpDown HasDecimals="False" Maximum="10" Minimum="0" SelectAllOnFocus="True"
-                             Value="{Binding Camp.ddor, UpdateSourceTrigger=PropertyChanged}" />-->
 
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" >
@@ -335,13 +328,10 @@
                                             <TextBlock Text="Numero de baño: " VerticalAlignment="Bottom"/>
                                             <TextBox  Text="{Binding Camp.Cantban}" Width="80" >
                                                 <i:Interaction.Behaviors>
-                                                    <Val:TextBoxDecimalRangeBehaviour MaxDecimals="0" MaxInteger="20" Minimum="0.0" Maximum="20.0" />
+                                                    <Val:TextBoxDecimalRangeBehaviour MaxDecimals="0" MaxInteger="2" Minimum="1.0" Maximum="10.0" />
                                                 </i:Interaction.Behaviors>
                                             </TextBox>
-                                            <!--<Controls:NumericUpDown HasDecimals="False"  Maximum="10" Minimum="1" SelectAllOnFocus="False"-->
-                                            <!--Value="{Binding Camp.dban, UpdateSourceTrigger=PropertyChanged}"/>-->
                                         </StackPanel>
-
 
                                     </WrapPanel>
                                     <StackPanel Orientation="Horizontal"  >
@@ -369,8 +359,7 @@
                                 <DataTemplate>
                                     <StackPanel  Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="Pencil" Height="20" Width="20"  VerticalAlignment="Center" />
-                                        <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubheadingTextBlock}" 
-                                                       Text="{Binding}" />
+                                        <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubheadingTextBlock}" Text="{Binding}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </GroupBox.HeaderTemplate>
@@ -381,17 +370,11 @@
 
                                     <TextBlock Text="Registro de modelo bodega." Margin="0,0,0,40"/>
 
-
                                     <StackPanel Orientation="Horizontal" Margin="0,0,0,20" >
-                                        <CheckBox Name="CondBod" Content="Condominio" HorizontalAlignment="Left" 
-                                      IsChecked="{Binding Camp.bcondsel}" />
-                                        <TextBlock Text="Nombre Edificio: "  
-                                      />
-                                        <ComboBox   
-                                      ItemsSource="{Binding Vargnrl.edific}" 
-                                      SelectedValuePath="Id" DisplayMemberPath="Name" 
-                                      SelectedValue="{Binding Camp.biddep}"
-                                     />
+                                        <CheckBox Name="CondBod" Content="Condominio" HorizontalAlignment="Left" IsChecked="{Binding Camp.bcondsel}" />
+                                        <TextBlock Text="Nombre Edificio: "/>
+                                        <ComboBox ItemsSource="{Binding Vargnrl.edific}" SelectedValuePath="Id" DisplayMemberPath="Name" 
+                                                  SelectedValue="{Binding Camp.biddep}" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="0,0,0,50">
                                         <TextBlock Text="Nombre de modelo: " />

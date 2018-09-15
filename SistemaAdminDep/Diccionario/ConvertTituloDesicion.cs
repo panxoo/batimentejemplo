@@ -18,7 +18,7 @@ namespace SistemaAdminDep.Diccionario
             switch (ValSt)
             {
                 case "mdpp":
-                    val = "¿Se desea desabilitar el modelo?";
+                    val = "Tipo de modelo";
                     break;
                 case "tpsv":
                     val = "Tipo de servicio";
