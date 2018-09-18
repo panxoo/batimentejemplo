@@ -132,6 +132,7 @@
     <Compile Include="Diccionario\ConvertTituloError.cs" />
     <Compile Include="Diccionario\ConvertTrueToFalse.cs" />
     <Compile Include="Validacion\TextBoxDecimalRangeBehaviour.cs" />
+    <Compile Include="Validacion\ValidacionFormulario.cs" />
     <Compile Include="Vista\Conf\Edif\ModelProp.xaml.cs">
       <DependentUpon>ModelProp.xaml</DependentUpon>
     </Compile>

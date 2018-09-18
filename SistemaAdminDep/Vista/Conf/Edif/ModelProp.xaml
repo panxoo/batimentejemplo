@@ -9,6 +9,7 @@
                 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"    
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
              
              xmlns:materialDesignConverters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
                           Background="{DynamicResource MaterialDesignPaper}"
@@ -35,9 +36,18 @@
             <Dic:ConvertParameter x:Key="ConvParm"/>
             <Dic:ConvertIcoDel x:Key="IcoDel"/>
 
-            <!--<Style BasedOn="{StaticResource MaterialDesignCheckBox}" TargetType="{x:Type CheckBox}">
-                <Setter Property="Margin" Value="0,0,10,10"/>
-            </Style>-->
+            <materialDesignConverters:BooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter" TrueValue="Hidden" FalseValue="Visible" />
+
+            
+            <Style x:Key="TextBoxInError" TargetType="{x:Type TextBox}">
+                <Style.Triggers>
+                    <Trigger Property="Validation.HasError" Value="true">
+                        <Setter Property="ToolTip"
+              Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                              Path=(Validation.Errors)[0].ErrorContent}"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
 
         </ResourceDictionary>
     </UserControl.Resources>
@@ -286,50 +296,85 @@
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal"  Margin="0,0,0,20">
-
+                                        <!--Text="{Binding Camp.Nomb, UpdateSourceTrigger=PropertyChanged}" -->
                                         <TextBlock Text="Nombre de Modelo: " />
-                                        <TextBox  Text="{Binding Camp.Nomb, UpdateSourceTrigger=PropertyChanged}" Width="250" />
-
+                                            <TextBox Width="250" x:Name="DTboxNombre" >
+                                                <TextBox.Text>
+                                                    <Binding Path="Camp.Nomb" UpdateSourceTrigger="Default">
+                                                        <Binding.ValidationRules>
+                                                            <Val:ValidacionTextVacio />
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </TextBox.Text>
+                                            </TextBox>
                                     </StackPanel>
 
                                     <WrapPanel  Margin="0,0,0,50">
                                         <StackPanel Orientation="Horizontal" Margin="0,0,20,0">
 
                                             <TextBlock Text="Tamaño (cm): "  VerticalAlignment="Bottom"/>
-                                            <TextBox  Text="{Binding Camp.Tamall, UpdateSourceTrigger=LostFocus}" Width="80" >
+                                            <TextBox  Width="80" x:Name="DTboxTall">
                                                 <i:Interaction.Behaviors>
                                                     <Val:TextBoxDecimalRangeBehaviour MaxDecimals="2" MaxInteger="4" Minimum="1" Maximum="9999.99" />
                                                 </i:Interaction.Behaviors>
+                                                <TextBox.Text>
+                                                    <Binding Path="Camp.Tamall" UpdateSourceTrigger="Default">
+                                                        <Binding.ValidationRules>
+                                                            <Val:ValidacionDicimCero/>
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </TextBox.Text>
                                             </TextBox>
 
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,0,20,0" >
 
                                             <TextBlock Text="Tamaño Util (cm): " VerticalAlignment="Bottom"/>
-                                            <TextBox  Text="{Binding Camp.Tamut}" Width="80" >
+                                            <TextBox  Width="80" x:Name="DTboxTamu">
                                                 <i:Interaction.Behaviors>
                                                     <Val:TextBoxDecimalRangeBehaviour MaxDecimals="2" MaxInteger="4" Minimum="1.0" Maximum="9999.99" />
                                                 </i:Interaction.Behaviors>
+                                                <TextBox.Text>
+                                                    <Binding Path="Camp.Tamut" UpdateSourceTrigger="Default">
+                                                        <Binding.ValidationRules>
+                                                            <Val:ValidacionDicimCero/>
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </TextBox.Text>
                                             </TextBox>
 
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,0,20,0">
 
                                             <TextBlock Text="Numero de pieza: " VerticalAlignment="Bottom"/>
-                                            <TextBox  Text="{Binding Camp.Cantdor}" Width="80" >
+                                            <TextBox Width="80" x:Name="DTboxNumPi">
                                                 <i:Interaction.Behaviors>
                                                     <Val:TextBoxDecimalRangeBehaviour MaxDecimals="0" MaxInteger="2" Minimum="1.0" Maximum="10.0" />
                                                 </i:Interaction.Behaviors>
+                                                <TextBox.Text>
+                                                    <Binding Path="Camp.Cantdor" UpdateSourceTrigger="Default">
+                                                        <Binding.ValidationRules>
+                                                            <Val:ValidacionNumbCero/>
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </TextBox.Text>
                                             </TextBox>
 
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" >
 
                                             <TextBlock Text="Numero de baño: " VerticalAlignment="Bottom"/>
-                                            <TextBox  Text="{Binding Camp.Cantban}" Width="80" >
+                                            <TextBox x:Name="DTboxNumBa" Width="80" >
                                                 <i:Interaction.Behaviors>
                                                     <Val:TextBoxDecimalRangeBehaviour MaxDecimals="0" MaxInteger="2" Minimum="1.0" Maximum="10.0" />
                                                 </i:Interaction.Behaviors>
+                                                <TextBox.Text>
+                                                    <Binding Path="Camp.Cantban" UpdateSourceTrigger="Default">
+                                                        <Binding.ValidationRules>
+                                                            <Val:ValidacionNumbCero/>
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </TextBox.Text>
                                             </TextBox>
                                         </StackPanel>
 
@@ -354,7 +399,7 @@
                         </materialDesign:TransitionerSlide.OpeningEffects>
 
                         <GroupBox  Margin="0" Background="{DynamicResource MaterialDesignPaper}" Style="{DynamicResource MaterialDesignCardGroupBox}"
-                                   Header="Modelo de tipo de departamento">
+                                   Header="Modelo de tipo de bodega">
                             <GroupBox.HeaderTemplate>
                                 <DataTemplate>
                                     <StackPanel  Orientation="Horizontal">
@@ -368,27 +413,45 @@
 
                                 <StackPanel Orientation="Vertical" Margin="20">
 
-                                    <TextBlock Text="Registro de modelo bodega." Margin="0,0,0,40"/>
 
                                     <StackPanel Orientation="Horizontal" Margin="0,0,0,20" >
-                                        <CheckBox Name="CondBod" Content="Condominio" HorizontalAlignment="Left" IsChecked="{Binding Camp.bcondsel}" />
-                                        <TextBlock Text="Nombre Edificio: "/>
-                                        <ComboBox ItemsSource="{Binding Vargnrl.edific}" SelectedValuePath="Id" DisplayMemberPath="Name" 
-                                                  SelectedValue="{Binding Camp.biddep}" />
+                                        <CheckBox Name="CondBod" Content="Condominio" HorizontalAlignment="Left" IsChecked="{Binding Camp.Condsel}" />
+                                        <ComboBox materialDesign:HintAssist.Hint="Seleccionar Edificio"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                                  ItemsSource="{Binding Vargnrl.Edific}" SelectedValuePath="Id" DisplayMemberPath="Name" Margin="20,0,0,0"
+                                                  SelectedValue="{Binding Camp.Idedf}" Visibility="{Binding Camp.Condsel ,Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="0,0,0,50">
                                         <TextBlock Text="Nombre de modelo: " />
-                                        <TextBox Grid.Column="2"  Text="{Binding Camp.bnom, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <TextBox x:Name="BTboxName" Width="250">
+                                            <TextBox.Text>
+                                                <Binding Path="Camp.Nomb" UpdateSourceTrigger="Default">
+                                                    <Binding.ValidationRules>
+                                                        <Val:ValidacionTextVacio/>
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
 
-                                        <TextBlock Text="Tamaño: "  />
-                                        <!--<Controls:NumericUpDown  HideUpDownButtons="True" HasDecimals="True" Maximum="9999.99" Minimum="0"
-                                                    Value="{Binding Camp.btam,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
+                                        <TextBlock Text="Tamaño: "  Margin="20,0,0,0"  />
+                                        <TextBox  x:Name="BTboxTamall" Width="80" >
+                                            <i:Interaction.Behaviors>
+                                                <Val:TextBoxDecimalRangeBehaviour MaxDecimals="2" MaxInteger="4" Minimum="1" Maximum="9999.99" />
+                                            </i:Interaction.Behaviors>
+                                            <TextBox.Text>
+                                                <Binding Path="Camp.Tamall" UpdateSourceTrigger="Default">
+                                                    <Binding.ValidationRules>
+                                                        <Val:ValidacionDicimCero/>
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
 
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal"  >
 
                                         <Button Content="Guardar"  Command="{Binding DelSaveMod}" CommandParameter="2" />
-                                        <Button Content="Cancel"  Command="{Binding DelSelEdit}" CommandParameter="0"/>
+                                        <Button Content="Cancel"  Command="{Binding DelSelEdit}" Style="{StaticResource MaterialDesignRaisedAccentButton}" CommandParameter="0"
+                                                 Margin="10,0,0,0"/>
                                     </StackPanel>
                                 </StackPanel>
                             </ScrollViewer>
@@ -403,7 +466,7 @@
 
 
                         <GroupBox  Margin="0" Background="{DynamicResource MaterialDesignPaper}" Style="{DynamicResource MaterialDesignCardGroupBox}"
-                                   Header="Modelo de tipo de departamento">
+                                   Header="Modelo de tipo de estacionamiento">
                             <GroupBox.HeaderTemplate>
                                 <DataTemplate>
                                     <StackPanel  Orientation="Horizontal">
@@ -418,34 +481,56 @@
 
                                 <StackPanel Orientation="Vertical" Margin="20 ">
 
-                                    <TextBlock Text="Registro de modelo estacionamiento." Margin="0,0,0,40"/>
-
                                     <StackPanel Orientation="Horizontal"  Margin="0,0,0,20" >
 
-                                        <CheckBox Name="CondEst" Content="Condominio"  HorizontalAlignment="Left" 
-                                      IsChecked="{Binding Camp.econdsel}"/>
-                                        <TextBlock Text="Edificio: "  />
-                                        <ComboBox Grid.Column="3"  
-                                      ItemsSource="{Binding Vargnrl.edific}" 
-                                      SelectedValuePath="Id" DisplayMemberPath="Name" 
-                                      SelectedValue="{Binding Camp.eiddep}"/>
-
+                                        <CheckBox Name="CondEst" Content="Condominio"  HorizontalAlignment="Left" IsChecked="{Binding Camp.Condsel}"/>
+                                        <ComboBox materialDesign:HintAssist.Hint="Seleccionar Edificio"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                                  ItemsSource="{Binding Vargnrl.Edific}" SelectedValuePath="Id" DisplayMemberPath="Name"  Margin="20,0,0,0"
+                                                  Visibility="{Binding Camp.Condsel ,Converter={StaticResource InvertedBooleanToVisibilityConverter}}"
+                                                  x:Name="ECboxEdf">
+                                            <ComboBox.SelectedValue>
+                                                <Binding Path="Camp.Idedf" UpdateSourceTrigger="Default">
+                                                    <Binding.ValidationRules>
+                                                        <Val:ValidacionSeleccionComb/>
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </ComboBox.SelectedValue>
+                                        </ComboBox>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal"  Margin="0,0,0,50">
 
                                         <TextBlock Text="Nombre de modelo: " />
-                                        <TextBox Text="{Binding Camp.enom, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <TextBox x:Name="ETboxName" Width="250">
+                                            <TextBox.Text>
+                                                <Binding Path="Camp.Nomb" UpdateSourceTrigger="Default">
+                                                    <Binding.ValidationRules>
+                                                        <Val:ValidacionTextVacio/>
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
 
-                                        <TextBlock Text="Tamaño: "  />
-                                        <!--<Controls:NumericUpDown  HideUpDownButtons="True" HasDecimals="True" Maximum="9999.99" Minimum="0"
-                                                    Value="{Binding Camp.etam, UpdateSourceTrigger=PropertyChanged}"/>-->
+                                        <TextBlock Text="Tamaño: "  Margin="20,0,0,0" />
 
+                                        <TextBox x:Name="ETboxTamall" Width="80" >
+                                            <i:Interaction.Behaviors>
+                                                <Val:TextBoxDecimalRangeBehaviour MaxDecimals="2" MaxInteger="4" Minimum="1" Maximum="9999.99" />
+                                            </i:Interaction.Behaviors>
+                                            <TextBox.Text>
+                                                <Binding Path="Camp.Tamall" UpdateSourceTrigger="Default">
+                                                    <Binding.ValidationRules>
+                                                        <Val:ValidacionDicimCero/>
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal"  >
 
                                         <Button Content="Guardar" Command="{Binding DelSaveMod}" CommandParameter="1"/>
-                                        <Button Content="Cancel" Command="{Binding DelSelEdit}" CommandParameter="0"/>
+                                        <Button Content="Cancel" Command="{Binding DelSelEdit}" Style="{StaticResource MaterialDesignRaisedAccentButton}"  CommandParameter="0"
+                                                 Margin="10,0,0,0"/>
 
                                     </StackPanel>
 

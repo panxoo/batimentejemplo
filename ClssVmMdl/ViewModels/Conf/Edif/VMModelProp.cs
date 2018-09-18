@@ -46,6 +46,8 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
         public Action<int> SelPantalla { get; set; }
         public Action<string, string> ActDesicion { get; set; }
         public Action<string, string> ActError { get; set; }
+        public Action<int> ErrorVal { get; set; }
+
 
         public DelegateCommand<object> DelSelEdit { get; set; }
         public DelegateCommand<object> DelSaveMod { get; set; }
@@ -189,7 +191,7 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
 
                 case 2:
 
-                    foreach (DataRow c in camp.Tabest.Select("id = " + id + " and tp = 1"))
+                    foreach (DataRow c in camp.Tabbod.Select("id = " + id + " and tp = 2"))
                     {
                         CargaOtro(c);
                     }
@@ -197,7 +199,7 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
 
                 default:
 
-                    foreach (var c in camp.Tabbod.Select("id = " + id + " and tp = 2"))
+                    foreach (var c in camp.Tabest.Select("id = " + id + " and tp = 1"))
                     {
                         CargaOtro(c);
                     }
@@ -273,7 +275,7 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
                         a = calldp.SvtModDep(camp.IdTpModSel, aux_idEdf, camp.Idtpedf, camp.Nomb.ToString().Trim(), camp.Cantdor, camp.Cantban, camp.Tamall, camp.Tamut, ParSistem.IdCond);
                     else
                         a = calldp.MDPP_SvtModOtro(camp.Nomb.ToString().Trim(), camp.Tamall, aux_idEdf, camp.Condsel, camp.IdTpModSel, ParSistem.IdCond, Tp);
-
+                    
                 }
                 else
                 {
@@ -285,7 +287,9 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
 
             }
 
-            Mensaje(a, Tp, Convert.ToInt16(camp.UpdtAct));
+Mensaje(a, Tp, Convert.ToInt16(camp.UpdtAct));
+
+
         }
 
 
@@ -356,6 +360,7 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
             }
             else
             {
+                ErrorVal(Tp);
                 MsgEv.MsgAlmacenar(mod, a);
                 vargnrl.SelError = true;
                 ActError(mod, mod + ";" + a);
@@ -366,7 +371,7 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
         private void LimpGnrl()
         {
             Camp.LimpVar();
-            Vargnrl.SelError = false;
+            Vargnrl.SelError = true;
         }
 
         #endregion

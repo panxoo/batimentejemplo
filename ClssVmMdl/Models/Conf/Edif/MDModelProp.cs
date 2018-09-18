@@ -58,7 +58,7 @@ namespace ClssVmMdl.Models.Conf.Edif
         {
             get
             {
-                nomb = val.LimitStrg(nomb, 50);
+                nomb = val.LimitStrg(nomb, 5);
                 return nomb;
             }
             set => SetProperty(ref nomb, value);
@@ -159,7 +159,7 @@ namespace ClssVmMdl.Models.Conf.Edif
 
         public void LimpVar()
         {
-            Nomb = string.Empty;
+            Nomb = null;
             Cantban = 0;
             Cantdor = 0;
             Tamall = 0;

@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using MaterialDesignThemes.Wpf;
 using ClssVmMdl.ViewModels.Conf.Edif;
 using SistemaAdminDep.Dialogo;
+using SistemaAdminDep.Validacion;
 
 namespace SistemaAdminDep.Vista.Conf.Edif
 {
@@ -13,13 +14,14 @@ namespace SistemaAdminDep.Vista.Conf.Edif
     {
         public ModelProp()
         {
-            InitializeComponent();
             vm = new VMModelProp();
             DataContext = vm;
 
             vm.SelPantalla = new Action<int>((int arg) => SelecMant(arg));
-            vm.ActDesicion = new Action<string,string>((string tit, string mns) => Desicion(tit,mns));
-            vm.ActError = new Action<string,string>((string tit, string mns) => Error(tit, mns));
+            vm.ActDesicion = new Action<string, string>((string tit, string mns) => Desicion(tit, mns));
+            vm.ActError = new Action<string, string>((string tit, string mns) => Error(tit, mns));
+            vm.ErrorVal = new Action<int>((int Arg) => prueba(Arg));
+            InitializeComponent();
         }
 
         VMModelProp vm;
@@ -68,6 +70,36 @@ namespace SistemaAdminDep.Vista.Conf.Edif
             await DialogHost.Show(view, "RootDialog");
 
             GC.Collect();
+        }
+
+        private void prueba(int tp)
+        {
+            //ValidacionTextVacio val = new ValidacionTextVacio();
+            //tbox1.BindingGroup.ValidationRules.Add(val);
+            switch (tp)
+            {
+                case -1:
+                    DTboxNombre.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                    DTboxNumBa.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                    DTboxNumPi.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                    DTboxTall.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                    DTboxTamu.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                    break;
+
+                case 2:
+                    BTboxName.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                    BTboxTamall.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                    break;
+
+                case 1:
+                    ETboxName.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                    ETboxTamall.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                    ECboxEdf.GetBindingExpression(ComboBox.SelectedValueProperty).UpdateSource();
+                    break;
+
+            }
+
+
         }
     }
 }

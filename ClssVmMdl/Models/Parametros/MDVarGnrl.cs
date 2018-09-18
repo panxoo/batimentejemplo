@@ -16,6 +16,7 @@ namespace ClssVmMdl.Models.Parametros
         {
             //_selDeci = false;
             //_selMsg = false;
+            SelError = true;
         }
 
         private List<ColIdName> tpdep;
