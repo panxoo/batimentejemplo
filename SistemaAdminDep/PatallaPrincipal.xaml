@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SistemaAdminDep"
         xmlns:Serv="clr-namespace:SistemaAdminDep.Vista.Servicios"
-        xmlns:Pant="clr-namespace:SistemaAdminDep.Vista.Conf.Edif"
+        
+        xmlns:Pant="clr-namespace:SistemaAdminDep.Vista"
         
         xmlns:ks="clr-namespace:SistemaAdminDep.Vista.Sistema"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -185,7 +186,7 @@
 
                     </TabItem>
                         <TabItem Header=" sadasd">
-                            <!--<Pant:ModelProp />-->
+                            <Pant:Prueba />
 
                         </TabItem>
                     </TabControl>

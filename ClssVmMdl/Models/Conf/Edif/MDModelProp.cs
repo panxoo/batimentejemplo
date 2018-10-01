@@ -160,19 +160,28 @@ namespace ClssVmMdl.Models.Conf.Edif
         public void LimpVar()
         {
             Nomb = null;
-            Cantban = 0;
-            Cantdor = 0;
-            Tamall = 0;
-            Tamut = 0;
+            Cantban = 1;
+            Cantban = new int();
+
+            Cantdor = 1;
+            Cantdor = new int();
+
+            Tamall = 1;
+            Tamall = new double();
+
+            Tamut = 1;
+            Tamut = new double();
 
             UpdtAct = false;
             SelMod = false;
-            idTpModSel = -1;
+            IdTpModSel = -1;
 
             Condsel = true;
 
-            this.Idedf = -1;
-            this.Idtpedf = -1;
+            Idedf = 1;
+            Idtpedf = 1;
+            Idedf = new int();
+            Idtpedf = new int();
 
         }
 

@@ -132,14 +132,14 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
             if (tp == -1)
             {
                 Vargnrl.Tpdep = callvr.PRGN_tpdep(ParSistem.IdCond);
-                Camp.Idtpedf = -1;
+            
                 //if (vargnrl.tpdep.Count > 0)
             }
 
             if (ParSistem.MultiEdef == true)
             {
-                Vargnrl.Edific = callvr.PRGN_Edif(ParSistem.IdCond);
-                Camp.Idedf = -1;
+                   Vargnrl.Edific = callvr.PRGN_Edif(ParSistem.IdCond);
+           
             }
         }
 
@@ -239,7 +239,7 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
             if (Tp == -1) //Dep
             {
                 if (val.NumMayCero(new List<int>(new int[] { camp.Cantban, camp.Cantdor })) == false
-                    || val.NumMayCero(new List<double>(new double[] { camp.Tamut })) == false || camp.Idtpedf == -1 || camp.Idedf == -1)
+                    || val.NumMayCero(new List<double>(new double[] { camp.Tamut })) == false || camp.Idtpedf < 1 || camp.Idedf < 1)
                     a = "2";
 
                 if (camp.Tamall < Camp.Tamut)
@@ -275,7 +275,7 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
                         a = calldp.SvtModDep(camp.IdTpModSel, aux_idEdf, camp.Idtpedf, camp.Nomb.ToString().Trim(), camp.Cantdor, camp.Cantban, camp.Tamall, camp.Tamut, ParSistem.IdCond);
                     else
                         a = calldp.MDPP_SvtModOtro(camp.Nomb.ToString().Trim(), camp.Tamall, aux_idEdf, camp.Condsel, camp.IdTpModSel, ParSistem.IdCond, Tp);
-                    
+
                 }
                 else
                 {
@@ -287,7 +287,7 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
 
             }
 
-Mensaje(a, Tp, Convert.ToInt16(camp.UpdtAct));
+            Mensaje(a, Tp, Convert.ToInt16(camp.UpdtAct));
 
 
         }

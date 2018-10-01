@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:SistemaAdminDep.Vista.Servicios"
              mc:Ignorable="d" 
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-             xmlns:ctrl="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:Dic="clr-namespace:SistemaAdminDep.Diccionario"
              xmlns:Val="clr-namespace:SistemaAdminDep.Validacion"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"             
@@ -14,7 +13,6 @@
              Background="{DynamicResource MaterialDesignPaper}"
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              FontFamily="{StaticResource MaterialDesignFont}"
-             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              TextOptions.TextFormattingMode="Ideal" 
              TextOptions.TextRenderingMode="Auto"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -140,38 +138,47 @@
                                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"  />
 
                                    
-
-
-                                    <TextBox  Text="{Binding Camp.AltGrid}" 
-                                              materialDesign:HintAssist.Hint="Monto de servicio" 
-                                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"  >
-                                        <i:Interaction.Behaviors>
-                                            <Val:TextBoxDecimalRangeBehaviour MaxDecimals="2" 
-                             MaxInteger="20" 
-                             Minimum="0.0" 
-                             Maximum="20.0" />
-
-                                        </i:Interaction.Behaviors>
-
-                                    </TextBox>
-
                                     <WrapPanel Margin="0,20,0,5">
 
                                         <StackPanel Orientation="Vertical" Margin="0,0,5,0">
                                             <CheckBox Content="Se requiere cobro de uso" IsChecked="{Binding Camp.SeCobra}" />
 
-                                            <TextBox  Text="{Binding Camp.Cobro}" materialDesign:HintAssist.Hint="Monto de servicio" 
-                                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                                      Visibility="{Binding Camp.SeCobra,Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+                                            <TextBox  materialDesign:HintAssist.Hint="Monto de servicio" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                                      Visibility="{Binding Camp.SeCobra,Converter={StaticResource InvertedBooleanToVisibilityConverter}}"  
+                                                      Name="TboxValCob">
+                                                <i:Interaction.Behaviors>
+                                                    <Val:TextBoxDecimalRangeBehaviour MaxDecimals="0" MaxInteger="4" Minimum="1.0" Maximum="9999.99" />
+                                                </i:Interaction.Behaviors>
+
+                                                <TextBox.Text>
+                                                    <Binding Path="Camp.Cobro" UpdateSourceTrigger="Default">
+                                                        <Binding.ValidationRules>
+                                                            <Val:ValidacionNumbCero/>
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </TextBox.Text>
+                                            </TextBox>
                                         </StackPanel>
 
                                         <StackPanel Orientation="Vertical" Margin="0,0,5,0">
 
                                             <CheckBox Content="Se  requiere garantia" IsChecked ="{Binding Camp.RqGarant}"  />
 
-                                            <TextBox  Text="{Binding Camp.GarValor}" materialDesign:HintAssist.Hint="Valor de garantia" 
-                                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                                      Visibility="{Binding Camp.RqGarant,Converter={StaticResource InvertedBooleanToVisibilityConverter}}"/>
+                                            <TextBox  materialDesign:HintAssist.Hint="Valor de garantia" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                                      Visibility="{Binding Camp.RqGarant,Converter={StaticResource InvertedBooleanToVisibilityConverter}}"
+                                                      Name="TboxValGar">
+                                                <i:Interaction.Behaviors>
+                                                    <Val:TextBoxDecimalRangeBehaviour MaxDecimals="0" MaxInteger="4" Minimum="1.0" Maximum="9999.99" />
+                                                </i:Interaction.Behaviors>
+
+                                                <TextBox.Text>
+                                                    <Binding Path="Camp.GarValor" UpdateSourceTrigger="Default">
+                                                        <Binding.ValidationRules>
+                                                            <Val:ValidacionNumbCero/>
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </TextBox.Text>
+                                            </TextBox>
 
                                         </StackPanel>
 
@@ -193,9 +200,21 @@
 
                                                 <StackPanel Orientation="Vertical">
                                                     <CheckBox Content="Reserva por valor total" IsChecked="{Binding Camp.ResCobTot}"/>
-                                                    <TextBox  Text="{Binding Camp.ResCobMont}" materialDesign:HintAssist.Hint="Valor de la reserva:" 
-                                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                                      Visibility="{Binding Camp.ResCobTot,Converter={StaticResource InvertedBooleanToVisibilityConverter}}"/>
+                                                    <TextBox  materialDesign:HintAssist.Hint="Valor de la reserva:" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                                              Visibility="{Binding Camp.ResCobTot,Converter={StaticResource InvertedBooleanToVisibilityConverter}}"
+                                                              Name="TboxValRes">
+                                                        <i:Interaction.Behaviors>
+                                                            <Val:TextBoxDecimalRangeBehaviour MaxDecimals="0" MaxInteger="4" Minimum="1.0" Maximum="9999.99" />
+                                                        </i:Interaction.Behaviors>
+
+                                                        <TextBox.Text>
+                                                            <Binding Path="Camp.ResCobMont" UpdateSourceTrigger="Default">
+                                                                <Binding.ValidationRules>
+                                                                    <Val:ValidacionNumbCero/>
+                                                                </Binding.ValidationRules>
+                                                            </Binding>
+                                                        </TextBox.Text>
+                                                    </TextBox>
 
                                                 </StackPanel>
                                             </WrapPanel>
@@ -203,10 +222,10 @@
                                     </GroupBox>
 
                                     <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
-                                        <Button Content="Guardar" Command="{Binding DelSavTpSrv}" CommandParameter="0"/>
+                                        <Button Content="Guardar" IsDefault="True" Command="{Binding DelSavTpSrv}" CommandParameter="0"/>
                                         <Button Content="Guardar y Cerrar" Command="{Binding DelSavTpSrv}" CommandParameter="1" Margin="5,0,0,0"
                                                 Visibility="{Binding Camp.ActUpdt, Converter={StaticResource InvertedBooleanToVisibilityConverter}}"/>
-                                        <Button Content="Cancelar" Command="{Binding DelCanTpSrv}" Margin="5,0,0,0"/>
+                                        <Button Content="Cancelar" IsCancel="True" Command="{Binding DelCanTpSrv}" Margin="5,0,0,0" Style="{StaticResource MaterialDesignRaisedAccentButton}"/>
                                     </StackPanel>
 
                                 </StackPanel>

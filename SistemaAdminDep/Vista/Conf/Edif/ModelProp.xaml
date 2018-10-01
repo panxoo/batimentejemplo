@@ -9,8 +9,6 @@
                 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"    
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
-             
              xmlns:materialDesignConverters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
                           Background="{DynamicResource MaterialDesignPaper}"
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -38,16 +36,6 @@
 
             <materialDesignConverters:BooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter" TrueValue="Hidden" FalseValue="Visible" />
 
-            
-            <Style x:Key="TextBoxInError" TargetType="{x:Type TextBox}">
-                <Style.Triggers>
-                    <Trigger Property="Validation.HasError" Value="true">
-                        <Setter Property="ToolTip"
-              Value="{Binding RelativeSource={x:Static RelativeSource.Self},
-                              Path=(Validation.Errors)[0].ErrorContent}"/>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
 
         </ResourceDictionary>
     </UserControl.Resources>
@@ -287,26 +275,42 @@
 
                                         <ComboBox materialDesign:HintAssist.Hint="Seleccionar Edificio"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"   
                                                   ItemsSource="{Binding Vargnrl.Edific}" SelectedValuePath="Id" DisplayMemberPath="Name" Margin="0,0,20,0"
-                                                  SelectedValue="{Binding Camp.Idedf}" />
+                                                  Name="DCBoxEdi">
+                                            <ComboBox.SelectedValue>
+                                                <Binding Path="Camp.Idedf" UpdateSourceTrigger="Default">
+                                                    <Binding.ValidationRules>
+                                                        <Val:ValidacionSeleccionComb/>
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </ComboBox.SelectedValue>
+                                        </ComboBox>
 
                                         <ComboBox materialDesign:HintAssist.Hint="Seleccionar Tipo Edificio"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                                                   ItemsSource="{Binding Vargnrl.Tpdep}" SelectedValuePath="Id" DisplayMemberPath="Name" 
-                                                  SelectedValue="{Binding Camp.Idtpedf}"/>
+                                                  Name="DCBoxTpDep">
+                                            <ComboBox.SelectedValue>
+                                                <Binding Path="Camp.Idtpedf" UpdateSourceTrigger="Default">
+                                                    <Binding.ValidationRules>
+                                                        <Val:ValidacionSeleccionComb/>
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </ComboBox.SelectedValue>
+                                        </ComboBox>
 
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal"  Margin="0,0,0,20">
                                         <!--Text="{Binding Camp.Nomb, UpdateSourceTrigger=PropertyChanged}" -->
                                         <TextBlock Text="Nombre de Modelo: " />
-                                            <TextBox Width="250" x:Name="DTboxNombre" >
-                                                <TextBox.Text>
-                                                    <Binding Path="Camp.Nomb" UpdateSourceTrigger="Default">
-                                                        <Binding.ValidationRules>
-                                                            <Val:ValidacionTextVacio />
-                                                        </Binding.ValidationRules>
-                                                    </Binding>
-                                                </TextBox.Text>
-                                            </TextBox>
+                                        <TextBox Width="250" x:Name="DTboxNombre" >
+                                            <TextBox.Text>
+                                                <Binding Path="Camp.Nomb" UpdateSourceTrigger="Default">
+                                                    <Binding.ValidationRules>
+                                                        <Val:ValidacionTextVacio />
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
                                     </StackPanel>
 
                                     <WrapPanel  Margin="0,0,0,50">
@@ -318,7 +322,7 @@
                                                     <Val:TextBoxDecimalRangeBehaviour MaxDecimals="2" MaxInteger="4" Minimum="1" Maximum="9999.99" />
                                                 </i:Interaction.Behaviors>
                                                 <TextBox.Text>
-                                                    <Binding Path="Camp.Tamall" UpdateSourceTrigger="Default">
+                                                    <Binding Path="Camp.Tamall" Mode="TwoWay">
                                                         <Binding.ValidationRules>
                                                             <Val:ValidacionDicimCero/>
                                                         </Binding.ValidationRules>
@@ -335,7 +339,7 @@
                                                     <Val:TextBoxDecimalRangeBehaviour MaxDecimals="2" MaxInteger="4" Minimum="1.0" Maximum="9999.99" />
                                                 </i:Interaction.Behaviors>
                                                 <TextBox.Text>
-                                                    <Binding Path="Camp.Tamut" UpdateSourceTrigger="Default">
+                                                    <Binding Path="Camp.Tamut" Mode="TwoWay">
                                                         <Binding.ValidationRules>
                                                             <Val:ValidacionDicimCero/>
                                                         </Binding.ValidationRules>
@@ -380,8 +384,8 @@
 
                                     </WrapPanel>
                                     <StackPanel Orientation="Horizontal"  >
-                                        <Button Content="Guardar"  Command="{Binding DelSaveMod}" CommandParameter="-1" />
-                                        <Button Content="Cancel"  Command="{Binding DelSelEdit}" Style="{StaticResource MaterialDesignRaisedAccentButton}" CommandParameter="0"
+                                        <Button Content="Guardar" IsDefault="True"  Command="{Binding DelSaveMod}" CommandParameter="-1" />
+                                        <Button Content="Cancel"  IsCancel="True" Command="{Binding DelSelEdit}" Style="{StaticResource MaterialDesignRaisedAccentButton}" CommandParameter="0"
                                                 Margin="10,0,0,0"/>
                                     </StackPanel>
 
@@ -418,7 +422,15 @@
                                         <CheckBox Name="CondBod" Content="Condominio" HorizontalAlignment="Left" IsChecked="{Binding Camp.Condsel}" />
                                         <ComboBox materialDesign:HintAssist.Hint="Seleccionar Edificio"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                                                   ItemsSource="{Binding Vargnrl.Edific}" SelectedValuePath="Id" DisplayMemberPath="Name" Margin="20,0,0,0"
-                                                  SelectedValue="{Binding Camp.Idedf}" Visibility="{Binding Camp.Condsel ,Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+                                                  Visibility="{Binding Camp.Condsel ,Converter={StaticResource InvertedBooleanToVisibilityConverter}}" Name="BCBoxEdi">
+                                            <ComboBox.SelectedValue>
+                                                <Binding Path="Camp.Idedf" UpdateSourceTrigger="Default">
+                                                    <Binding.ValidationRules>
+                                                        <Val:ValidacionSeleccionComb/>
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </ComboBox.SelectedValue>
+                                        </ComboBox>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="0,0,0,50">
                                         <TextBlock Text="Nombre de modelo: " />
@@ -519,7 +531,7 @@
                                             <TextBox.Text>
                                                 <Binding Path="Camp.Tamall" UpdateSourceTrigger="Default">
                                                     <Binding.ValidationRules>
-                                                        <Val:ValidacionDicimCero/>
+                                                        <Val:ValidacionDicimCero ValidationStep="RawProposedValue"/>
                                                     </Binding.ValidationRules>
                                                 </Binding>
                                             </TextBox.Text>

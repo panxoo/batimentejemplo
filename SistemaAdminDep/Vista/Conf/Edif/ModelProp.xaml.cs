@@ -84,11 +84,14 @@ namespace SistemaAdminDep.Vista.Conf.Edif
                     DTboxNumPi.GetBindingExpression(TextBox.TextProperty).UpdateSource();
                     DTboxTall.GetBindingExpression(TextBox.TextProperty).UpdateSource();
                     DTboxTamu.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                    DCBoxEdi.GetBindingExpression(ComboBox.SelectedValueProperty).UpdateSource();
+                    DCBoxTpDep.GetBindingExpression(ComboBox.SelectedValueProperty).UpdateSource();
                     break;
 
                 case 2:
                     BTboxName.GetBindingExpression(TextBox.TextProperty).UpdateSource();
                     BTboxTamall.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                    BCBoxEdi.GetBindingExpression(ComboBox.SelectedValueProperty).UpdateSource();
                     break;
 
                 case 1:

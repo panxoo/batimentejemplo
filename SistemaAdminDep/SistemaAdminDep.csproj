@@ -133,8 +133,14 @@
     <Compile Include="Diccionario\ConvertTrueToFalse.cs" />
     <Compile Include="Validacion\TextBoxDecimalRangeBehaviour.cs" />
     <Compile Include="Validacion\ValidacionFormulario.cs" />
+    <Compile Include="Vista\Conf\Edif\ConfEdef.xaml.cs">
+      <DependentUpon>ConfEdef.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vista\Conf\Edif\ModelProp.xaml.cs">
       <DependentUpon>ModelProp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Prueba.xaml.cs">
+      <DependentUpon>Prueba.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vista\Servicios\Servicios.xaml.cs">
       <DependentUpon>Servicios.xaml</DependentUpon>
@@ -195,7 +201,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Vista\Conf\Edif\ConfEdef.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Vista\Conf\Edif\ModelProp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vista\Prueba.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

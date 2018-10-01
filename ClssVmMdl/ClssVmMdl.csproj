@@ -92,6 +92,7 @@
     <Compile Include="Models\Conf\Servicios\MDTipoServicios.cs" />
     <Compile Include="Models\Dialogo\MDDialogDesicion.cs" />
     <Compile Include="Models\Dialogo\MDDialogError.cs" />
+    <Compile Include="Models\MDPrueba.cs" />
     <Compile Include="Models\Nota\MDNota.cs" />
     <Compile Include="Models\Parametros\MDParGnrlPrin.cs" />
     <Compile Include="Models\Parametros\MDVarGnrl.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="ViewModels\Dialogo\VMDialogError.cs" />
     <Compile Include="ViewModels\Nota\VMNota.cs" />
     <Compile Include="ViewModels\Sist\VMPantPrincipal.cs" />
+    <Compile Include="ViewModels\VMPrueba.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AccesoDatos\AccesoDatos.csproj">

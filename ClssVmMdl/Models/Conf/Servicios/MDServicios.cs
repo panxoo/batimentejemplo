@@ -244,7 +244,7 @@ namespace ClssVmMdl.Models.Conf.Servicios
             }
             CostUso = false;
             Costfj = false;
-            IdTpsrv = idMinTp;
+            IdTpsrv = -1;
             UpdtAct = false;
             IdDelt = new int();
             Idsrv = new int();
