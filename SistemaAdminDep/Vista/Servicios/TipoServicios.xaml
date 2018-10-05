@@ -36,20 +36,7 @@
             <Style BasedOn="{StaticResource MaterialDesignCheckBox}" TargetType="{x:Type CheckBox}">
                 <Setter Property="Margin" Value="0,0,10,10"/>
             </Style>
-
-            <Style TargetType="{x:Type DataGridColumnHeader}"   BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}" x:Key="sdas">
-                <Setter Property="HorizontalAlignment" Value="Right" />
-                <Setter Property="ContentTemplate">
-                    <Setter.Value>
-                        <DataTemplate>
-                            <TextBlock TextWrapping="Wrap" Text="{Binding}" TextAlignment="Right" />
-                        </DataTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
-
-
+        
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid  Background="{StaticResource test}">
@@ -71,10 +58,7 @@
 
                     <DataGrid ItemsSource="{Binding Camp.DtTpSrv}" ScrollViewer.VerticalScrollBarVisibility="Auto" CanUserAddRows="False" 
                                   AutoGenerateColumns="False" IsReadOnly="True" HorizontalScrollBarVisibility="Visible" 
-                                  MaxHeight="{Binding Camp.AltGrid}" IsEnabled="{Binding Camp.ModAdd, Converter={StaticResource ConvertFT}}" 
-                                materialDesign:DataGridAssist.CellPadding="13 8 8 8"
-  materialDesign:DataGridAssist.ColumnHeaderPadding="8"
-                              >
+                                  MaxHeight="{Binding Camp.AltGrid}" IsEnabled="{Binding Camp.ModAdd, Converter={StaticResource ConvertFT}}" >
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Header="">
                                 <DataGridTemplateColumn.CellTemplate>
@@ -112,17 +96,15 @@
                             </DataGridTemplateColumn>
                             <DataGridTextColumn Header="Servicio" Binding="{Binding Path=Name}"/>
                             <DataGridTextColumn Header="Cobro" Binding="{Binding Path=Cob}"/>
-                            <DataGridCheckBoxColumn Header="Cobro en Gastos Comunes" Binding="{Binding Path=CobGC}" ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"/>
-                            <DataGridCheckBoxColumn Header="Reserva" Binding="{Binding Path=RqrSvrSc}" ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"/>
-                            <DataGridCheckBoxColumn Header="Requiere Reserva con Documento" Binding="{Binding Path=RqRsrv}" 
-                                                    ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}" Width="150" 
-                                                    HeaderStyle="{StaticResource sdas}"/>
-                            <DataGridCheckBoxColumn Header="Reserva por Checke" Binding="{Binding Path=ResDoc}" ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"/>
-                            <DataGridCheckBoxColumn Header="Reserva por Efectivo" Binding="{Binding Path=ResEfc}" ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"/>
-                            <DataGridCheckBoxColumn Header="Reserva por Transferencia" Binding="{Binding Path=ResTra}" ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"/>
-                            <DataGridCheckBoxColumn Header="Reserva Pago Total" Binding="{Binding Path=ResCtt}" ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"/>
+                            <DataGridCheckBoxColumn Header="Cobro en Gastos Comunes" Binding="{Binding Path=CobGC}"/>
+                            <DataGridCheckBoxColumn Header="Reserva" Binding="{Binding Path=RqrSvrSc}"/>
+                            <DataGridCheckBoxColumn Header="Requiere Reserva con Documento" Binding="{Binding Path=RqRsrv}"/>
+                            <DataGridCheckBoxColumn Header="Reserva por Checke" Binding="{Binding Path=ResDoc}"/>
+                            <DataGridCheckBoxColumn Header="Reserva por Efectivo" Binding="{Binding Path=ResEfc}"/>
+                            <DataGridCheckBoxColumn Header="Reserva por Transferencia" Binding="{Binding Path=ResTra}"/>
+                            <DataGridCheckBoxColumn Header="Reserva Pago Total" Binding="{Binding Path=ResCtt}"/>
                             <DataGridTextColumn Header="Monto Reserva Parcial" Binding="{Binding Path=ResCMn}"/>
-                            <DataGridCheckBoxColumn Header="Requiere Garantia" Binding="{Binding Path=RqGaran}" ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"/>
+                            <DataGridCheckBoxColumn Header="Requiere Garantia" Binding="{Binding Path=RqGaran}"/>
                             <DataGridTextColumn Header="Monto Garantia" Binding="{Binding Path=GrMont}"/>
                         </DataGrid.Columns>
                     </DataGrid>

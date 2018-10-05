@@ -24,7 +24,7 @@ namespace ClssVmMdl.Calling
             return Dt;
         }
 
-        public string TPSV_SaveTpSrv(int cond, string usr, string nom, bool rqcob, int? valor, bool rqgr, int valgr, bool rqgc, bool rqrsv,
+        public string TPSV_SaveTpSrv(int cond, string usr, string nom, bool rqcob, double valor, bool rqgr, int valgr, bool rqgc, bool rqrsv,
             bool rsvvaltot, int rsvval, bool rsvche, bool rsvefe, bool rsvtra)
         {
 
@@ -34,7 +34,7 @@ namespace ClssVmMdl.Calling
             return Resp;
         }
 
-        public string TPSV_SaveTpSrv(int idSrv, int cond, string usr, string nom, bool rqcob, int? valor, bool rqgr, int valgr, bool rqgc, bool rqrsv,
+        public string TPSV_SaveTpSrv(int idSrv, int cond, string usr, string nom, bool rqcob, double valor, bool rqgr, int valgr, bool rqgc, bool rqrsv,
           bool rsvvaltot, int rsvval, bool rsvche, bool rsvefe, bool rsvtra)
         {
 
