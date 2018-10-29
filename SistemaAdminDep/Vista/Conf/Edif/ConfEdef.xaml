@@ -168,6 +168,49 @@
                             </DataGrid>
 
                         </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Margin="20">
+
+                            <StackPanel Margin="0,0,10,0" Orientation="Horizontal">
+                              <TextBlock Text="Nombre Edificio:" Margin="0,0,10,0"/>  
+                              <TextBox Text="{Binding Camp.Enom}" Width="200"/>
+                            </StackPanel>
+
+                            <WrapPanel Margin="0,0,0,15">
+                                <TextBox materialDesign:HintAssist.Hint="Identificador Edificio"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         Text="{Binding Camp.IdNomEdf}" Width="120" Margin="0,0,10,0">
+                             
+                                <TextBox materialDesign:HintAssist.Hint="Numero Edificio"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         Text="{Binding Camp.NumEdf}" Width="120" Margin="0,0,10,0">
+                             
+                                <TextBox materialDesign:HintAssist.Hint="Telefono Edificio"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         Text="{Binding Camp.ETel}" Width="120" Margin="0,0,10,0">
+                             
+                                <TextBox materialDesign:HintAssist.Hint="Telefono Edificio 2"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         Text="{Binding Camp.ETel2}" Width="120" Margin="0,0,10,0">
+
+                                <TextBox materialDesign:HintAssist.Hint="Correo Edificio"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         Text="{Binding Camp.ECorreo}" Width="120" Margin="0,0,10,0">
+
+                                <TextBox materialDesign:HintAssist.Hint="Correo Edificio 2"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         Text="{Binding Camp.ECorreo2}" Width="120" Margin="0,0,10,0">
+
+                                <TextBox materialDesign:HintAssist.Hint="Pisos"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         Text="{Binding Camp.Pisos}" Width="120" Margin="0,0,10,0">
+
+                                <TextBox materialDesign:HintAssist.Hint="Pisos Subterranio"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         Text="{Binding Camp.SPisos}" Width="120" Margin="0,0,10,0">
+                            </WrapPanel>
+
+                            <StackPanel>
+                                <Button Content="Guardar"  Command="{Binding DelSavUpdt}" CommandParameter="1"/>
+                                <Button Content="Cancel"  Command="{Binding DelCanMod}" CommandParameter="1" Margin="10,0,0,0" 
+                                        Style="{StaticResource MaterialDesignRaisedAccentButton}" />
+                            </StackPanel>
+
+
+                        
+                        </StackPanel>
                         
                     </GroupBox>
 
