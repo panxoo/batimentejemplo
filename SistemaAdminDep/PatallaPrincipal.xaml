@@ -7,6 +7,7 @@
         xmlns:Serv="clr-namespace:SistemaAdminDep.Vista.Servicios"
         
         xmlns:Pant="clr-namespace:SistemaAdminDep.Vista"
+        xmlns:edfi="clr-namespace:SistemaAdminDep.Vista.Conf.Edif"
         
         xmlns:ks="clr-namespace:SistemaAdminDep.Vista.Sistema"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -186,7 +187,7 @@
 
                     </TabItem>
                         <TabItem Header=" sadasd">
-                            <Pant:Prueba />
+                            <edfi:ConfEdef />
 
                         </TabItem>
                     </TabControl>

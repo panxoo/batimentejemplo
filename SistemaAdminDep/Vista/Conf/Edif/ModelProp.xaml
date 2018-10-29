@@ -273,7 +273,7 @@
                                     <StackPanel Orientation="Horizontal"   Margin="0,0,0,30">
 
 
-                                        <ComboBox materialDesign:HintAssist.Hint="Seleccionar Edificio"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"   
+                                        <ComboBox materialDesign:HintAssist.Hint="Edificio"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"   
                                                   ItemsSource="{Binding Vargnrl.Edific}" SelectedValuePath="Id" DisplayMemberPath="Name" Margin="0,0,20,0"
                                                   Name="DCBoxEdi">
                                             <ComboBox.SelectedValue>
@@ -285,7 +285,7 @@
                                             </ComboBox.SelectedValue>
                                         </ComboBox>
 
-                                        <ComboBox materialDesign:HintAssist.Hint="Seleccionar Tipo Edificio"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                        <ComboBox materialDesign:HintAssist.Hint="Tipo Edificio"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                                                   ItemsSource="{Binding Vargnrl.Tpdep}" SelectedValuePath="Id" DisplayMemberPath="Name" 
                                                   Name="DCBoxTpDep">
                                             <ComboBox.SelectedValue>

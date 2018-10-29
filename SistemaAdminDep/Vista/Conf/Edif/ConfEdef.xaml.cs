@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ClssVmMdl.ViewModels.Conf.Edif;
 
 namespace SistemaAdminDep.Vista.Conf.Edif
 {
@@ -22,7 +23,11 @@ namespace SistemaAdminDep.Vista.Conf.Edif
     {
         public ConfEdef()
         {
+            VM = new VMConfEdef();
+            DataContext = VM;
             InitializeComponent();
         }
+
+        private VMConfEdef VM;
     }
 }

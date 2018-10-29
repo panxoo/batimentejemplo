@@ -10,176 +10,179 @@ namespace ClssVmMdl.Models.Conf.Edif
 
         public MDConfEdef()
         {
-            _eidDep = -1;
-            selgnrl = false;
-            moddep = false;
+            //selgnrl = false;
+            //moddep = false;
+            Eupdt = false;
+            Cupdt = false;
             val = new ValTam();
-        } 
+        }
 
         private ValTam val;
 
-        private string _panam;
-        public string panam
+        //private bool selgnrl;
+        //public bool Selgnrl
+        //{
+        //    get { return selgnrl; }
+        //    set { SetProperty(ref selgnrl, value); }
+        //}
+
+        private bool cupdt;
+        public bool Cupdt
         {
-            get { return _panam; }
-            set { SetProperty(ref _panam, value); }
+            get => cupdt;
+            set
+            {
+                SetProperty(ref cupdt, value);
+                if (cupdt == false)
+                    LimpCond();
+            }
         }
 
-        private string _renam;
-        public string renam
+        private bool eupdt;
+        public bool Eupdt
         {
-            get { return _renam; }
-            set { SetProperty(ref _renam, value); }
+            get
+            {
+                if (eupdt == false)
+                {
+                    IdEdf = new int();
+                    LimpEdf();
+                }
+                return eupdt;
+            }
+            set => SetProperty(ref eupdt, value);
         }
 
-        private bool selgnrl;
-        public bool Selgnrl
+        private int idEdf;
+        public int IdEdf
         {
-            get { return selgnrl; }
-            set { SetProperty(ref selgnrl, value); }
+            get => idEdf;
+            set => SetProperty(ref idEdf, value);
         }
 
-        private bool moddep;
-        public bool Moddep
-        {
-            get { return moddep; }
-            set { SetProperty(ref moddep, value); }
-        }
+
 
         #region Condominio
 
-        private ArrayList dtcond;
-        public ArrayList Dtcond
-        {
-            get => dtcond;
-            set => SetProperty(ref dtcond, value);
-        }
-
-        private string _cnom;
-        public string cnom
+        private string cnom;
+        public string Cnom
         {
             get
             {
-                _cnom = val.LimitStrg(_cnom, 500);
-                return _cnom;
+                cnom = val.LimitStrg(cnom, 500);
+                return cnom;
             }
-            set { SetProperty(ref _cnom, value); }
+            set => SetProperty(ref cnom, value);
         }
 
-        private int _cIdPais;
-        public int cIdPais
+        private int idPais;
+        public int IdPais
         {
-            get { return _cIdPais; }
-            set { SetProperty(ref _cIdPais, value); }
+            get => idPais;
+            set => SetProperty(ref idPais, value);
         }
 
-        private int _cIdRegion;
-        public int cIdRegion
+        private int idRegion;
+        public int IdRegion
         {
-            get { return _cIdRegion; }
-            set { SetProperty(ref _cIdRegion, value); }
+            get => idRegion;
+            set => SetProperty(ref idRegion, value);
         }
 
-        private string _ccity;
-        public string ccity
+        private string city;
+        public string City
         {
             get
             {
-                _ccity = val.LimitStrg(_ccity, 100);
-                return _ccity;
+                city = val.LimitStrg(city, 100);
+                return city;
             }
-            set { SetProperty(ref _ccity, value); }
+            set => SetProperty(ref city, value);
         }
 
-        private string _ccalle;
-        public string ccalle
+        private string calle;
+        public string Calle
         {
             get
             {
-                _ccalle = val.LimitStrg(_ccalle, 500);
-                return _ccalle;
+                calle = val.LimitStrg(calle, 500);
+                return calle;
             }
-            set { SetProperty(ref _ccalle, value); }
+            set => SetProperty(ref calle, value);
         }
 
-        private string _cNumDir;
-        public string cNumDir
+        private string numDir;
+        public string NumDir
         {
             get
             {
-                _cNumDir = val.LimitStrg(_cNumDir, 50);
-                return _cNumDir;
+                numDir = val.LimitStrg(numDir, 50);
+                return numDir;
             }
-            set { SetProperty(ref _cNumDir, value); }
+            set => SetProperty(ref numDir, value);
         }
 
-        private string _cpostal;
-        public string cpostal
+        private string postal;
+        public string Postal
         {
             get
             {
-                _cpostal = val.LimitStrg(_cpostal, 50);
-                return _cpostal;
+                postal = val.LimitStrg(postal, 50);
+                return postal;
             }
-            set { SetProperty(ref _cpostal, value); }
+            set => SetProperty(ref postal, value);
         }
 
-        private string _ctel;
-        public string ctel
+        private string ctel;
+        public string CTel
         {
             get
             {
-                _ctel = val.LimitStrg(_ctel, 15);
-                return _ctel;
+                ctel = val.LimitStrg(ctel, 15);
+                return ctel;
             }
-            set { SetProperty(ref _ctel, value); }
+            set => SetProperty(ref ctel, value);
         }
 
-        private string _ctel2;
-        public string ctel2
+        private string ctel2;
+        public string CTel2
         {
             get
             {
-                _ctel2 = val.LimitStrg(_ctel2, 15);
-                return _ctel2;
+                ctel2 = val.LimitStrg(ctel2, 15);
+                return ctel2;
             }
-            set { SetProperty(ref _ctel2, value); }
+            set => SetProperty(ref ctel2, value);
         }
 
-        private string _ccorreo;
-        public string ccorreo
+        private string ccorreo;
+        public string CCorreo
         {
             get
             {
-                _ccorreo = val.LimitStrg(_ccorreo, 50);
-                return _ccorreo;
+                ccorreo = val.LimitStrg(ccorreo, 50);
+                return ccorreo;
             }
-            set { SetProperty(ref _ccorreo, value); }
+            set => SetProperty(ref ccorreo, value);
         }
 
-        private string _ccorreo2;
-        public string ccorreo2
+        private string ccorreo2;
+        public string CCorreo2
         {
             get
             {
-                _ccorreo2 = val.LimitStrg(_ccorreo2, 50);
-                return _ccorreo2;
+                ccorreo2 = val.LimitStrg(ccorreo2, 50);
+                return ccorreo2;
             }
-            set { SetProperty(ref _ccorreo2, value); }
+            set => SetProperty(ref ccorreo2, value);
         }
 
-        private bool _cupdt;
-        public bool cupdt
-        {
-            get { return _cupdt; }
-            set { SetProperty(ref _cupdt, value); }
-        }
 
-        private bool _cmultied;
-        public bool cmultied
+        private bool multiEd;
+        public bool MultiEd
         {
-            get { return _cmultied; }
-            set { SetProperty(ref _cmultied, value); }
+            get => multiEd;
+            set => SetProperty(ref multiEd, value);
         }
 
         #endregion
@@ -188,112 +191,143 @@ namespace ClssVmMdl.Models.Conf.Edif
 
         #region Edificio
 
-        private DataTable _eedif;
-        public DataTable eedif
+        private DataTable edif;
+        public DataTable Edif
         {
-            get { return _eedif; }
-            set { SetProperty(ref _eedif, value); }
+            get => edif;
+            set => SetProperty(ref edif, value);
         }
 
-        private int _eidDep;
-        public int eidDep
-        {
-            get { return _eidDep; }
-            set { SetProperty(ref _eidDep, value); }
-        }
-
-        private string _enom;
-        public string enom
+        private string enom;
+        public string Enom
         {
             get
             {
-                _enom = val.LimitStrg(_enom, 500);
-                return _enom;
+                enom = val.LimitStrg(enom, 500);
+                return enom;
             }
-            set { SetProperty(ref _enom, value); }
+            set => SetProperty(ref cnom, value);
         }
 
-        private string _eidnom;
-        public string eidnom
+        private string idNomEdf;
+        public string IdNomEdf
         {
             get
             {
-                _eidnom = val.LimitStrg(_eidnom, 50);
-                return _eidnom;
+                idNomEdf = val.LimitStrg(idNomEdf, 50);
+                return idNomEdf;
             }
-            set { SetProperty(ref _eidnom, value); }
+            set => SetProperty(ref idNomEdf, value);
         }
 
-        private string _enumd;
-        public string enumd
+        private string numEdf;
+        public string NumEdf
         {
             get
             {
-                _enumd = val.LimitStrg(_enumd, 10);
-                return _enumd;
+                numEdf = val.LimitStrg(numEdf, 10);
+                return numEdf;
             }
-            set { SetProperty(ref _enumd, value); }
+            set => SetProperty(ref numEdf, value);
         }
 
-        private string _etel;
-        public string etel
+        private string etel;
+        public string ETel
         {
             get
             {
-                _etel = val.LimitStrg(_etel, 15);
-                return _etel;
+                etel = val.LimitStrg(etel, 15);
+                return etel;
             }
-            set { SetProperty(ref _etel, value); }
+            set => SetProperty(ref etel, value);
         }
 
-        private string _etel2;
-        public string etel2
+        private string etel2;
+        public string ETel2
         {
             get
             {
-                _etel2 = val.LimitStrg(_etel2, 15);
-                return _etel2;
+                etel2 = val.LimitStrg(etel2, 15);
+                return etel2;
             }
-            set { SetProperty(ref _etel2, value); }
+            set => SetProperty(ref etel2, value);
         }
 
-        private string _ecor;
-        public string ecor
+        private string ecorreo;
+        public string ECorreo
         {
             get
             {
-                _ecor = val.LimitStrg(_ecor, 50);
-                return _ecor;
+                ecorreo = val.LimitStrg(ecorreo, 50);
+                return ecorreo;
             }
-            set { SetProperty(ref _ecor, value); }
+            set => SetProperty(ref ecorreo, value);
         }
 
-        private string _ecor2;
-        public string ecor2
+        private string ecorreo2;
+        public string ECorreo2
         {
             get
             {
-                _ecor2 = val.LimitStrg(_ecor2, 50);
-                return _ecor2;
+                ecorreo2 = val.LimitStrg(ecorreo2, 50);
+                return ecorreo2;
             }
-            set { SetProperty(ref _ecor2, value); }
+            set => SetProperty(ref ecorreo2, value);
         }
 
-        private int _espiso;
-        public int espiso
+        private int spisos;
+        public int Spisos
         {
-            get { return _espiso; }
-            set { SetProperty(ref _espiso, value); }
+            get => spisos;
+            set => SetProperty(ref spisos, value);
         }
 
-        private int _episo;
-        public int episo
+        private int pisos;
+        public int Pisos
         {
-            get { return _episo; }
-            set { SetProperty(ref _episo, value); }
+            get => pisos;
+            set => SetProperty(ref pisos, value);
         }
 
 
+
+        #endregion
+
+        #region Metodo
+
+        public void LimpCond()
+        {
+            Cnom = "";
+            MultiEd = false;
+
+            Calle = "";
+            NumDir = "";
+            City = "";
+            IdPais = -1;
+            IdRegion = -1;
+            Postal = "";
+
+            CTel = "";
+            CTel2 = "";
+            CCorreo = "";
+            CCorreo2 = "";
+
+        }
+
+        public void LimpEdf()
+        {
+            Enom = "";
+            IdNomEdf = "";
+            NumEdf = "";
+
+            ETel = "";
+            ETel2 = "";
+            ECorreo = "";
+            ECorreo2 = "";
+
+            Pisos = 0;
+            Spisos = 0;
+        }
 
         #endregion
     }

@@ -26,18 +26,18 @@ namespace ClssVmMdl.Models.Parametros
             set { SetProperty(ref tpdep, value); }
         }
 
-        private List<ColIdName> _pais;
-        public List<ColIdName> pais
+        private List<ColIdName> pais;
+        public List<ColIdName> Pais
         {
-            get { return _pais; }
-            set { SetProperty(ref _pais, value); }
+            get => pais; 
+            set => SetProperty(ref pais, value); 
         }
 
-        private List<ColIdName> _region;
-        public List<ColIdName> region
+        private List<ColIdName> region;
+        public List<ColIdName> Region
         {
-            get { return _region; }
-            set { SetProperty(ref _region, value); }
+            get => region; 
+            set => SetProperty(ref region, value); 
         }
 
         private List<ColIdName> edific;

@@ -20,7 +20,7 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
         public VMConfEdef()
         {
             mod = "cfed";
-            _camp = new MDConfEdef();
+            camp = new MDConfEdef();
             vargnrl = new MDVarGnrl();
             calvar = new CallVariables(mod);
             caldep = new CallDep(mod);
@@ -33,13 +33,12 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
 
 
             DelSelectionPais = new DelegateCommand(ExSelectionPais);
-            DelActUpdtC = new DelegateCommand(ExActUpdate);
-            DelCanUpdtC = new DelegateCommand(ExCanUpdate);
-            DelExeUpdtC = new DelegateCommand(ExUpdate);
+            DelActUpdt = new DelegateCommand(ExActUpdt);
+            DelCanMod = new DelegateCommand<object>(ExCanMod);
+            DelSavUpdt = new DelegateCommand<object>(ExcSavUpdt);
 
-            //DelViewDepa = new DelegateCommand<object>(ExCargEdif);
-            DelCanDepa = new DelegateCommand(ExCanEdifi);
-            DelUpdDep = new DelegateCommand<object>(ExCargUpdateEd);
+
+            DelActUpdtDep = new DelegateCommand<object>(ExActUpdtEd);
             DelSvDepa = new DelegateCommand(ExSvEdificio);
             DelAddDep = new DelegateCommand(ExAddEdificio);
 
@@ -58,29 +57,29 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
 
         public InteractionRequest<MDEditPisoEdificio> IntPisoPopUp { get; private set; }
 
-        private MDConfEdef _camp;
-        public MDConfEdef camp
+        private MDConfEdef camp;
+        public MDConfEdef Camp
         {
-            get { return _camp; }
-            set { SetProperty(ref _camp, value); }
+            get => camp;
+            set => SetProperty(ref camp, value);
         }
 
         private MDVarGnrl vargnrl;
         public MDVarGnrl Vargnrl
         {
-            get { return vargnrl; }
-            set { SetProperty(ref vargnrl, value); }
+            get => vargnrl;
+            set => SetProperty(ref vargnrl, value);
         }
 
         public DelegateCommand DelSelectionPais { get; set; }
-        public DelegateCommand DelActUpdtC { get; set; }
-        public DelegateCommand DelCanUpdtC { get; set; }
-        public DelegateCommand DelExeUpdtC { get; set; }
+        public DelegateCommand DelActUpdt { get; set; }
+        public DelegateCommand<object> DelSavUpdt { get; set; }
 
-        public DelegateCommand DelCanDepa { get; set; }
-        public DelegateCommand DelSvDepa { get; set; }
-        public DelegateCommand<object> DelUpdDep { get; set; }
+        public DelegateCommand<object> DelCanMod { get; set; }
+
+        public DelegateCommand<object> DelActUpdtDep { get; set; }
         public DelegateCommand DelAddDep { get; set; }
+        public DelegateCommand DelSvDepa { get; set; }
 
         public DelegateCommand<object[]> DelPisoPopUp { get; set; }
         public DelegateCommand DelCloseMsgError { get; set; }
@@ -91,60 +90,44 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
 
         #region Execute
 
-        private void ExActUpdate()
+        private void ExActUpdt() => camp.Cupdt = true;
+
+        private void ExCanMod(object parm)
         {
-            _camp.cupdt = false;
+            if (Convert.ToInt16(parm) == 0)
+            {
+                camp.Cupdt = false;
+                CallCondominio();
+            }
+            else
+            {
+                camp.Eupdt = false;
+            }
         }
 
-        private void ExCanUpdate()
+        private void ExActUpdtEd(object Edef)
         {
-            CargaCond();
+            camp.Eupdt = true;
+            //_camp.Selgnrl = true;
+            CargEdif((int)Edef);
         }
-
-        private void ExUpdate()
-        {
-            AlmacenarCond();
-        }
-
-
-
-        private void ExCanEdifi()
-        {
-            LimpEdif();
-            _camp.Moddep = false;
-            _camp.eidDep = -1;
-            _camp.Selgnrl = false;
-        }
-
-        //private void ExCargEdif(object edef)
-        //{
-        //    CargEdif((int)edef);
-        //    _camp.Moddep = true;
-        //}
-
-        private void ExCargUpdateEd(object Edef)
-        {
-            _camp.Moddep = true;
-            _camp.Selgnrl = true;
-
-            if (_camp.eidDep != (int)Edef || _camp.eidDep == -1)
-                CargEdif((int)Edef);
-        }
+        
+        private void ExcSavUpdt(object parm) => AlmacenarCond((int)parm);
 
         private void ExSvEdificio()
         {
-            SaveEdf();
+            AlmacenarEdf();
         }
 
         private void ExAddEdificio()
         {
-            _camp.Moddep = true;
-            _camp.Selgnrl = true;
+            //_camp.Moddep = true;
+
         }
 
         private void ExSelectionPais()
         {
-            CargaReg(_camp.cIdPais, 0);
+            CargaReg(camp.IdPais, 0);
         }
 
         private void ExCloseMsgError()
@@ -161,93 +144,82 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
 
         private void CargaInicial()
         {
-
-            vargnrl.pais = calvar.PRGN_PaisReg(0, 0);
+            vargnrl.Pais = calvar.PRGN_PaisReg(0, 0);
             CallCondominio();
-
-            // _camp.cupdt = true;
-
-
         }
 
         private void CallCondominio()
         {
-            _camp.Dtcond = new ArrayList();
-            _camp.Dtcond = caldep.CFED_SelCond(ParSistem.IdCond);
-            CargaCond();
+            ArrayList dtcond = new ArrayList();
+            dtcond = caldep.CFED_SelCond(ParSistem.IdCond);
+
+            camp.Cnom = dtcond[0].ToString();
+            camp.IdPais = (int)dtcond[1];
+
+            CargaReg((int)dtcond[1], (int)dtcond[2]);
+
+            camp.City = dtcond[3].ToString();
+            camp.Calle = dtcond[4].ToString();
+            camp.NumDir = dtcond[5].ToString();
+            camp.Postal = dtcond[6].ToString();
+            camp.CTel = dtcond[7].ToString();
+            camp.CTel2 = dtcond[8].ToString();
+            camp.CCorreo = dtcond[9].ToString();
+            camp.CCorreo2 = dtcond[10].ToString();
+            camp.MultiEd = Convert.ToBoolean(dtcond[11]);
+
+            CargEdifGrd();
         }
 
-        private void CargaCond()
-        {
-            _camp.cnom = _camp.Dtcond[0].ToString();
-            _camp.cIdPais = (int)_camp.Dtcond[1];
-
-            CargaReg((int)_camp.Dtcond[1], (int)_camp.Dtcond[2]);
-
-            _camp.ccity = _camp.Dtcond[3].ToString();
-            _camp.ccalle = _camp.Dtcond[4].ToString();
-            _camp.cNumDir = _camp.Dtcond[5].ToString();
-            _camp.cpostal = _camp.Dtcond[6].ToString();
-            _camp.ctel = _camp.Dtcond[7].ToString();
-            _camp.ctel2 = _camp.Dtcond[8].ToString();
-            _camp.ccorreo = _camp.Dtcond[9].ToString();
-            _camp.ccorreo2 = _camp.Dtcond[10].ToString();
-            _camp.cmultied = Convert.ToBoolean(_camp.Dtcond[11]);
-
-
-            DisableModCond();
-
-            if (_camp.cmultied == true)
-                CargEdifGrd();
-            else
-                _camp.eedif = new System.Data.DataTable();
-
-        }
-
-        private void DisableModCond()
-        {
-
-            _camp.panam = (from p in vargnrl.pais
-                           where p.Id == _camp.cIdPais
-                           select p.Name.ToString()).First();
-
-            _camp.renam = (from p in vargnrl.region
-                           where p.Id == _camp.cIdRegion
-                           select p.Name.ToString()).First();
-
-            _camp.cupdt = true;
-
-        }
 
         private void CargaReg(int idpais, int idreg)
         {
-            _camp.cIdRegion = new int();
-            vargnrl.region = new List<ColIdName>();
+            camp.IdRegion = new int();
+            vargnrl.Region = new List<ColIdName>();
 
-            vargnrl.region = calvar.PRGN_PaisReg(1, idpais);
+            vargnrl.Region = calvar.PRGN_PaisReg(1, idpais);
 
-            if (vargnrl.region.Exists(x => x.Id == idreg))
-                _camp.cIdRegion = idreg;
+            if (vargnrl.Region.Exists(x => x.Id == idreg))
+                camp.IdRegion = idreg;
             else
-                _camp.cIdRegion = vargnrl.region[0].Id;
+                camp.IdRegion = vargnrl.Region[0].Id;
         }
 
-        private void AlmacenarCond()
+        private void CargEdif(int ed)
+        {
+            ArrayList lst = caldep.CFED_SelEdef(ed, ParSistem.IdCond);
+
+            if (lst.Count > 0)
+            {
+                camp.Enom = lst[0].ToString();
+                camp.IdNomEdf = lst[1].ToString();
+                camp.NumEdf = lst[2].ToString();
+                camp.ETel = lst[3].ToString();
+                camp.ETel2 = lst[4].ToString();
+                camp.ECorreo = lst[5].ToString();
+                camp.ECorreo2 = lst[6].ToString();
+                camp.Pisos = Convert.ToInt32(lst[7]);
+                camp.Spisos = Convert.ToInt32(lst[8]);
+                camp.IdEdf = ed;
+            }
+        }
+
+        private void AlmacenarCond(int tp)
         {
             string a;
 
-            if (vali.EmptyStrg(new List<string>(new string[] {_camp.cnom,_camp.ccity,_camp.ccalle,_camp.cNumDir,_camp.cpostal,
-                _camp.ctel,_camp.ccorreo})))
-            {
-                a = caldep.CFED_SavCond(_camp.cnom.Trim(), _camp.cIdPais, _camp.cIdRegion, _camp.ccity.Trim(), _camp.ccalle.Trim(),
-                    _camp.cNumDir.Trim(), _camp.cpostal.Trim(), _camp.ctel.Trim(), _camp.ctel2.Trim(), _camp.ccorreo.Trim(),
-                    _camp.ccorreo2.Trim(), Convert.ToInt16(_camp.cmultied), ParSistem.IdCond);
-            }
-            else
-            {
-                a = "2";
-            }
-            msgproc(a, 0);
+            //if (vali.EmptyStrg(new List<string>(new string[] {_camp.cnom,_camp.ccity,_camp.ccalle,_camp.cNumDir,_camp.cpostal,
+            //    _camp.ctel,_camp.ccorreo})))
+            //{
+            //    a = caldep.CFED_SavCond(_camp.cnom.Trim(), _camp.cIdPais, _camp.cIdRegion, _camp.ccity.Trim(), _camp.ccalle.Trim(),
+            //        _camp.cNumDir.Trim(), _camp.cpostal.Trim(), _camp.ctel.Trim(), _camp.ctel2.Trim(), _camp.ccorreo.Trim(),
+            //        _camp.ccorreo2.Trim(), Convert.ToInt16(_camp.cmultied), ParSistem.IdCond);
+            //}
+            //else
+            //{
+            //    a = "2";
+            //}
+            //msgproc(a, 0);
         }
 
         #endregion
@@ -257,60 +229,30 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
 
         private void CargEdifGrd()
         {
-            camp.eedif = caldep.CFED_DatosEdificios(ParSistem.IdCond);
+            camp.Edif = caldep.CFED_DatosEdificios(ParSistem.IdCond);
         }
 
-        private void CargEdif(int ed)
+
+
+
+        private void AlmacenarEdf()
         {
-            ArrayList lst = caldep.CFED_SelEdef(ed, ParSistem.IdCond);
+            string a = "";
 
-            if (lst.Count > 0)
-            {
-                _camp.enom = lst[0].ToString();
-                _camp.eidnom = lst[1].ToString();
-                _camp.enumd = lst[2].ToString();
-                _camp.etel = lst[3].ToString();
-                _camp.etel2 = lst[4].ToString();
-                _camp.ecor = lst[5].ToString();
-                _camp.ecor2 = lst[6].ToString();
-                _camp.episo = Convert.ToInt32(lst[7]);
-                _camp.espiso = Convert.ToInt32(lst[8]);
-                _camp.eidDep = (int)lst[9];
-            }
-        }
-
-        private void LimpEdif()
-        {
-            _camp.enom = "";
-            _camp.eidnom = "";
-            _camp.enumd = "";
-            _camp.etel = "";
-            _camp.etel2 = "";
-            _camp.ecor = "";
-            _camp.ecor2 = "";
-            _camp.episo = 0;
-            _camp.espiso = 0;
-            _camp.eidDep = -1;
-        }
-
-        private void SaveEdf()
-        {
-            string a;
-
-            if (vali.EmptyStrg(new List<string>(new string[] { _camp.enom, _camp.eidnom, _camp.enumd })) &&
-                (vali.NumMayCero(new List<int>(new int[] { _camp.episo }))) && (vali.NumCeroMay(new List<int>(new int[] { _camp.espiso }))))
-            {
-                if (_camp.eidDep == -1)
-                    a = caldep.CFED_SavDep(ParSistem.IdCond, _camp.enom.Trim(), _camp.eidnom.Trim(), _camp.enumd.Trim(), _camp.etel.Trim(),
-                        _camp.etel2.Trim(), _camp.ecor.Trim(), _camp.ecor2.Trim(), _camp.episo, _camp.espiso);
-                else
-                    a = caldep.CFED_SavDep(ParSistem.IdCond, _camp.enom.Trim(), _camp.eidnom.Trim(), _camp.enumd.Trim(), _camp.etel.Trim(),
-                        _camp.etel2.Trim(), _camp.ecor.Trim(), _camp.ecor2.Trim(), _camp.episo, _camp.espiso, _camp.eidDep);
-            }
-            else
-            {
-                a = "2";
-            }
+            //if (vali.EmptyStrg(new List<string>(new string[] { _camp.enom, _camp.eidnom, _camp.enumd })) &&
+            //    (vali.NumMayCero(new List<int>(new int[] { _camp.episo }))) && (vali.NumCeroMay(new List<int>(new int[] { _camp.espiso }))))
+            //{
+            //    if (_camp.eidDep == -1)
+            //        a = caldep.CFED_SavDep(ParSistem.IdCond, _camp.enom.Trim(), _camp.eidnom.Trim(), _camp.enumd.Trim(), _camp.etel.Trim(),
+            //            _camp.etel2.Trim(), _camp.ecor.Trim(), _camp.ecor2.Trim(), _camp.episo, _camp.espiso);
+            //    else
+            //        a = caldep.CFED_SavDep(ParSistem.IdCond, _camp.enom.Trim(), _camp.eidnom.Trim(), _camp.enumd.Trim(), _camp.etel.Trim(),
+            //            _camp.etel2.Trim(), _camp.ecor.Trim(), _camp.ecor2.Trim(), _camp.episo, _camp.espiso, _camp.eidDep);
+            //}
+            //else
+            //{
+            //    a = "2";
+            //}
 
             msgproc(a, 1);
 
@@ -332,9 +274,8 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
                 }
                 else
                 {
-                    LimpEdif();
-                    _camp.Moddep = false;
-                    _camp.Selgnrl = false;
+                    //_camp.Moddep = false;
+                    //_camp.Selgnrl = false;
                     CargEdifGrd();
                 }
             }
