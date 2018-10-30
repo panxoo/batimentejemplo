@@ -186,10 +186,10 @@
 
 
                     </TabItem>
-                        <TabItem Header=" sadasd">
+                        <!--<TabItem Header=" sadasd">
                             <edfi:ConfEdef />
 
-                        </TabItem>
+                        </TabItem>-->
                     </TabControl>
 
 

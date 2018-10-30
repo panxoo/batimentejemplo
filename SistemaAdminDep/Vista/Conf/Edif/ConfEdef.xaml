@@ -40,15 +40,15 @@
                 <StackPanel Orientation="Vertical" Margin="0,10,0,0">
 
                     <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" Header="Datos Condominio" Margin="0,0,0,10" >
-                            
+
                         <StackPanel Orientation="Vertical" Margin="20,5,20,5">
                             <materialDesign:Badged HorizontalAlignment="Right" Margin="0,0,0,10" Badge="{materialDesign:PackIcon Pencil}"
                                                     BadgeColorZoneMode="Accent" 
                                                    IsEnabled="{Binding Camp.Cupdt,Converter={StaticResource TrueToFalse}}">
                                 <Button Content="Editar" Command="{Binding DelActUpdt}"/>
                             </materialDesign:Badged>
- 
-                            
+
+
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                                 <TextBlock Text="Nombre del condominio :" Margin="0,0,15,0"/>
                                 <TextBox Text="{Binding Camp.Cnom}" Width="300" Margin="0,0,25,0" 
@@ -116,105 +116,119 @@
                                 <Button Content="Guardar"  Command="{Binding DelSavUpdt}" CommandParameter="0"/>
                                 <Button Content="Cancel"  Command="{Binding DelCanMod}" CommandParameter="0" Margin="10,0,0,0" 
                                         Style="{StaticResource MaterialDesignRaisedAccentButton}" />
-                                
+
                             </StackPanel>
-                            </StackPanel>
-                                                </GroupBox>
+                        </StackPanel>
+                    </GroupBox>
 
-                    <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" Header="Edificios del Condominio">
+                    <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" Header="Edificios del Condominio" Background="{DynamicResource MaterialDesignPaper}">
 
-                        <StackPanel Margin="20,5,20,5" Orientation="Vertical">
-                            <Button   Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"   ToolTip="Agregar"  materialDesign:ShadowAssist.ShadowDepth="Depth3"
-                       Command="{Binding DelAddTpSrv}" HorizontalAlignment="Right" Margin="0,0,0,5" >
-                                <materialDesign:PackIcon Kind="Plus" Height="24" Width="24" />
-                            </Button>
+                        <materialDesign:Transitioner Name="Trans" SelectedIndex="0" >
+                            <StackPanel Margin="20,1,20,5" Orientation="Vertical">
+                                <Button   Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"   ToolTip="Agregar"  materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                              Command="{Binding DelAddDep}" HorizontalAlignment="Right" Margin="0,0,0,5" >
+                                    <materialDesign:PackIcon Kind="Plus" Height="24" Width="24" />
+                                </Button>
 
-                            <DataGrid CanUserAddRows="False" IsReadOnly="True"
-                                    ItemsSource="{Binding camp.eedif}" AutoGenerateColumns="False">
-                                <DataGrid.Columns>
-                                    <DataGridTemplateColumn>
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <Button AutomationProperties.AutomationId="UpdtDep" Content="Update" Tag="Actualizar" 
+                                <DataGrid CanUserAddRows="False" IsReadOnly="True"
+                                    ItemsSource="{Binding Camp.Edif}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Button AutomationProperties.AutomationId="UpdtDep" Content="Update" Tag="Actualizar" 
                                                                 Command="{Binding DataContext.DelUpdDep,RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                                                 CommandParameter="{Binding Path=id_edf}"/>
-                                                    <Button AutomationProperties.AutomationId="PisoDep" Content="Piso"
+                                                        <Button AutomationProperties.AutomationId="PisoDep" Content="Piso"
                                                                 Command="{Binding DataContext.DelPisoPopUp,RelativeSource={RelativeSource AncestorType=DataGrid}}">
-                                                        <!--<Button.CommandParameter>
+                                                            <!--<Button.CommandParameter>
                                                             <MultiBinding Converter="{StaticResource copr}" Mode="OneWay" >
                                                                 <Binding Source="False" />
                                                                 <Binding Path="cond"/>
                                                                 <Binding Path="id_edf"/>
                                                             </MultiBinding>
                                                         </Button.CommandParameter>-->
-                                                    </Button>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                
-                                <DataGridTextColumn Header="Nombre Edificio" Binding="{Binding Path=nom_dep}" />
-                                    <DataGridTextColumn Header="Ident. edificio" Binding="{Binding Path=ident_ed}" />
-                                    <DataGridTextColumn Header="Num. Direccion" Binding="{Binding Path=num_dir}" />
-                                    <DataGridTextColumn Header="Telefono" Binding="{Binding Path=tel}" />
-                                    <DataGridTextColumn Header="Telefono 2" Binding="{Binding Path=tel2}" />
-                                    <DataGridTextColumn Header="Correo" Binding="{Binding Path=corre}" />
-                                    <DataGridTextColumn Header="Correo 2" Binding="{Binding Path=corre2}" />
-                                    <DataGridTextColumn Header="Pisos" Binding="{Binding Path=ps}" />
-                                    <DataGridTextColumn Header="Sub Pisos" Binding="{Binding Path=pss}" />
-</DataGrid.Columns>
-                                  
-                            </DataGrid>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
 
-                        </StackPanel>
+                                        <DataGridTextColumn Header="Nombre Edificio" Binding="{Binding Path=nom_dep}" />
+                                        <DataGridTextColumn Header="Ident. edificio" Binding="{Binding Path=ident_ed}" />
+                                        <DataGridTextColumn Header="Num. Direccion" Binding="{Binding Path=num_dir}" />
+                                        <DataGridTextColumn Header="Telefono" Binding="{Binding Path=tel}" />
+                                        <DataGridTextColumn Header="Telefono 2" Binding="{Binding Path=tel2}" />
+                                        <DataGridTextColumn Header="Correo" Binding="{Binding Path=corre}" />
+                                        <DataGridTextColumn Header="Correo 2" Binding="{Binding Path=corre2}" />
+                                        <DataGridTextColumn Header="Pisos" Binding="{Binding Path=ps}" />
+                                        <DataGridTextColumn Header="Sub Pisos" Binding="{Binding Path=pss}" />
+                                    </DataGrid.Columns>
 
-                        <StackPanel Orientation="Vertical" Margin="20">
+                                </DataGrid>
 
-                            <StackPanel Margin="0,0,10,0" Orientation="Horizontal">
-                              <TextBlock Text="Nombre Edificio:" Margin="0,0,10,0"/>  
-                              <TextBox Text="{Binding Camp.Enom}" Width="200"/>
                             </StackPanel>
 
-                            <WrapPanel Margin="0,0,0,15">
-                                <TextBox materialDesign:HintAssist.Hint="Identificador Edificio"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                         Text="{Binding Camp.IdNomEdf}" Width="120" Margin="0,0,10,0">
-                             
-                                <TextBox materialDesign:HintAssist.Hint="Numero Edificio"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                         Text="{Binding Camp.NumEdf}" Width="120" Margin="0,0,10,0">
-                             
-                                <TextBox materialDesign:HintAssist.Hint="Telefono Edificio"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                         Text="{Binding Camp.ETel}" Width="120" Margin="0,0,10,0">
-                             
-                                <TextBox materialDesign:HintAssist.Hint="Telefono Edificio 2"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                         Text="{Binding Camp.ETel2}" Width="120" Margin="0,0,10,0">
+                            <materialDesign:TransitionerSlide   >
+                                <materialDesign:TransitionerSlide.OpeningEffects>
+                                    <materialDesign:TransitionEffect Kind="SlideInFromLeft" Duration="0:0:0.8" />
+                                    <materialDesign:TransitionEffect Kind="SlideInFromBottom" Duration="0:0:0.8" OffsetTime="0:1:0.1" />
+                                </materialDesign:TransitionerSlide.OpeningEffects>
 
-                                <TextBox materialDesign:HintAssist.Hint="Correo Edificio"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                         Text="{Binding Camp.ECorreo}" Width="120" Margin="0,0,10,0">
+                                <StackPanel Orientation="Vertical" Margin="20">
 
-                                <TextBox materialDesign:HintAssist.Hint="Correo Edificio 2"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                         Text="{Binding Camp.ECorreo2}" Width="120" Margin="0,0,10,0">
+                                    <StackPanel Margin="0,0,0,20" Orientation="Horizontal">
+                                        <TextBlock Text="Nombre Edificio:" Margin="0,0,10,0"/>
+                                        <TextBox Text="{Binding Camp.Enom}" Width="200"/>
+                                    </StackPanel>
 
-                                <TextBox materialDesign:HintAssist.Hint="Pisos"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                         Text="{Binding Camp.Pisos}" Width="120" Margin="0,0,10,0">
+                                    <WrapPanel Margin="0,0,0,15">
+                                        <TextBox materialDesign:HintAssist.Hint="Identificador Edificio"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         Text="{Binding Camp.IdNomEdf}" Width="120" Margin="0,0,10,0"/>
 
-                                <TextBox materialDesign:HintAssist.Hint="Pisos Subterranio"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                         Text="{Binding Camp.SPisos}" Width="120" Margin="0,0,10,0">
-                            </WrapPanel>
+                                        <TextBox materialDesign:HintAssist.Hint="Numero Edificio"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         Text="{Binding Camp.NumEdf}" Width="120" Margin="0,0,10,0"/>
 
-                            <StackPanel>
-                                <Button Content="Guardar"  Command="{Binding DelSavUpdt}" CommandParameter="1"/>
-                                <Button Content="Cancel"  Command="{Binding DelCanMod}" CommandParameter="1" Margin="10,0,0,0" 
+                                        <TextBox materialDesign:HintAssist.Hint="Telefono Edificio"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         Text="{Binding Camp.ETel}" Width="120" Margin="0,0,10,0"/>
+
+                                        <TextBox materialDesign:HintAssist.Hint="Telefono Edificio 2"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         Text="{Binding Camp.ETel2}" Width="120" Margin="0,0,10,0"/>
+
+                                        <TextBox materialDesign:HintAssist.Hint="Correo Edificio"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         Text="{Binding Camp.ECorreo}" Width="120" Margin="0,0,10,0"/>
+
+                                        <TextBox materialDesign:HintAssist.Hint="Correo Edificio 2"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         Text="{Binding Camp.ECorreo2}" Width="120" Margin="0,0,10,0"/>
+
+                                        <TextBox materialDesign:HintAssist.Hint="Pisos"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         Text="{Binding Camp.Pisos}" Width="120" Margin="0,0,10,0"/>
+
+                                        <TextBox materialDesign:HintAssist.Hint="Pisos Subterranio"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         Text="{Binding Camp.SPisos}" Width="120" Margin="0,0,10,0"/>
+                                    </WrapPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Content="Guardar"  Command="{Binding DelAddDep}" CommandParameter="1"/>
+                                        <Button Content="Cancel"  Command="{Binding DelCanMod}" CommandParameter="1" Margin="10,0,0,0" 
                                         Style="{StaticResource MaterialDesignRaisedAccentButton}" />
-                            </StackPanel>
+                                    </StackPanel>
 
 
-                        
-                        </StackPanel>
-                        
+
+                                </StackPanel>
+
+
+                            </materialDesign:TransitionerSlide>
+                        </materialDesign:Transitioner>
+
                     </GroupBox>
 
                 </StackPanel>
+
+
+
             </DockPanel>
         </ScrollViewer>
     </Grid>

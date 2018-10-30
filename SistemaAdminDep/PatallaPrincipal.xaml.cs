@@ -79,7 +79,25 @@ namespace SistemaAdminDep
 
         private void Button5_Click(object sender, RoutedEventArgs e)
         {
+            foreach (TabItem ti in TbCont.Items)
+            {
+                if (ti.Header.ToString() == "Condominio")
+                {
+                    ti.Focus();
+                    return;
+                }
+            }
 
+            ConfEdef PageControl = new ConfEdef();
+
+            TabItem NewItemTab = new TabItem();
+
+            NewItemTab.Header = "Condominio";
+
+            NewItemTab.Content = PageControl;
+
+            TbCont.Items.Add(NewItemTab);
+            NewItemTab.Focus();
         }
 
         private void BtnNewEdif_Click(object sender, RoutedEventArgs e)

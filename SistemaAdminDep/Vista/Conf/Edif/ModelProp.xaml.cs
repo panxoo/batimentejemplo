@@ -14,6 +14,7 @@ namespace SistemaAdminDep.Vista.Conf.Edif
     {
         public ModelProp()
         {
+          
             vm = new VMModelProp();
             DataContext = vm;
 
@@ -22,6 +23,7 @@ namespace SistemaAdminDep.Vista.Conf.Edif
             vm.ActError = new Action<string, string>((string tit, string mns) => Error(tit, mns));
             vm.ErrorVal = new Action<int>((int Arg) => prueba(Arg));
             InitializeComponent();
+         
         }
 
         VMModelProp vm;

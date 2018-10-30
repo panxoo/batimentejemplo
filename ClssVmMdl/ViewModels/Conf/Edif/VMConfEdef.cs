@@ -55,6 +55,8 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
         private ValElemment vali;
         private string mod;
 
+        public Action<bool> ACUpdtDep;
+
         public InteractionRequest<MDEditPisoEdificio> IntPisoPopUp { get; private set; }
 
         private MDConfEdef camp;
@@ -72,9 +74,9 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
         }
 
         public DelegateCommand DelSelectionPais { get; set; }
+
         public DelegateCommand DelActUpdt { get; set; }
         public DelegateCommand<object> DelSavUpdt { get; set; }
-
         public DelegateCommand<object> DelCanMod { get; set; }
 
         public DelegateCommand<object> DelActUpdtDep { get; set; }
@@ -102,8 +104,11 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
             else
             {
                 camp.Eupdt = false;
+                ACUpdtDep(false);
             }
         }
+
+        private void ExAddEdificio() => ACUpdtDep(true);
 
         private void ExActUpdtEd(object Edef)
         {
@@ -119,11 +124,7 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
             AlmacenarEdf();
         }
 
-        private void ExAddEdificio()
-        {
-            //_camp.Moddep = true;
-
-        }
+     
 
         private void ExSelectionPais()
         {
