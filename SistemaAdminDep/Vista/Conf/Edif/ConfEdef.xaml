@@ -206,7 +206,7 @@
                                          Text="{Binding Camp.Pisos}" Width="120" Margin="0,0,10,0"/>
 
                                         <TextBox materialDesign:HintAssist.Hint="Pisos Subterranio"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                         Text="{Binding Camp.SPisos}" Width="120" Margin="0,0,10,0"/>
+                                         Text="{Binding Camp.Spisos}" Width="120" Margin="0,0,10,0"/>
                                     </WrapPanel>
 
                                     <StackPanel Orientation="Horizontal">
