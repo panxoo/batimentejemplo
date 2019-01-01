@@ -28,7 +28,7 @@ namespace AccesoDatos
             objconexionCons.Server = "localhost";
 
             objconexionCons.Password = "123456";
-            objconexionCons.Database = "EdificioMain";
+            objconexionCons.Database = "edificiomain";
             objconexionCons.UserID = "root";
 
             mod = md;

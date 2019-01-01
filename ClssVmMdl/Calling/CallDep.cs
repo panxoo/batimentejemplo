@@ -75,10 +75,10 @@ namespace ClssVmMdl.Calling
         }
 
 
-        public string CFED_SavCond(string cond, int pai, int reg, string ciu, string calle, string numd, string post, string tel, 
-            string tel2, string cor, string cor2, int tpCond, int idcond)
+        public string CFED_SavCond(string Nomcond, int pai, int reg, string ciu, string calle, string numd, string post, string tel, 
+            string tel2, string cor, string cor2,bool tpCond, int idcond)
         {
-            Respi = Conn.InsertSQLvar("call up_cfed_condominio('" + cond + "'," + pai + "," + reg + ",'" + ciu + "','" + calle + "','" + numd + "','" + tel + "','" + tel2 + "','" + cor + "','" + cor2 + "','" + post + "'," + tpCond + "," + idcond + ");");
+            Respi = Conn.InsertSQLvar("call up_cfed_condominio('" + Nomcond + "'," + pai + "," + reg + ",'" + ciu + "','" + calle + "','" + numd + "','" + tel + "','" + tel2 + "','" + cor + "','" + cor2 + "','" + post + "','" + tpCond + "'," + idcond + ");");
             return Respi.ToString();
         }
 

@@ -2,6 +2,7 @@
 using System.Data;
 using ClssVmMdl.Validacion;
 using System.Collections;
+using System.ComponentModel.DataAnnotations;
 
 namespace ClssVmMdl.Models.Conf.Edif
 {
@@ -41,16 +42,16 @@ namespace ClssVmMdl.Models.Conf.Edif
         private bool eupdt;
         public bool Eupdt
         {
-            get
+            get => eupdt;
+            set
             {
+                SetProperty(ref eupdt, value);
                 if (eupdt == false)
                 {
                     IdEdf = new int();
                     LimpEdf();
                 }
-                return eupdt;
             }
-            set => SetProperty(ref eupdt, value);
         }
 
         private int idEdf;
@@ -198,7 +199,9 @@ namespace ClssVmMdl.Models.Conf.Edif
             set => SetProperty(ref edif, value);
         }
 
+
         private string enom;
+        [Required(ErrorMessage = "Se debe llenar los campos.")]
         public string Enom
         {
             get
@@ -206,7 +209,7 @@ namespace ClssVmMdl.Models.Conf.Edif
                 enom = val.LimitStrg(enom, 500);
                 return enom;
             }
-            set => SetProperty(ref cnom, value);
+            set => SetProperty(ref enom, value);
         }
 
         private string idNomEdf;

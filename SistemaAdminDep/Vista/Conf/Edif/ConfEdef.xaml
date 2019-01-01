@@ -113,7 +113,7 @@
 
                             <StackPanel Orientation="Horizontal" Margin="0,15,0,0" Visibility="{Binding Camp.Cupdt, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" >
 
-                                <Button Content="Guardar"  Command="{Binding DelSavUpdt}" CommandParameter="0"/>
+                                <Button Content="Guardar"  Command="{Binding DelSav}" CommandParameter="0"/>
                                 <Button Content="Cancel"  Command="{Binding DelCanMod}" CommandParameter="0" Margin="10,0,0,0" 
                                         Style="{StaticResource MaterialDesignRaisedAccentButton}" />
 
@@ -138,7 +138,7 @@
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
                                                         <Button AutomationProperties.AutomationId="UpdtDep" Content="Update" Tag="Actualizar" 
-                                                                Command="{Binding DataContext.DelUpdDep,RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                                Command="{Binding Path=DataContext.DelActUpdtDep,RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                                                 CommandParameter="{Binding Path=id_edf}"/>
                                                         <Button AutomationProperties.AutomationId="PisoDep" Content="Piso"
                                                                 Command="{Binding DataContext.DelPisoPopUp,RelativeSource={RelativeSource AncestorType=DataGrid}}">
@@ -210,8 +210,8 @@
                                     </WrapPanel>
 
                                     <StackPanel Orientation="Horizontal">
-                                        <Button Content="Guardar"  Command="{Binding DelAddDep}" CommandParameter="1"/>
-                                        <Button Content="Cancel"  Command="{Binding DelCanMod}" CommandParameter="1" Margin="10,0,0,0" 
+                                        <Button IsDefault="True"  Content="Guardar"  Command="{Binding DelSav}" CommandParameter="1"/>
+                                        <Button IsCancel="True" Content="Cancel"  Command="{Binding DelCanMod}" CommandParameter="1" Margin="10,0,0,0" 
                                         Style="{StaticResource MaterialDesignRaisedAccentButton}" />
                                     </StackPanel>
 
