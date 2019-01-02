@@ -51,7 +51,7 @@
 
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                                 <TextBlock Text="Nombre del condominio :" Margin="0,0,15,0"/>
-                                <TextBox x:Name="Cnom" Width="300" Margin="0,0,25,0" 
+                                <TextBox x:Name="TboxCnom" Width="300" Margin="0,0,25,0" 
                                          IsReadOnly="{Binding Camp.Cupdt,Converter={StaticResource TrueToFalse}}">
                                             <TextBox.Text>
                                                     <Binding Path="Camp.Cnom">
@@ -228,15 +228,39 @@
 
                                     <StackPanel Margin="0,0,0,20" Orientation="Horizontal">
                                         <TextBlock Text="Nombre Edificio:" Margin="0,0,10,0"/>
-                                        <TextBox Text="{Binding Camp.Enom}" Width="200"/>
+                                        <TextBox x:Name="TboxEnom" Width="200">
+                                            <TextBox.Text>
+                                                <Binding Path="Camp.Enom" UpdateSourceTrigger="Default">
+                                                    <Binding.ValidationRules>
+                                                        <Val:ValidacionTextVacio />
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
                                     </StackPanel>
 
                                     <WrapPanel Margin="0,0,0,15">
                                         <TextBox materialDesign:HintAssist.Hint="Identificador Edificio"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                         Text="{Binding Camp.IdNomEdf}" Width="120" Margin="0,0,10,0"/>
+                                                 x:Name="TboxIdNomEdf" Width="120" Margin="0,0,10,0">
+                                            <TextBox.Text>
+                                                <Binding Path="Camp.IdNomEdf" UpdateSourceTrigger="Default">
+                                                    <Binding.ValidationRules>
+                                                        <Val:ValidacionTextVacio />
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
 
                                         <TextBox materialDesign:HintAssist.Hint="Numero Edificio"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                         Text="{Binding Camp.NumEdf}" Width="120" Margin="0,0,10,0"/>
+                                         x:Name="TboxNumEdf" Width="120" Margin="0,0,10,0">
+                                            <TextBox.Text>
+                                                <Binding Path="Camp.NumEdf" UpdateSourceTrigger="Default">
+                                                    <Binding.ValidationRules>
+                                                        <Val:ValidacionTextVacio />
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
 
                                         <TextBox materialDesign:HintAssist.Hint="Telefono Edificio"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          Text="{Binding Camp.ETel}" Width="120" Margin="0,0,10,0"/>
