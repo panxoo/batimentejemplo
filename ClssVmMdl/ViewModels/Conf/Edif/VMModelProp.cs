@@ -101,7 +101,7 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
             Camp.IdTpModSel = Convert.ToInt32(parm[1]);
             Camp.VigenteIdSel = Convert.ToBoolean(parm[2]);
             camp.TpModSel = Convert.ToInt16(parm[0]);
-            ActDesicion(mod, mod + ";" + parm[2].ToString());
+           bool dec = ActDesicion(mod, mod + ";" + parm[2].ToString());
         }
 
         public void ExcDeltAct(bool parm)

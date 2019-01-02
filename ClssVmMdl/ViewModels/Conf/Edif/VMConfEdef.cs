@@ -55,6 +55,8 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
         private string mod;
 
         public Action<bool> ACUpdtDep;
+        public Action<string, string> ActDesicion { get; set; }
+        public Action<string, string> ActError { get; set; }
 
         public InteractionRequest<MDEditPisoEdificio> IntPisoPopUp { get; private set; }
 
@@ -248,8 +250,8 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
             {
                 //ErrorVal(Tp);
                 //MsgEv.MsgAlmacenar(mod, a);
-                //vargnrl.SelError = true;
-                //ActError(mod, mod + ";" + a);
+                vargnrl.SelError = true;
+                ActError(mod, mod + ";" + a);
             }
         }
 
