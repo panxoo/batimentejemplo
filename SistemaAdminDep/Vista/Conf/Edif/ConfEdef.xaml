@@ -51,8 +51,16 @@
 
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                                 <TextBlock Text="Nombre del condominio :" Margin="0,0,15,0"/>
-                                <TextBox Text="{Binding Camp.Cnom}" Width="300" Margin="0,0,25,0" 
-                                         IsReadOnly="{Binding Camp.Cupdt,Converter={StaticResource TrueToFalse}}"/>
+                                <TextBox x:Name="Cnom" Width="300" Margin="0,0,25,0" 
+                                         IsReadOnly="{Binding Camp.Cupdt,Converter={StaticResource TrueToFalse}}">
+                                            <TextBox.Text>
+                                                    <Binding Path="Camp.Cnom">
+                                                        <Binding.ValidationRules>
+                                                            <Val:ValidacionTextVacio/>
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                            </TextBox.Text>
+                                    </TextBox>
 
                                 <CheckBox Content="Multiple edificios" HorizontalContentAlignment="Left" 
                                       IsChecked="{Binding Camp.MultiEd}" IsEnabled="{Binding Camp.Cupdt}"/>
@@ -61,27 +69,67 @@
                             <GroupBox Header="Dirección" Margin="0,15,0,10">
 
                                 <WrapPanel Margin="5">
-                                    <TextBox materialDesign:HintAssist.Hint="Dirección"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"   
-                                             Width="230" Margin="0,0,15,0" Text="{Binding Camp.Calle}" 
-                                             IsReadOnly="{Binding Camp.Cupdt,Converter={StaticResource TrueToFalse}}"/>
+                                    <TextBox materialDesign:HintAssist.Hint="Dirección" x:Name="TboxDirec"
+                                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="230" Margin="0,0,15,0"
+                                             IsReadOnly="{Binding Camp.Cupdt,Converter={StaticResource TrueToFalse}}">
+                                            <TextBox.Text>
+                                                    <Binding Path="Camp.Calle">
+                                                        <Binding.ValidationRules>
+                                                            <Val:ValidacionTextVacio/>
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                            </TextBox.Text>
+                                    </TextBox>
 
-                                    <TextBox materialDesign:HintAssist.Hint="Numero"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"   
-                                             Width="80" Margin="0,0,15,0" Text="{Binding Camp.NumDir}"
-                                             IsReadOnly="{Binding Camp.Cupdt,Converter={StaticResource TrueToFalse}}"/>
+                                    <TextBox materialDesign:HintAssist.Hint="Numero" x:Name="TboxNumDir"
+                                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="80" Margin="0,0,15,0" 
+                                             IsReadOnly="{Binding Camp.Cupdt,Converter={StaticResource TrueToFalse}}">
+                                            <TextBox.Text>
+                                                    <Binding Path="Camp.NumDir">
+                                                        <Binding.ValidationRules>
+                                                            <Val:ValidacionTextVacio/>
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                            </TextBox.Text>
+                                    </TextBox>
 
-                                    <ComboBox materialDesign:HintAssist.Hint="Pais"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"   
-                                              ItemsSource="{Binding Vargnrl.Pais}" SelectedValuePath="Id" DisplayMemberPath="Name"
-                                              Margin="0,0,15,0" MinWidth="130"  SelectedValue="{Binding Camp.IdPais}" 
-                                              IsEnabled="{Binding Camp.Cupdt}"/>
+                                    <ComboBox materialDesign:HintAssist.Hint="Pais" x:Name="CboxPais" 
+                                              Style="{StaticResource MaterialDesignFloatingHintComboBox}" ItemsSource="{Binding Vargnrl.Pais}" 
+                                              SelectedValuePath="Id" DisplayMemberPath="Name" Margin="0,0,15,0" MinWidth="130" 
+                                              IsEnabled="{Binding Camp.Cupdt}">
+                                            <ComboBox.SelectedValue>
+                                                <Binding Path="Camp.IdPais">
+                                                    <Binding.ValidationRules>
+                                                        <Val:ValidacionSeleccionComb/>
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </ComboBox.SelectedValue>
+                                        </ComboBox>
 
-                                    <ComboBox materialDesign:HintAssist.Hint="Region"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"   
-                                              ItemsSource="{Binding Vargnrl.Region}" SelectedValuePath="Id" DisplayMemberPath="Name"
-                                              Margin="0,0,15,0"  MinWidth="130" SelectedValue="{Binding Camp.IdRegion}"
-                                              IsEnabled="{Binding Camp.Cupdt}"/>
+                                    <ComboBox materialDesign:HintAssist.Hint="Region" x:Name="CboxReg"
+                                              Style="{StaticResource MaterialDesignFloatingHintComboBox}" ItemsSource="{Binding Vargnrl.Region}" 
+                                              SelectedValuePath="Id" DisplayMemberPath="Name" Margin="0,0,15,0"  MinWidth="130"
+                                              IsEnabled="{Binding Camp.Cupdt}">
+                                            <ComboBox.SelectedValue>
+                                                <Binding Path="Camp.IdRegion">
+                                                    <Binding.ValidationRules>
+                                                        <Val:ValidacionSeleccionComb/>
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </ComboBox.SelectedValue>
+                                        </ComboBox>
 
-                                    <TextBox materialDesign:HintAssist.Hint="Ciudad"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"   
-                                             Width="130" Margin="0,0,15,0" Text="{Binding Camp.City}"
-                                             IsReadOnly="{Binding Camp.Cupdt,Converter={StaticResource TrueToFalse}}"/>
+                                    <TextBox materialDesign:HintAssist.Hint="Ciudad" x:Name="TboxCity"
+                                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="130" Margin="0,0,15,0"
+                                             IsReadOnly="{Binding Camp.Cupdt,Converter={StaticResource TrueToFalse}}">
+                                            <TextBox.Text>
+                                                    <Binding Path="Camp.City">
+                                                        <Binding.ValidationRules>
+                                                            <Val:ValidacionTextVacio/>
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                            </TextBox.Text>
+                                    </TextBox>
 
                                     <TextBox materialDesign:HintAssist.Hint="Codigo Postal"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"   
                                              Width="80" Text="{Binding Camp.Postal}" 
