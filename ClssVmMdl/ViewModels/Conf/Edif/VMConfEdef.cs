@@ -42,7 +42,6 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
             DelAddDep = new DelegateCommand(ExAddEdificio);
 
             DelPisoPopUp = new DelegateCommand<object[]>(RaisePisoPopUpModExc);
-            //DelCloseMsgError = new DelegateCommand(ExCloseMsgError);
         }
 
 
@@ -125,7 +124,12 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
         {
             CargaReg(camp.IdPais, 0);
         }
-           
+
+        public void ExcDeltAct(bool res)
+        {
+
+        }
+
         #endregion
 
 
@@ -230,28 +234,29 @@ namespace ClssVmMdl.ViewModels.Conf.Edif
 
         private void Mensaje(string a, int Tp)
         {
-            if (a == "1")
+            switch (a)
             {
-                if(Tp==0)
-                {
-                    camp.Cupdt = false;
-                    CallCondominio();
-                }
-                else
-                {
-                    camp.Eupdt = false;
-                    ACUpdtDep(false);
-                    CargEdifGrd();
-                }
-
-                msgev.MsgAlmacenar(mod, a);
-            }
-            else
-            {
-                //ErrorVal(Tp);
-                //MsgEv.MsgAlmacenar(mod, a);
-                vargnrl.SelError = true;
-                ActError(mod, mod + ";" + a);
+                case "1":
+                    switch (Tp)
+                    {
+                        case 0:
+                            camp.Cupdt = false;
+                            CallCondominio();
+                            break;
+                        default:
+                            camp.Eupdt = false;
+                            ACUpdtDep(false);
+                            CargEdifGrd();
+                            break;
+                    }
+                    msgev.MsgAlmacenar(mod, a);
+                    break;
+                default:
+                    //ErrorVal(Tp);
+                    msgev.MsgAlmacenar(mod, a);
+                    vargnrl.SelError = true;
+                    ActError(mod, mod + ";" + a);
+                    break;
             }
         }
 

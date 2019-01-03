@@ -28,16 +28,10 @@ namespace SistemaAdminDep.Vista.Conf.Edif
 
         private VMConfEdef vm;
 
-        private void ActUpdt(bool opt)
-        {
-            if (opt == false)
-                Trans.SelectedIndex = 0;
-            else
-                Trans.SelectedIndex = 1;
-        }
+        private void ActUpdt(bool opt) => Trans.SelectedIndex = opt == false ? 0 : 1;
 
 
-        private async Task<bool> Desicion(string titulo, string mnsg)
+        private async void Desicion(string titulo, string mnsg)
         {
             DialogDesicion view = new DialogDesicion
             {
@@ -46,10 +40,10 @@ namespace SistemaAdminDep.Vista.Conf.Edif
             };
 
             var result = await DialogHost.Show(view, "RootDialog");
-            //vm.ExcDeltAct((bool)(result ?? false));
+             vm.ExcDeltAct((bool)(result ?? false));
 
-            return (bool)(result ?? false);
-            //GC.Collect();
+            
+             GC.Collect();
         }
 
         private async void Error(string titulo, string mnsg)
