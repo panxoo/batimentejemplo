@@ -41,6 +41,8 @@
 
 
                 <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+                    
+                
 
                     <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" Header="Datos Condominio" Margin="0,0,0,10" >
 
@@ -237,14 +239,16 @@
 
                                     <StackPanel Margin="0,0,0,20" Orientation="Horizontal">
                                         <TextBlock Text="Nombre Edificio:" Margin="0,0,10,0"/>
-                                        <TextBox x:Name="TboxEnom" Width="200">
-                                            <TextBox.Text>
+                                        <TextBox x:Name="TboxEnom" Width="200" 
+                                                 Text="{Binding Camp.Enom,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                                 ToolTip="{Binding Path=(Validation.Errors).Count,UpdateSourceTrigger=PropertyChanged,RelativeSource={RelativeSource Self}}">
+                                            <!--<TextBox.Text>
                                                 <Binding Path="Camp.Enom" UpdateSourceTrigger="Default">
                                                     <Binding.ValidationRules>
                                                         <Val:ValidacionTextVacio />
                                                     </Binding.ValidationRules>
                                                 </Binding>
-                                            </TextBox.Text>
+                                            </TextBox.Text>-->
                                         </TextBox>
                                     </StackPanel>
 

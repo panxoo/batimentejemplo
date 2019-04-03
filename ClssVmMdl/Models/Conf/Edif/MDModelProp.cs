@@ -2,10 +2,12 @@
 using System.Data;
 using ClssVmMdl.Validacion;
 using System;
+using Prism.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace ClssVmMdl.Models.Conf.Edif
 {
-    public class MDModelProp : BindableBase
+    public class MDModelProp : ValidatableBindableBase
     {
 
         public MDModelProp()
@@ -118,7 +120,7 @@ namespace ClssVmMdl.Models.Conf.Edif
 
 
         #region General
-
+        
         private bool updtAct;
         public bool UpdtAct
         {

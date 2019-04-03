@@ -3,10 +3,11 @@ using System.Data;
 using ClssVmMdl.Validacion;
 using System.Collections;
 using System.ComponentModel.DataAnnotations;
+using Prism.Validation;
 
 namespace ClssVmMdl.Models.Conf.Edif
 {
-    public class MDConfEdef : BindableBase
+    public class MDConfEdef : ValidatableBindableBase
     {
 
         public MDConfEdef()
@@ -66,11 +67,12 @@ namespace ClssVmMdl.Models.Conf.Edif
         #region Condominio
 
         private string cnom;
+        
         public string Cnom
         {
             get
             {
-                cnom = val.LimitStrg(cnom, 500);
+                //cnom = val.LimitStrg(cnom, 500);
                 return cnom;
             }
             set => SetProperty(ref cnom, value);
@@ -95,7 +97,7 @@ namespace ClssVmMdl.Models.Conf.Edif
         {
             get
             {
-                city = val.LimitStrg(city, 100);
+                //city = val.LimitStrg(city, 100);
                 return city;
             }
             set => SetProperty(ref city, value);
@@ -106,7 +108,7 @@ namespace ClssVmMdl.Models.Conf.Edif
         {
             get
             {
-                calle = val.LimitStrg(calle, 500);
+                //calle = val.LimitStrg(calle, 500);
                 return calle;
             }
             set => SetProperty(ref calle, value);
@@ -117,7 +119,7 @@ namespace ClssVmMdl.Models.Conf.Edif
         {
             get
             {
-                numDir = val.LimitStrg(numDir, 50);
+                //numDir = val.LimitStrg(numDir, 50);
                 return numDir;
             }
             set => SetProperty(ref numDir, value);
@@ -128,7 +130,7 @@ namespace ClssVmMdl.Models.Conf.Edif
         {
             get
             {
-                postal = val.LimitStrg(postal, 50);
+                //postal = val.LimitStrg(postal, 50);
                 return postal;
             }
             set => SetProperty(ref postal, value);
@@ -139,7 +141,7 @@ namespace ClssVmMdl.Models.Conf.Edif
         {
             get
             {
-                ctel = val.LimitStrg(ctel, 15);
+                //ctel = val.LimitStrg(ctel, 15);
                 return ctel;
             }
             set => SetProperty(ref ctel, value);
@@ -150,7 +152,7 @@ namespace ClssVmMdl.Models.Conf.Edif
         {
             get
             {
-                ctel2 = val.LimitStrg(ctel2, 15);
+                //ctel2 = val.LimitStrg(ctel2, 15);
                 return ctel2;
             }
             set => SetProperty(ref ctel2, value);
@@ -161,7 +163,7 @@ namespace ClssVmMdl.Models.Conf.Edif
         {
             get
             {
-                ccorreo = val.LimitStrg(ccorreo, 50);
+                //ccorreo = val.LimitStrg(ccorreo, 50);
                 return ccorreo;
             }
             set => SetProperty(ref ccorreo, value);
@@ -172,7 +174,7 @@ namespace ClssVmMdl.Models.Conf.Edif
         {
             get
             {
-                ccorreo2 = val.LimitStrg(ccorreo2, 50);
+                //ccorreo2 = val.LimitStrg(ccorreo2, 50);
                 return ccorreo2;
             }
             set => SetProperty(ref ccorreo2, value);
@@ -206,7 +208,7 @@ namespace ClssVmMdl.Models.Conf.Edif
         {
             get
             {
-                enom = val.LimitStrg(enom, 500);
+                //enom = val.LimitStrg(enom, 500);
                 return enom;
             }
             set => SetProperty(ref enom, value);
@@ -217,7 +219,7 @@ namespace ClssVmMdl.Models.Conf.Edif
         {
             get
             {
-                idNomEdf = val.LimitStrg(idNomEdf, 50);
+                //idNomEdf = val.LimitStrg(idNomEdf, 50);
                 return idNomEdf;
             }
             set => SetProperty(ref idNomEdf, value);
@@ -228,7 +230,7 @@ namespace ClssVmMdl.Models.Conf.Edif
         {
             get
             {
-                numEdf = val.LimitStrg(numEdf, 10);
+                //numEdf = val.LimitStrg(numEdf, 10);
                 return numEdf;
             }
             set => SetProperty(ref numEdf, value);
@@ -239,7 +241,7 @@ namespace ClssVmMdl.Models.Conf.Edif
         {
             get
             {
-                etel = val.LimitStrg(etel, 15);
+                //etel = val.LimitStrg(etel, 15);
                 return etel;
             }
             set => SetProperty(ref etel, value);
@@ -250,7 +252,7 @@ namespace ClssVmMdl.Models.Conf.Edif
         {
             get
             {
-                etel2 = val.LimitStrg(etel2, 15);
+                //etel2 = val.LimitStrg(etel2, 15);
                 return etel2;
             }
             set => SetProperty(ref etel2, value);
@@ -261,7 +263,7 @@ namespace ClssVmMdl.Models.Conf.Edif
         {
             get
             {
-                ecorreo = val.LimitStrg(ecorreo, 50);
+                //ecorreo = val.LimitStrg(ecorreo, 50);
                 return ecorreo;
             }
             set => SetProperty(ref ecorreo, value);
@@ -272,7 +274,7 @@ namespace ClssVmMdl.Models.Conf.Edif
         {
             get
             {
-                ecorreo2 = val.LimitStrg(ecorreo2, 50);
+                //ecorreo2 = val.LimitStrg(ecorreo2, 50);
                 return ecorreo2;
             }
             set => SetProperty(ref ecorreo2, value);
