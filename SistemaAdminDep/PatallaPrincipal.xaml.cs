@@ -36,7 +36,7 @@ namespace SistemaAdminDep
             //UserControl UCMenu = new ControlMenu();
             //GridPrincipal.Children.Add(UCMenu);
             vm.CloseTab = new Action<string>((string hd) => tc_Close(hd));
-            hola = "hola Mundo";
+            
         }
 
         public string hola;

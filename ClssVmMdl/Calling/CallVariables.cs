@@ -65,14 +65,14 @@ namespace ClssVmMdl.Calling
         public List<ColIdName> PRGN_Piso(int edef, int idcond)
         {
             List<ColIdName> Lst;
-            Lst = conn.SelectColect2Proc("select * from vwprgn_Piso where edef = " + edef + " and cond = " + idcond);
+            Lst = conn.SelectColect2Proc("select * from vwprgn_piso where edef = " + edef + " and cond = " + idcond);
             return Lst;
         }
 
         public List<ColIdName> PRGN_TipoServ(int idcond)
         {
             List<ColIdName> Lst;
-            Lst = conn.SelectColect2Proc("select * from vwprgn_TipoServ where cond = " + idcond);
+            Lst = conn.SelectColect2Proc("select * from vwprgn_tiposerv where cond = " + idcond);
             return Lst;
         }
 

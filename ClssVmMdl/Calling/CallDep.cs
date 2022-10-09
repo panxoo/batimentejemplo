@@ -78,7 +78,7 @@ namespace ClssVmMdl.Calling
         public string CFED_SavCond(string Nomcond, int pai, int reg, string ciu, string calle, string numd, string post, string tel, 
             string tel2, string cor, string cor2,bool tpCond, int idcond)
         {
-            Respi = Conn.InsertSQLvar("call up_cfed_condominio('" + Nomcond + "'," + pai + "," + reg + ",'" + ciu + "','" + calle + "','" + numd + "','" + tel + "','" + tel2 + "','" + cor + "','" + cor2 + "','" + post + "','" + tpCond + "'," + idcond + ");");
+            Respi = Conn.InsertSQLvar("call up_cfed_condominio('" + Nomcond + "'," + pai + "," + reg + ",'" + ciu + "','" + calle + "','" + numd + "','" + tel + "','" + tel2 + "','" + cor + "','" + cor2 + "','" + post + "'," + (tpCond ? '1' : '0') + "," + idcond + ");");
             return Respi.ToString();
         }
 
@@ -201,7 +201,7 @@ namespace ClssVmMdl.Calling
         public DataTable MTDP_SelDepartamentxPiso(int ps, int edef, int idcond)
         {
             DataTable dt;
-            dt = Conn.SelectGridProc("Select * FROM vwmtdp_DepartamentXPiso Where edef = " + edef + " and pis =" + ps + " and cond =" + idcond);
+            dt = Conn.SelectGridProc("Select * FROM vwmtdp_departamentxpiso Where edef = " + edef + " and pis =" + ps + " and cond =" + idcond);
             return dt;
         }
 
@@ -224,7 +224,7 @@ namespace ClssVmMdl.Calling
             try
             {
                 ArrayList Colect;
-                Colect = Conn.SelectColectProc("select * from vwmtdp_DepartUpdt where id = " + id_dep + " and pis = " + piso + " and ed = " + edf);
+                Colect = Conn.SelectColectProc("select * from vwmtdp_departupdt where id = " + id_dep + " and pis = " + piso + " and ed = " + edf);
                 return Colect;
             }
             catch (Exception ex)

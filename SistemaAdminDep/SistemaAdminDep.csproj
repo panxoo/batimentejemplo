@@ -249,6 +249,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Imagen\Menu\business.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -259,7 +260,6 @@
       <SubType>Designer</SubType>
     </None>
     <Resource Include="Imagen\Menu\notepad.png" />
-    <Resource Include="Imagen\Menu\business.png" />
     <Resource Include="Imagen\Menu\edificio.png" />
     <Resource Include="Imagen\Menu\model.png" />
     <Resource Include="Imagen\Menu\bbq.png" />

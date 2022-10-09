@@ -25,13 +25,13 @@ namespace ClssVmMdl.Calling
                 DataTable dt;
 
                 if (parm == 1)
-                    dt = Conn.SelectGridProc("Select * FROM vwParGnrltpdep");
+                    dt = Conn.SelectGridProc("Select * FROM vwpargnrltpdep");
                 else if (parm == 2)
-                    dt = Conn.SelectGridProc("Select * FROM vwParGnrltpdepOt");
+                    dt = Conn.SelectGridProc("Select * FROM vwpargnrltpdepOt");
                 else if (parm == 3)
-                    dt = Conn.SelectGridProc("Select * FROM vwParGnrltpNot");
+                    dt = Conn.SelectGridProc("Select * FROM vwpargnrltpnot");
                 else if (parm == 4)
-                    dt = Conn.SelectGridProc("Select * FROM vwParGnrlNvlNot");
+                    dt = Conn.SelectGridProc("Select * FROM vwpargnrlnvlnot");
                 else
                     dt = new DataTable();
 
